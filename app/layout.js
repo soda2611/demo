@@ -4,8 +4,8 @@ export const metadata = {
   title: 'GreenFarm',
   description: 'Website bán nông sản - rau củ sạch',
   icons: {
-    icon: 'https://github.com/soda2611/tkw/blob/main/public/demo/images/image.png?raw=true',
-    shortcut: 'https://github.com/soda2611/tkw/blob/main/public/demo/images/image.png?raw=true',
+    icon: 'https://github.com/soda2611/demo/blob/main/public/image.png?raw=true',
+    shortcut: 'https://github.com/soda2611/demo/blob/main/public/image.png?raw=true',
   },
 };
 

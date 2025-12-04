@@ -108,7 +108,7 @@ export default function App() {
               ) : null}
 
               <img
-                src="https://github.com/soda2611/tkw/blob/main/public/demo/images/image.png?raw=true"
+                src="https://github.com/soda2611/demo/blob/main/public/image.png?raw=true"
                 alt="Logo"
                 style={{ height: 40 }}
               />

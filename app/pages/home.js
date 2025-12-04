@@ -23,7 +23,7 @@ export default function HomePage() {
     return (
         <div style={{ width: '90%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, borderRadius: 10, scrollbarWidth: "none", msOverflowStyle: "none", "&::-webkit-scrollbar": {display: "none",}, }}>
             <Box sx={{ backgroundColor: 'primary.main', height: 300, width: '100%', overflow: 'hidden', borderRadius: 5, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <img src="https://github.com/soda2611/tkw/blob/main/public/demo/images/banner.png?raw=true" alt="Banner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <img src="https://github.com/soda2611/demo/blob/main/public/banner.png?raw=true" alt="Banner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'absolute', color: 'white', textAlign: 'center', padding: 2, borderRadius: 5, height: 300, width: 'calc(90% - 25px)', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
                     <Typography variant='h4' component='div' sx={{ fontWeight: 'bold', marginBottom: 1, color: 'white' }}>
                     Chào mừng đến với GreenFarm!
