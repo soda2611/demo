@@ -24,6 +24,16 @@
       "description": "Mô tả sản phẩm",
       "price": 25000,
       "sale": 22000
+    },
+    "Rau ngót": {
+      "description": "Mô tả sản phẩm",
+      "price": 16000,
+      "sale": 14000
+    },
+    "Mồng tơi": {
+      "description": "Mô tả sản phẩm",
+      "price": 17000,
+      "sale": 15000
     }
   },
   "Củ": {
@@ -51,6 +61,16 @@
       "description": "Mô tả sản phẩm",
       "price": 40000,
       "sale": 35000
+    },
+    "Cà rốt": {
+      "description": "Mô tả sản phẩm",
+      "price": 22000,
+      "sale": 20000
+    },
+    "Sắn": {
+      "description": "Mô tả sản phẩm",
+      "price": 18000,
+      "sale": 16000
     }
   },
   "Trái cây": {
@@ -78,6 +98,21 @@
       "description": "Mô tả sản phẩm",
       "price": 50000,
       "sale": 45000
+    },
+    "Xoài": {
+      "description": "Mô tả sản phẩm",
+      "price": 45000,
+      "sale": 40000
+    },
+    "Ổi": {
+      "description": "Mô tả sản phẩm",
+      "price": 25000,
+      "sale": 22000
+    },
+    "Lê": {
+      "description": "Mô tả sản phẩm",
+      "price": 55000,
+      "sale": 50000
     }
   }
 }
