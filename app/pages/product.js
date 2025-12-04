@@ -136,7 +136,7 @@ export default function ProductPage() {
                                 width: 55,
                                 }}
                             >
-                                {(100-(item['sale']/item['price'])*100).toFixed(1)}%
+                                -{(100-(item['sale']/item['price'])*100).toFixed(1)}%
                             </Box>
                         </>
                       ) : (
