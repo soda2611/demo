@@ -136,11 +136,26 @@ export default function App() {
                 gap: 10,
               }}
             >
+              Blog
+            </div>
+          )}
+          {tab === 3 && (
+            <div
+              style={{
+                overflowY: "hidden",
+                height: "100%",
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column",
+                gap: 10,
+              }}
+            >
               <ContactPage />
             </div>
           )}
         </Box>
-
         <div
           style={{
             backdropFilter: "blur(5px)",
@@ -196,6 +211,12 @@ export default function App() {
                           onClick={() => handleTabChange(null, 2)}
                           sx={{ cursor: "pointer" }}
                         >
+                          <ListItemText primary="Blog" />
+                        </ListItem>
+                        <ListItem
+                          onClick={() => handleTabChange(null, 3)}
+                          sx={{ cursor: "pointer" }}
+                        >
                           <ListItemText primary="Liên hệ" />
                         </ListItem>
                       </List>
@@ -223,6 +244,7 @@ export default function App() {
                   >
                     <Tab label="Trang chủ" />
                     <Tab label="Sản phẩm" />
+                    <Tab label="Blog" />
                     <Tab label="Liên hệ" />
                   </Tabs>
                 ) : null}

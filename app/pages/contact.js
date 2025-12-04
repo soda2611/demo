@@ -47,7 +47,7 @@ export default function ContactPage() {
       <Typography
         variant="h3"
         component="div"
-        sx={{ fontWeight: "bold", marginBottom: 10, color: "text.primary" }}
+        sx={{ fontWeight: "bold", marginBottom: 5, color: "text.primary" }}
       >
         Liên hệ
       </Typography>
@@ -56,8 +56,8 @@ export default function ContactPage() {
         <Grid
           container
           spacing={{ md: 10 }}
-          columns={{ md: 2 }}
-          sx={{ width: "70%", justifyContent: "center" }}
+          columns={{ md: 3 }}
+          sx={{ width: "70%", justifyContent: "center", borderRadius: 5, backgroundColor: '#f1f1f1', padding: 5 }}
         >
           <div
             style={{
@@ -71,25 +71,24 @@ export default function ContactPage() {
             <div style={{ display: "flex", gap: 25 }}>
               <TextField
                 variant="outlined"
-                color="primary"
                 label="Họ và tên"
-                sx={{ flexGrow: 1 }}
+                sx={{ flexGrow: 1, backgroundColor: 'white' }}
               />
               <TextField
                 variant="outlined"
-                color="primary"
                 label="Số điện thoại"
+                sx={{ backgroundColor: 'white' }}
               />
             </div>
-            <TextField variant="outlined" color="primary" label="Email" />
-            <TextField variant="outlined" color="primary" label="Chủ đề" />
+            <TextField variant="outlined" color="primary" label="Email" sx={{ backgroundColor: 'white' }} />
+            <TextField variant="outlined" color="primary" label="Chủ đề" sx={{ backgroundColor: 'white' }} />
             <TextField
               multiline
               variant="outlined"
-              color="primary"
               label="Nội dung"
               rows={10}
-            />
+              sx={{ backgroundColor: 'white' }}
+            />  
             <div>
               <Button
                 variant="contained"
@@ -189,29 +188,31 @@ export default function ContactPage() {
               alignItems: "initial",
               flexGrow: 1,
               gap: 25,
+              backgroundColor: '#f1f1f1',
+              padding: 20,
+              borderRadius: 10
             }}
           >
             <div style={{ display: "flex", gap: 25 }}>
               <TextField
                 variant="outlined"
-                color="primary"
                 label="Họ và tên"
-                sx={{ flexGrow: 1 }}
+                sx={{ flexGrow: 1, backgroundColor: 'white' }}
               />
               <TextField
                 variant="outlined"
-                color="primary"
                 label="Số điện thoại"
+                sx={{ backgroundColor: 'white' }}
               />
             </div>
-            <TextField variant="outlined" color="primary" label="Email" />
-            <TextField variant="outlined" color="primary" label="Chủ đề" />
+            <TextField variant="outlined" color="primary" label="Email" sx={{ backgroundColor: 'white' }} />
+            <TextField variant="outlined" color="primary" label="Chủ đề" sx={{ backgroundColor: 'white' }} />
             <TextField
               multiline
               variant="outlined"
-              color="primary"
               label="Nội dung"
               rows={10}
+              sx={{ backgroundColor: 'white' }}
             />
             <div>
               <Button
