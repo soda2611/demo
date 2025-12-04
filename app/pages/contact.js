@@ -76,8 +76,9 @@ export default function ContactPage() {
               />
               <TextField
                 variant="outlined"
-                label="Số điện thoại"
-                sx={{ backgroundColor: 'white' }}
+                label="SĐT"
+                inputProps={{ maxLength: 10 }}
+                sx={{ backgroundColor: 'white', width: 135 }}
               />
             </div>
             <TextField variant="outlined" color="primary" label="Email" sx={{ backgroundColor: 'white' }} />
