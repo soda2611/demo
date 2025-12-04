@@ -1,0 +1,8 @@
+1:"$Sreact.fragment"
+2:I[47190,["/demo/_next/static/chunks/6fb08cd3939026f4.js"],"ViewportBoundary"]
+4:I[47190,["/demo/_next/static/chunks/6fb08cd3939026f4.js"],"MetadataBoundary"]
+5:"$Sreact.suspense"
+7:I[46095,["/demo/_next/static/chunks/6fb08cd3939026f4.js"],"IconMark"]
+0:{"buildId":"2On29jBIU0HHuWLPE4_JX","rsc":["$","$1","h",{"children":[null,["$","$L2",null,{"children":"$@3"}],["$","div",null,{"hidden":true,"children":["$","$L4",null,{"children":["$","$5",null,{"name":"Next.Metadata","children":"$@6"}]}]}],null]}],"loading":null,"isPartial":false}
+3:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+6:[["$","title","0",{"children":"GreenFarm"}],["$","meta","1",{"name":"description","content":"Website bán nông sản - rau củ sạch"}],["$","link","2",{"rel":"shortcut icon","href":"https://github.com/soda2611/tkw/blob/main/public/demo/images/image.png?raw=true"}],["$","link","3",{"rel":"icon","href":"https://github.com/soda2611/tkw/blob/main/public/demo/images/image.png?raw=true"}],["$","$L7","4",{}]]
