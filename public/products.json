@@ -1,51 +1,42 @@
 {
   "Rau": {
-    "rau_muong": {
-      "name": "Rau muống",
+    "Rau muống": {
       "price": "15000",
       "sale": "12000"
     },
-    "rau_cai_xanh": {
-      "name": "Rau cải xanh",
+    "Rau cải xanh": {
       "price": "18000",
       "sale": "15000"
     },
-    "ca_chua": {
-      "name": "Cà chua",
+    "Cà chua": {
       "price": "20000",
       "sale": "17000"
     }
   },
   "Củ": {
-    "khoai_tay": {
-      "name": "Khoai tây",
+    "Khoai tây": {
       "price": "25000",
       "sale": "22000"
     },
-    "khoai_lang": {
-      "name": "Khoai lang",
+    "Khoai lang": {
       "price": "22000",
       "sale": "20000"
     },
-    "cu_cai": {
-      "name": "Củ cải",
+    "Củ cải": {
       "price": "20000",
       "sale": "18000"
     }
   },
   "Trái cây": {
-    "tao": {
-      "name": "Táo",
+    "Táo": {
       "price": "40000",
       "sale": "35000"
     },
-    "chuoi": {
-      "name": "Chuối",
+    "Chuối": {
       "price": "30000",
       "sale": "27000"
     },
-    "cam": {
-      "name": "Cam",
+    "Cam": {
       "price": "35000",
       "sale": "30000"
     }
