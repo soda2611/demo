@@ -1,44 +1,53 @@
 {
   "Rau": {
     "Rau muống": {
-      "price": "15000",
-      "sale": "12000"
+      "description": "Mô tả sản phẩm",
+      "price": 15000,
+      "sale": 15000
     },
     "Rau cải xanh": {
-      "price": "18000",
-      "sale": "15000"
+      "description": "Mô tả sản phẩm",
+      "price": 18000,
+      "sale": 15000
     },
     "Cà chua": {
-      "price": "20000",
-      "sale": "17000"
+      "description": "Mô tả sản phẩm",
+      "price": 20000,
+      "sale": 20000
     }
   },
   "Củ": {
     "Khoai tây": {
-      "price": "25000",
-      "sale": "22000"
+      "description": "Mô tả sản phẩm",
+      "price": 25000,
+      "sale": 22000
     },
     "Khoai lang": {
-      "price": "22000",
-      "sale": "20000"
+      "description": "Mô tả sản phẩm",
+      "price": 22000,
+      "sale": 22000
     },
     "Củ cải": {
-      "price": "20000",
-      "sale": "18000"
+      "description": "Mô tả sản phẩm",
+      "price": 20000,
+      "sale": 18000
     }
   },
   "Trái cây": {
     "Táo": {
-      "price": "40000",
-      "sale": "35000"
+      "description": "Mô tả sản phẩm",
+      "price": 40000,
+      "sale": 40000
     },
     "Chuối": {
-      "price": "30000",
-      "sale": "27000"
+      "description": "Mô tả sản phẩm",
+      "price": 30000,
+      "sale": 27000
     },
     "Cam": {
-      "price": "35000",
-      "sale": "30000"
+      "description": "Mô tả sản phẩm",
+      "price": 35000,
+      "sale": 30000
     }
   }
 }
