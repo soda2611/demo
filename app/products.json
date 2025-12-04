@@ -14,6 +14,16 @@
       "description": "Mô tả sản phẩm",
       "price": 20000,
       "sale": 20000
+    },
+    "Xà lách": {
+      "description": "Mô tả sản phẩm",
+      "price": 12000,
+      "sale": 10000
+    },
+    "Bắp cải": {
+      "description": "Mô tả sản phẩm",
+      "price": 25000,
+      "sale": 22000
     }
   },
   "Củ": {
@@ -31,6 +41,16 @@
       "description": "Mô tả sản phẩm",
       "price": 20000,
       "sale": 18000
+    },
+    "Hành tây": {
+      "description": "Mô tả sản phẩm",
+      "price": 30000,
+      "sale": 28000
+    },
+    "Gừng": {
+      "description": "Mô tả sản phẩm",
+      "price": 40000,
+      "sale": 35000
     }
   },
   "Trái cây": {
@@ -48,6 +68,16 @@
       "description": "Mô tả sản phẩm",
       "price": 35000,
       "sale": 30000
+    },
+    "Nho": {
+      "description": "Mô tả sản phẩm",
+      "price": 60000,
+      "sale": 55000
+    },
+    "Dưa hấu": {
+      "description": "Mô tả sản phẩm",
+      "price": 50000,
+      "sale": 45000
     }
   }
 }

@@ -47,7 +47,7 @@ export default function ProductPage() {
               <Grid
                 container
                 spacing={2}
-                sx={{ padding: 1, display: "flex", alignItems: "center" }}
+                sx={{ padding: 1, display: "flex", alignItems: "center", marginBottom: 10 }}
               >
                 <Grid item>
                   <Box
