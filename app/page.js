@@ -66,6 +66,19 @@ export default function App() {
 
   const [openSearch, setOpenSearch] = useState(false);
 
+  const [products, setProducts] = useState(null);
+
+  useEffect(() => {
+    fetch(
+      "https://raw.githubusercontent.com/soda2611/demo/refs/heads/main/app/products.json"
+    )
+      .then((res) => res.json())
+      .then((data) => setProducts(data))
+      .catch((err) => console.error("Lỗi khi tải JSON:", err));
+  }, []);
+
+  if (!products) return <div>Đang tải dữ liệu...</div>;
+
   return (
     <ThemeProvider theme={theme}>
       <div
@@ -104,7 +117,7 @@ export default function App() {
                 gap: 10,
               }}
             >
-              <HomePage />
+              <HomePage products={products}/>
             </div>
           )}
           {tab === 1 && (
@@ -120,7 +133,7 @@ export default function App() {
                 gap: 10,
               }}
             >
-              <ProductPage />
+              <ProductPage products={products}/>
             </div>
           )}
           {tab === 2 && (

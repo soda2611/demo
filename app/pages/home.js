@@ -3,7 +3,7 @@ import { Typography, Box, IconButton, Grid } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
-export default function HomePage() {
+export default function HomePage({products}) {
   return (
     <div
       style={{
@@ -87,103 +87,108 @@ export default function HomePage() {
         columns={{ xs: 2, sm: 4, md: 4 }}
         sx={{ justifyContent: "center" }}
       >
-        {Array.from({ length: 20 }).map((_, i) => (
-          <Grid
-            container
-            spacing={2}
-            key={i}
-            sx={{ padding: 1, display: "flex", alignItems: "center" }}
-          >
-            <Grid item>
-              <Box
-                sx={{
-                  backgroundColor: "#f1f1f1",
-                  width: 250,
-                  height: 400,
-                  borderRadius: 2.5,
-                }}
-              >
-                <div
-                  style={{
-                    backgroundColor: "#e0e0e0",
-                    width: "100%",
-                    height: "60%",
-                    borderTopLeftRadius: 10,
-                    borderTopRightRadius: 10,
-                  }}
-                />
-                <Box sx={{ padding: 2, height: "40%" }}>
-                  <Typography
-                    variant="h6"
-                    component="div"
-                    sx={{ fontWeight: "bold", marginBottom: 1 }}
-                  >
-                    Sản phẩm {i + 1}
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    color="text.secondary"
-                    sx={{ marginBottom: 2 }}
-                  >
-                    {`Mô tả ngắn về sản phẩm ${i + 1}`.length > 24
-                      ? `Mô tả ngắn về sản phẩm ${i + 1}`.substring(0, 22) +
-                        "..."
-                      : `Mô tả ngắn về sản phẩm ${i + 1}`}
-                  </Typography>
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                    <Typography
-                      variant="h6"
-                      component="div"
-                      sx={{ fontWeight: "bold", color: "primary.main" }}
+        {Object.entries(products).map(([category, items]) => (
+            <>
+            {Object.entries(items).map(([name, item]) => (
+                (100-(item['sale']/item['price'])*100>80 ? (
+                    <Grid
+                        container
+                        spacing={2}
+                        sx={{ padding: 1, display: "flex", alignItems: "center" }}
                     >
-                      0₫
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      component="div"
-                      sx={{
-                        fontWeight: "bold",
-                        color: "gray",
-                        textDecoration: "line-through",
-                      }}
-                    >
-                      100.000₫
-                    </Typography>
-                  </Box>
-                  <IconButton
-                    sx={{ position: "relative", bottom: 13, left: 190 }}
-                    aria-label="favorite"
-                  >
-                    <ShoppingCartIcon />
-                  </IconButton>
-                  <IconButton
-                    sx={{ position: "relative", bottom: 360, left: -50 }}
-                    aria-label="favorite"
-                  >
-                    <FavoriteBorderIcon />
-                  </IconButton>
-                  <Box
-                    sx={{
-                      position: "relative",
-                      top: -395,
-                      left: 170,
-                      fontWeight: "bold",
-                      color: "white",
-                      backgroundColor: "primary.main",
-                      padding: 0.5,
-                      borderRadius: 2,
-                      fontSize: 12,
-                      textAlign: "center",
-                      width: 55,
-                    }}
-                  >
-                    -100%
-                  </Box>
-                </Box>
-              </Box>
-            </Grid>
-          </Grid>
-        ))}
+                        <Grid item>
+                        <Box
+                            sx={{
+                            backgroundColor: "#f1f1f1",
+                            width: 250,
+                            height: 400,
+                            borderRadius: 2.5,
+                            }}
+                        >
+                            <div
+                            style={{
+                                backgroundColor: "#e0e0e0",
+                                width: "100%",
+                                height: "60%",
+                                borderTopLeftRadius: 10,
+                                borderTopRightRadius: 10,
+                            }}
+                            />
+                            <Box sx={{ padding: 2, height: "40%" }}>
+                            <Typography
+                                variant="h6"
+                                component="div"
+                                sx={{ fontWeight: "bold", marginBottom: 1 }}
+                            >
+                                {name}
+                            </Typography>
+                            <Typography
+                                variant="body1"
+                                color="text.secondary"
+                                sx={{ marginBottom: 2 }}
+                            >
+                                {`${item['description']}`.length > 24
+                                ? `${item['description']}`.substring(0, 22) +
+                                    "..."
+                                : `${item['description']}`}
+                            </Typography>
+                            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                <Typography
+                                variant="h6"
+                                component="div"
+                                sx={{ fontWeight: "bold", color: "primary.main" }}
+                                >
+                                {item['sale']}₫
+                                </Typography>
+                                <Typography
+                                variant="body2"
+                                component="div"
+                                sx={{
+                                    fontWeight: "bold",
+                                    color: "gray",
+                                    textDecoration: "line-through",
+                                }}
+                                >
+                                {item['price']}₫
+                                </Typography>
+                            </Box>
+                            <IconButton
+                                sx={{ position: "relative", bottom: 13, left: 190 }}
+                                aria-label="favorite"
+                            >
+                                <ShoppingCartIcon />
+                            </IconButton>
+                            <IconButton
+                                sx={{ position: "relative", bottom: 360, left: -50 }}
+                                aria-label="favorite"
+                            >
+                                <FavoriteBorderIcon />
+                            </IconButton>
+                            <Box
+                                sx={{
+                                position: "relative",
+                                top: -395,
+                                left: 170,
+                                fontWeight: "bold",
+                                color: "white",
+                                backgroundColor: "primary.main",
+                                padding: 0.5,
+                                borderRadius: 2,
+                                fontSize: 12,
+                                textAlign: "center",
+                                width: 55,
+                                }}
+                            >
+                                -{(100-(item['sale']/item['price'])*100).toFixed(1)}%
+                            </Box>
+                            </Box>
+                        </Box>
+                        </Grid>
+                    </Grid>
+                    ) : (null))
+                ))}
+            </>
+            ))}
       </Grid>
     </div>
   );

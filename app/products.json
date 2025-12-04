@@ -3,7 +3,7 @@
     "Rau muống": {
       "description": "Mô tả sản phẩm",
       "price": 15000,
-      "sale": 15000
+      "sale": 0
     },
     "Rau cải xanh": {
       "description": "Mô tả sản phẩm",
@@ -60,7 +60,7 @@
     "Gừng": {
       "description": "Mô tả sản phẩm",
       "price": 40000,
-      "sale": 35000
+      "sale": 1000
     },
     "Cà rốt": {
       "description": "Mô tả sản phẩm",

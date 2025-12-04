@@ -1,21 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Typography, Box, IconButton, Grid } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
-export default function ProductPage() {
-  const [products, setProducts] = useState(null);
-
-  useEffect(() => {
-    fetch(
-      "https://raw.githubusercontent.com/soda2611/demo/refs/heads/main/app/products.json"
-    )
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => console.error("Lỗi khi tải JSON:", err));
-  }, []);
-
-  if (!products) return <div>Đang tải dữ liệu...</div>;
+export default function ProductPage({products}) {
 
   return (
     <div
