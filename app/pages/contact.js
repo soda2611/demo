@@ -55,8 +55,8 @@ export default function ContactPage() {
       {!isMobile ? (
         <Grid
           container
-          spacing={{ xs: 3, md: 3 }}
-          columns={{ xs: 2, sm: 4, md: 4 }}
+          spacing={{ md: 10 }}
+          columns={{ md: 2 }}
           sx={{ width: "70%", justifyContent: "center" }}
         >
           <div
@@ -91,7 +91,10 @@ export default function ContactPage() {
               rows={10}
             />
             <div>
-              <Button variant="contained" color="primary.main">
+              <Button
+                variant="contained"
+                sx={{ bgcolor: "primary.main", color: "white" }}
+              >
                 Gửi
               </Button>
             </div>
@@ -104,17 +107,24 @@ export default function ContactPage() {
               flexGrow: 1,
             }}
           >
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{
-                fontWeight: "bold",
-                marginBottom: 1,
-                color: "text.primary",
+            <div
+              style={{
+                marginBottom: 20,
+                display: "flex",
+                padding: 2,
+                gap: 10,
+                alignItems: "center",
               }}
             >
-              GreenFarm
-            </Typography>
+              <img
+                src="https://github.com/soda2611/demo/blob/main/public/image.png?raw=true"
+                alt="Logo"
+                style={{ height: 40 }}
+              />
+              <Typography variant="h5" fontWeight="bold" component="div">
+                GreenFarm
+              </Typography>
+            </div>
             <Typography variant="body1">
               Hotline: 0123456789
               <br />
@@ -163,24 +173,6 @@ export default function ContactPage() {
                 />
               </Link>
             </Box>
-            <div
-              style={{
-                marginTop: 20,
-                display: "flex",
-                padding: 2,
-                gap: 10,
-                alignItems: "center",
-              }}
-            >
-              <img
-                src="https://github.com/soda2611/demo/blob/main/public/image.png?raw=true"
-                alt="Logo"
-                style={{ height: 40 }}
-              />
-              <Typography variant="h5" fontWeight="bold" component="div">
-                GreenFarm
-              </Typography>
-            </div>
           </div>
         </Grid>
       ) : (
@@ -222,7 +214,10 @@ export default function ContactPage() {
               rows={10}
             />
             <div>
-              <Button variant="contained" color="primary.main">
+              <Button
+                variant="contained"
+                sx={{ bgcolor: "primary.main", color: "white" }}
+              >
                 Gửi
               </Button>
             </div>
@@ -233,19 +228,27 @@ export default function ContactPage() {
               flexDirection: "column",
               alignItems: "self-start",
               flexGrow: 1,
+              marginTop: 50,
             }}
           >
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{
-                fontWeight: "bold",
-                marginBottom: 1,
-                color: "text.primary",
+            <div
+              style={{
+                marginBottom: 20,
+                display: "flex",
+                padding: 2,
+                gap: 10,
+                alignItems: "center",
               }}
             >
-              GreenFarm
-            </Typography>
+              <img
+                src="https://github.com/soda2611/demo/blob/main/public/image.png?raw=true"
+                alt="Logo"
+                style={{ height: 40 }}
+              />
+              <Typography variant="h5" fontWeight="bold" component="div">
+                GreenFarm
+              </Typography>
+            </div>
             <Typography variant="body1">
               Hotline: 0123456789
               <br />
@@ -294,24 +297,6 @@ export default function ContactPage() {
                 />
               </Link>
             </Box>
-            <div
-              style={{
-                marginTop: 20,
-                display: "flex",
-                padding: 2,
-                gap: 10,
-                alignItems: "center",
-              }}
-            >
-              <img
-                src="https://github.com/soda2611/demo/blob/main/public/image.png?raw=true"
-                alt="Logo"
-                style={{ height: 40 }}
-              />
-              <Typography variant="h5" fontWeight="bold" component="div">
-                GreenFarm
-              </Typography>
-            </div>
           </div>
         </Grid>
       )}
