@@ -4,6 +4,14 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 export default function ProductPage() {
+  const [products, setProducts] = useState(null);
+
+  useEffect(() => {
+    fetch("/products.json") // lấy từ public/
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, []);
+  
   return (
     <div
       style={{
