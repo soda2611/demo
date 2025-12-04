@@ -1,5 +1,5 @@
 {
-  "rau": {
+  "Rau": {
     "rau_muong": {
       "name": "Rau muống",
       "price": "15000",
@@ -16,7 +16,7 @@
       "sale": "17000"
     }
   },
-  "cu": {
+  "Củ": {
     "khoai_tay": {
       "name": "Khoai tây",
       "price": "25000",
@@ -33,7 +33,7 @@
       "sale": "18000"
     }
   },
-  "trai_cay": {
+  "Trái cây": {
     "tao": {
       "name": "Táo",
       "price": "40000",
