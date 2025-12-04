@@ -1,118 +1,128 @@
 {
   "Rau": {
     "Rau muống": {
-      "description": "Mô tả sản phẩm",
+      "description": "Rau muống tươi ngon",
       "price": 15000,
-      "sale": 0
+      "sale": 2000
     },
     "Rau cải xanh": {
-      "description": "Mô tả sản phẩm",
+      "description": "Rau cải xanh giòn ngọt",
       "price": 18000,
       "sale": 15000
     },
     "Cà chua": {
-      "description": "Mô tả sản phẩm",
+      "description": "Cà chua đỏ mọng",
       "price": 20000,
       "sale": 20000
     },
     "Xà lách": {
-      "description": "Mô tả sản phẩm",
+      "description": "Xà lách tươi giòn",
       "price": 12000,
-      "sale": 10000
+      "sale": 12000
     },
     "Bắp cải": {
-      "description": "Mô tả sản phẩm",
+      "description": "Bắp cải xanh",
       "price": 25000,
-      "sale": 22000
+      "sale": 2500
     },
     "Rau ngót": {
-      "description": "Mô tả sản phẩm",
+      "description": "Rau ngót sạch",
       "price": 16000,
-      "sale": 14000
+      "sale": 16000
     },
     "Mồng tơi": {
-      "description": "Mô tả sản phẩm",
+      "description": "Rau mồng tơi tươi",
       "price": 17000,
-      "sale": 15000
+      "sale": 17000
     }
   },
   "Củ": {
     "Khoai tây": {
-      "description": "Mô tả sản phẩm",
+      "description": "Khoai tây vàng",
       "price": 25000,
-      "sale": 22000
+      "sale": 4000
     },
     "Khoai lang": {
-      "description": "Mô tả sản phẩm",
+      "description": "Khoai lang tím",
       "price": 22000,
       "sale": 22000
     },
     "Củ cải": {
-      "description": "Mô tả sản phẩm",
+      "description": "Củ cải trắng",
       "price": 20000,
-      "sale": 18000
-    },
-    "Hành tây": {
-      "description": "Mô tả sản phẩm",
-      "price": 30000,
-      "sale": 28000
-    },
-    "Gừng": {
-      "description": "Mô tả sản phẩm",
-      "price": 40000,
-      "sale": 1000
-    },
-    "Cà rốt": {
-      "description": "Mô tả sản phẩm",
-      "price": 22000,
       "sale": 20000
     },
+    "Hành tây": {
+      "description": "Hành tây trắng",
+      "price": 30000,
+      "sale": 30000
+    },
+    "Gừng": {
+      "description": "Gừng tươi",
+      "price": 40000,
+      "sale": 40000
+    },
+    "Cà rốt": {
+      "description": "Cà rốt ngọt",
+      "price": 22000,
+      "sale": 3500
+    },
     "Sắn": {
-      "description": "Mô tả sản phẩm",
+      "description": "Củ sắn tươi",
       "price": 18000,
-      "sale": 16000
+      "sale": 18000
     }
   },
   "Trái cây": {
     "Táo": {
-      "description": "Mô tả sản phẩm",
+      "description": "Táo đỏ Mỹ",
       "price": 40000,
-      "sale": 40000
+      "sale": 5000
     },
     "Chuối": {
-      "description": "Mô tả sản phẩm",
+      "description": "Chuối chín vàng",
       "price": 30000,
-      "sale": 27000
-    },
-    "Cam": {
-      "description": "Mô tả sản phẩm",
-      "price": 35000,
       "sale": 30000
     },
+    "Cam": {
+      "description": "Cam sành",
+      "price": 35000,
+      "sale": 35000
+    },
     "Nho": {
-      "description": "Mô tả sản phẩm",
+      "description": "Nho tím ngọt",
       "price": 60000,
-      "sale": 55000
+      "sale": 8000
     },
     "Dưa hấu": {
-      "description": "Mô tả sản phẩm",
+      "description": "Dưa hấu đỏ ngọt",
       "price": 50000,
-      "sale": 45000
+      "sale": 50000
     },
     "Xoài": {
-      "description": "Mô tả sản phẩm",
+      "description": "Xoài cát Hòa Lộc",
       "price": 45000,
-      "sale": 40000
+      "sale": 45000
     },
     "Ổi": {
-      "description": "Mô tả sản phẩm",
+      "description": "Ổi xanh giòn",
       "price": 25000,
-      "sale": 22000
+      "sale": 25000
     },
     "Lê": {
-      "description": "Mô tả sản phẩm",
+      "description": "Lê Hàn Quốc",
       "price": 55000,
-      "sale": 50000
+      "sale": 55000
+    },
+    "Mít": {
+      "description": "Mít Thái thơm ngọt",
+      "price": 35000,
+      "sale": 35000
+    },
+    "Dứa": {
+      "description": "Dứa vàng",
+      "price": 20000,
+      "sale": 3000
     }
   }
 }
