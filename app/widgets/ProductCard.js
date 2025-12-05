@@ -108,8 +108,8 @@ export default function ProductCard({ name, item }) {
           <Box
             sx={{
               position: "relative",
-              top: -395,
-              left: 190,
+              top: -390,
+              left: 185,
               fontWeight: "bold",
               color: "white",
               backgroundColor: "primary.main",
