@@ -41,6 +41,66 @@
       "description": "Rau mồng tơi tươi",
       "price": 17000,
       "sale": 17000
+    },
+    "Cải bó xôi": {
+      "img": "https://product.hstatic.net/1000141988/product/c_i_b__x_i_vietgap_tr__ng_ph_t_300_g__i0018473__9140a507241a4ed1a5e33d1ec43da186_master.jpg",
+      "description": "Cải bó xôi 300g",
+      "price": 39000,
+      "sale": 39000
+    },
+    "Xà lách mỡ hữu cơ": {
+      "img": "https://product.hstatic.net/1000141988/product/x__l_ch_m__h_u_c__food_king_71a54fe034924fa8a0cb94dc12b1db37_master.jpg",
+      "description": "Xà lách mỡ hữu cơ",
+      "price": 47500,
+      "sale": 47500
+    },
+    "Xà lách Romaine Xanh hữu cơ": {
+      "img": "https://product.hstatic.net/1000141988/product/x__l_ch_romaine_xanh_h_u_c__orlar_40805d49f5354833935baeefda59520a_master.jpg",
+      "description": "Xà lách Romaine Xanh hữu cơ",
+      "price": 99000,
+      "sale": 99000
+    },
+    "Bông hẹ": {
+      "img": "https://product.hstatic.net/1000141988/product/bong_he_vietgap_200g_c67fbde822d1467bbff0fc784db96590_master.png",
+      "description": "Bông hẹ 200G/Gói - Rau sạch, thơm ngon, bổ dưỡng",
+      "price": 39000,
+      "sale": 39000
+    },
+    "Bông thiên lý": {
+      "img": "https://product.hstatic.net/1000141988/product/bong_he_vietgap_200g_c67fbde822d1467bbff0fc784db96590_master.png",
+      "description": "Bông thiên lý 200g/khay - Hương vị quê nhà, sức khỏe dồi dào",
+      "price": 49000,
+      "sale": 49000
+    },
+    "Ngò gai hữu cơ": {
+      "img": "https://cdn.hstatic.net/products/1000141988/ng__gai_h_u_c__vi_t_h__50_g___g_i___f8020f676e714073b739b78a9a2fa322_master.png",
+      "description": "Ngò gai hữu cơ (Gói 50G)",
+      "price": 22000,
+      "sale": 22000
+    },
+    "Tía tô hữu cơ": {
+      "img": "https://cdn.hstatic.net/products/1000141988/t_a_t__h_u_c__vi_t_h__50_g___g_i___308423f161fb475d852b04b17b3ddad2_master.png",
+      "description": "Tía tô hữu cơ (Gói 50g)",
+      "price": 19000,
+      "sale": 19000
+    },
+    "Cải thìa": {
+      "img": "https://product.hstatic.net/1000141988/product/cai_thia_vietgap_bio_ngon_-_300g__i0013792__67879620e7e3462fb20def0fabaa06f1_master.jpg",
+      "description": "Cải thìa 300g",
+      "price": 19500,
+      "sale": 19500
+    },
+    "Su hào hữu cơ": {
+      "img": "https://cdn.hstatic.net/products/1000141988/su_h_o_h_u_c__vi_t_h__500_g___khay___97e00764b69a4d5aa8cd8c5e9710441a_master.png",
+      "description": "Su hào hữu cơ (Khay 500g)",
+      "price": 55000,
+      "sale": 55000
+    },
+    "Rau diếp cá hữu cơ": {
+      "img": "https://cdn.hstatic.net/products/1000141988/rau_di_p_c__h_u_c__vi_t_h__50_g___g_i___5951990702f24b2d9c458170ea1229bd_master.png",
+      "description": "Rau diếp cá hữu cơ (Gói 50g)",
+      "price": 19000,
+      "sale": 19000
     }
   },
   "Củ": {
