@@ -25,6 +25,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import ProductPage from "./pages/product";
 import HomePage from "./pages/home";
 import ContactPage from "./pages/contact";
+import DemoBox from "./pages/blog";
 
 export default function App() {
   const theme = createTheme({
@@ -137,20 +138,7 @@ export default function App() {
             </div>
           )}
           {tab === 2 && (
-            <div
-              style={{
-                overflowY: "hidden",
-                height: "100%",
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "column",
-                gap: 10,
-              }}
-            >
-              Blog
-            </div>
+            <DemoBox/>
           )}
           {tab === 3 && (
             <div
