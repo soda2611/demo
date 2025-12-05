@@ -49,10 +49,17 @@ export default function ProductPage({ products }) {
                     backgroundColor: "#e0e0e0",
                     width: "100%",
                     height: "60%",
+                    overflow: 'hidden',
                     borderTopLeftRadius: 10,
                     borderTopRightRadius: 10,
                   }}
-                />
+                >
+                  <img
+                    src={item['img']}
+                    alt={name}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
+                </div>
                 <Box sx={{ padding: 2, height: "40%" }}>
                   <Typography
                     variant="h6"
