@@ -164,7 +164,7 @@ export default function HomePage({ products }) {
                       <ShoppingCartIcon />
                     </IconButton>
                     <IconButton
-                      sx={{ position: "relative", bottom: 360, left: -50 }}
+                      sx={{ position: "relative", bottom: 360, left: -50, backdropFilter: 'blur(10px)' }}
                       aria-label="favorite"
                     >
                       <FavoriteBorderIcon />
@@ -289,7 +289,7 @@ export default function HomePage({ products }) {
                       <ShoppingCartIcon />
                     </IconButton>
                     <IconButton
-                      sx={{ position: "relative", bottom: 360, left: -50 }}
+                      sx={{ position: "relative", bottom: 360, left: -50, backdropFilter: 'blur(10px)' }}
                       aria-label="favorite"
                     >
                       <FavoriteBorderIcon />
