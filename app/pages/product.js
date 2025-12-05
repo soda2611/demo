@@ -35,7 +35,7 @@ export default function ProductPage({ products }) {
             }}
           >
             {Object.entries(items).map(([name, item]) => (
-              <ProductCard name={name} item={item} />
+              <ProductCard name={name} item={item} key={name} />
             ))}
           </Box>
         </>

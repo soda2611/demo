@@ -89,7 +89,6 @@ export default function App() {
           flexDirection: "column",
           alignItems: "center",
           gap: 16,
-          padding: 16,
         }}
       >
         <CssBaseline />

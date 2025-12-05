@@ -46,7 +46,7 @@ export default function HomePage({ products }) {
             padding: 2,
             borderRadius: 5,
             height: 300,
-            width: "calc(90% - 25px)",
+            width: "90%",
             backgroundColor: "rgba(0, 0, 0, 0.5)",
           }}
         >
@@ -130,7 +130,7 @@ export default function HomePage({ products }) {
           <>
             {Object.entries(items).map(([name, item]) =>
               100 - (item["sale"] / item["price"]) * 100 > 80 ? (
-                <ProductCard name={name} item={item} />
+                <ProductCard name={name} item={item} key={name} />
               ) : null
             )}
           </>
