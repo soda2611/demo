@@ -24,19 +24,19 @@ export default function ProductCard({ name, item }) {
         }}
       >
         <Box
-        component="img"
-        src={item["img"]}
-        alt={name}
-        sx={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          transition: "0.3s",
-          "&:hover": {
-            transform: "scale(1.2)",
-          },
-        }}
-      />
+          component="img"
+          src={item["img"]}
+          alt={name}
+          sx={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            transition: "0.3s",
+            "&:hover": {
+              transform: "scale(1.2)",
+            },
+          }}
+        />
       </div>
       <Box sx={{ padding: 2, height: "40%" }}>
         <Typography
@@ -44,7 +44,9 @@ export default function ProductCard({ name, item }) {
           component="div"
           sx={{ fontWeight: "bold", marginBottom: 1 }}
         >
-          {name}
+          {`${name}`.length > 17
+            ? `${name}`.substring(0, 17) + "..."
+            : `${name}`}
         </Typography>
         {item["sale"] != item["price"] ? (
           <>
@@ -54,7 +56,7 @@ export default function ProductCard({ name, item }) {
               sx={{ marginBottom: 2 }}
             >
               {`${item["description"]}`.length > 24
-                ? `${item["description"]}`.substring(0, 22) + "..."
+                ? `${item["description"]}`.substring(0, 20) + "..."
                 : `${item["description"]}`}
             </Typography>
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -77,40 +79,6 @@ export default function ProductCard({ name, item }) {
                 {item["price"]}₫
               </Typography>
             </Box>
-            <IconButton
-              sx={{ position: "relative", bottom: 13, left: 190 }}
-              aria-label="favorite"
-            >
-              <ShoppingCartIcon />
-            </IconButton>
-            <IconButton
-              sx={{
-                position: "relative",
-                bottom: 360,
-                left: -50,
-                backdropFilter: "blur(10px)",
-              }}
-              aria-label="favorite"
-            >
-              <FavoriteBorderIcon />
-            </IconButton>
-            <Box
-              sx={{
-                position: "relative",
-                top: -395,
-                left: 170,
-                fontWeight: "bold",
-                color: "white",
-                backgroundColor: "primary.main",
-                padding: 0.5,
-                borderRadius: 2,
-                fontSize: 12,
-                textAlign: "center",
-                width: 55,
-              }}
-            >
-              -{(100 - (item["sale"] / item["price"]) * 100).toFixed(1)}%
-            </Box>
           </>
         ) : (
           <>
@@ -132,26 +100,67 @@ export default function ProductCard({ name, item }) {
                 {item["price"]}₫
               </Typography>
             </Box>
-            <IconButton
-              sx={{ position: "relative", bottom: 13, left: 190 }}
-              aria-label="favorite"
-            >
-              <ShoppingCartIcon />
-            </IconButton>
-            <IconButton
-              sx={{
-                position: "relative",
-                bottom: 360,
-                left: -50,
-                backdropFilter: "blur(10px)",
-              }}
-              aria-label="favorite"
-            >
-              <FavoriteBorderIcon />
-            </IconButton>
           </>
         )}
       </Box>
+      {item["sale"] != item["price"] ? (
+        <>
+          <Box
+            sx={{
+              position: "relative",
+              top: -395,
+              left: 190,
+              fontWeight: "bold",
+              color: "white",
+              backgroundColor: "primary.main",
+              padding: 0.5,
+              borderRadius: 2,
+              fontSize: 12,
+              textAlign: "center",
+              width: 55,
+            }}
+          >
+            -{(100 - (item["sale"] / item["price"]) * 100).toFixed(1)}%
+          </Box>
+          <IconButton
+            sx={{ position: "relative", bottom: 70, right: -205 }}
+            aria-label="favorite"
+          >
+            <ShoppingCartIcon />
+          </IconButton>
+          <IconButton
+            sx={{
+              position: "relative",
+              top: -420,
+              left: -35,
+              backdropFilter: "blur(10px)",
+            }}
+            aria-label="favorite"
+          >
+            <FavoriteBorderIcon />
+          </IconButton>
+        </>
+      ) : (
+        <>
+          <IconButton
+            sx={{ position: "relative", bottom: 45, right: -205 }}
+            aria-label="favorite"
+          >
+            <ShoppingCartIcon />
+          </IconButton>
+          <IconButton
+            sx={{
+              position: "relative",
+              top: -395,
+              left: -35,
+              backdropFilter: "blur(10px)",
+            }}
+            aria-label="favorite"
+          >
+            <FavoriteBorderIcon />
+          </IconButton>
+        </>
+      )}
     </Box>
   );
 }
