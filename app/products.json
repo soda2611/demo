@@ -54,7 +54,7 @@
       "price": 47500,
       "sale": 47500
     },
-    "Xà lách Romaine Xanh hữu cơ": {
+    "Xà lách Romaine xanh hữu cơ": {
       "img": "https://product.hstatic.net/1000141988/product/x__l_ch_romaine_xanh_h_u_c__orlar_40805d49f5354833935baeefda59520a_master.jpg",
       "description": "Xà lách Romaine Xanh hữu cơ",
       "price": 99000,
@@ -107,6 +107,24 @@
       "description": "Bắp cải trắng: Bí quyết cho sức khỏe trọn vẹn",
       "price": 40000,
       "sale": 40000
+    },
+    "Rau tần ô": {
+      "img": "https://product.hstatic.net/1000141988/product/rau_tan_o_vietgap_-_300gr_fd5ac19f2d934a9391b1370bbb5a8643_master.jpg",
+      "description": "Rau tần ô 300G ",
+      "price": 25000,
+      "sale": 21250
+    },
+    "Lá mè": {
+      "img": "https://product.hstatic.net/1000141988/product/la_me_vietgap_50g_341b30596954402188cbc2d6ec19c599_master.png",
+      "description": "Lá mè 50g: Bí quyết tạo nên những món ăn ngon khó quên",
+      "price": 15000,
+      "sale": 10000
+    },
+    "Gía sống": {
+      "img": "https://product.hstatic.net/1000141988/product/gia_song_vietgap_truong_phat_300_g__i0014109__22865428951e4a5b8c4c0c1fbe170c23_master.jpg",
+      "description": "Giá sống 300g - Món ăn dân dã, dinh dưỡng hiện đại",
+      "price": 10000,
+      "sale": 7500
     }
   },
   "Củ": {
@@ -184,7 +202,7 @@
     },
     "Bắp Mỹ": {
       "img": "https://product.hstatic.net/1000141988/product/bap_my_vietgap_-_2_trai_b24e30ee73f04fb49b62b9692279f180_master.jpg",
-      "description": "Món quà ngọt ngào từ thiên nhiên",
+      "description": "Bắp Mỹ: Món quà ngọt ngào từ thiên nhiên",
       "price": 29000,
       "sale": 24360
     },
@@ -193,6 +211,48 @@
       "description": "Cà tím: Viên ngọc tím trong vườn rau",
       "price": 17400,
       "sale": 17400
+    },
+    "Bắp cải trắng": {
+      "img": "https://product.hstatic.net/1000141988/product/bap_cai_trang_vietgap_-_800g_0cdb47dbc84747d3bc2bf70838a44faf_master.jpg",
+      "description": "Bắp cải trắng: Bí quyết cho sức khỏe trọn vẹn",
+      "price": 40000,
+      "sale": 40000
+    },
+    "Súp lơ trắng": {
+      "img": "https://product.hstatic.net/1000141988/product/sup_lo_trang_vietgap_-_500g_1e089583da9b43918cc3dc1ba8fb6602_master.jpg",
+      "description": "Súp lơ trắng 500g",
+      "price": 54500,
+      "sale": 54500
+    },
+    "Súp lơ xanh baby": {
+      "img": "https://product.hstatic.net/1000141988/product/bong_cai_xanh_baby_vietgap_f5df5020a1c3488f83e6d61465afcaa8_large_46322c5017ae4c9d8af8e86241d873dd_master.jpg",
+      "description": "Súp lơ xanh baby",
+      "price": 59000,
+      "sale": 59000
+    },
+    "Khoai tây Đà Lạt": {
+      "img": "https://product.hstatic.net/1000141988/product/khoai_tay_da_lat_vietgap_500g_93ec1207558d450d8a1e5450a82405a2_master.png",
+      "description": "Khoai Tây Đà Lạt",
+      "price": 30000,
+      "sale": 30000
+    },
+    "Cà chua trứng": {
+      "img": "https://product.hstatic.net/1000141988/product/ca_chua_trung_vietgap_500g_e99665f3befe40ffbcce63d424cd5f85_master.png",
+      "description": "Cà chua trứng 500g: Quả đỏ tròn trịa, vị ngọt thanh",
+      "price": 39000,
+      "sale": 31500
+    },
+    "Bí đao": {
+      "img": "https://product.hstatic.net/1000141988/product/bi_dao_vietgap_500g_bb8d7de2de174b058b960208b3a534d6_master.png",
+      "description": "Bí Đao 500G: Thanh Mát Tự Nhiên, An Tâm Chất Lượng",
+      "price": 19500,
+      "sale": 16575
+    },
+    "Bầu xanh": {
+      "img": "https://product.hstatic.net/1000141988/product/bau_xanh_huu_co_bio_ngon_550g_6a27cdc6dac64ba89c32d1a6ab690be6_master.png",
+      "description": "Bầu xanh 500g/trái",
+      "price": 22500,
+      "sale": 19575
     }
   },
   "Nấm": {
@@ -213,20 +273,30 @@
       "description": "Hương Vị Đồng Quê, Dinh Dưỡng Dồi Dào",
       "price": 34500,
       "sale": 34500
-    }
-  },
-  "Đậu hủ": {
-    "Đậu hủ bìa Tojy": {
-      "img": "https://product.hstatic.net/1000141988/product/dau_hu_bia_tojy_f0710f7e5c704409af275d389eb1338d_master.jpg",
-      "description": "Đậu Hũ Bìa Tojy 340g",
-      "price": 22000,
-      "sale": 22000
     },
-    "Đậu hủ trứng Tojy": {
-      "img": "https://product.hstatic.net/1000141988/product/dau_hu_trung_tojy_140gr_e764a509643b4e67a506ef0e63a01d3f_master.jpg",
-      "description": "Đậu Hũ Trứng Tojy 140g",
-      "price": 20500,
-      "sale": 20500
+    "Nấm sò trắng": {
+      "img": "https://product.hstatic.net/1000141988/product/nam_so_trang_nam_xanh_200g_23aac5170bff4c35a77607ed32b52f92_master.jpg",
+      "description": "Nấm sò trắng",
+      "price": 19500,
+      "sale": 19500
+    },
+    "Nấm bào ngư xám non Rica": {
+      "img": "https://product.hstatic.net/1000141988/product/ban_sao_cua_frame_co_icon_10x10_6ad923e5e6ce46eda59c6ab6d35e99e1_master.png",
+      "description": "Nấm Bào Ngư Xám Non Rica (Khay 200G)",
+      "price": 27000,
+      "sale": 22950
+    },
+    "Nấm mối đen": {
+      "img": "https://product.hstatic.net/1000141988/product/nam_moi_den_nam_xanh_150g_0aea096a78c9476a83bad3f02ca2a503_master.jpg",
+      "description": "Nấm Mối Đen: Hương Vị Độc Đáo, Bổ Dưỡng Tuyệt Vời",
+      "price": 75000,
+      "sale": 60000
+    },
+    "Nấm ngọc châm trắng Rica": {
+      "img": "https://product.hstatic.net/1000141988/product/63_fa4eb8e77136445fbe81284d5b2ea268_master.jpg",
+      "description": "Nấm ngọc châm trắng Rica (Khay 0.15Kg)",
+      "price": 47000,
+      "sale": 37600
     }
   },
   "Trái cây": {
@@ -289,6 +359,26 @@
       "description": "Dứa vàng",
       "price": 20000,
       "sale": 3000
+    }
+  },
+  "Đậu hủ": {
+    "Đậu hủ bìa Tojy": {
+      "img": "https://product.hstatic.net/1000141988/product/dau_hu_bia_tojy_f0710f7e5c704409af275d389eb1338d_master.jpg",
+      "description": "Đậu Hũ Bìa Tojy 340g",
+      "price": 22000,
+      "sale": 22000
+    },
+    "Đậu hủ trứng Tojy": {
+      "img": "https://product.hstatic.net/1000141988/product/dau_hu_trung_tojy_140gr_e764a509643b4e67a506ef0e63a01d3f_master.jpg",
+      "description": "Đậu Hũ Trứng Tojy 140g",
+      "price": 20500,
+      "sale": 20500
+    },
+    "Đậu hũ ky khô Tojy": {
+      "img": "https://product.hstatic.net/1000141988/product/dau_hu_ky_kho_tojy_80_g_783502f99ec2495aa13d50e35f6886e9_master.png",
+      "description": "Đậu hũ ky khô Tojy 80g",
+      "price": 43500,
+      "sale": 34800
     }
   }
 }
