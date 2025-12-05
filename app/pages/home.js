@@ -76,9 +76,10 @@ export default function HomePage({ products }) {
           marginTop: 10,
           marginBottom: 1,
           color: "text.primary",
+          textAlign: "center",
         }}
       >
-        Đại tiệc trái cây
+        Fruits Party
       </Typography>
       <Box
         sx={{
@@ -101,7 +102,6 @@ export default function HomePage({ products }) {
           </>
         ))}
       </Box>
-
       <Typography
         variant="h3"
         component="div"
@@ -110,6 +110,7 @@ export default function HomePage({ products }) {
           marginTop: 10,
           marginBottom: 1,
           color: "text.primary",
+          textAlign: "center",
         }}
       >
         Siêu giảm giá
@@ -144,6 +145,7 @@ export default function HomePage({ products }) {
           marginTop: 10,
           marginBottom: 1,
           color: "text.primary",
+          textAlign: "center",
         }}
       >
         Đang giảm giá
