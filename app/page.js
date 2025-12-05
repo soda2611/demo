@@ -25,6 +25,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import ProductPage from "./pages/product";
 import HomePage from "./pages/home";
 import ContactPage from "./pages/contact";
+import Footer from "./widgets/Footer";
 import DemoBox from "./pages/blog";
 
 export default function App() {
@@ -119,6 +120,7 @@ export default function App() {
               }}
             >
               <HomePage products={products}/>
+              <Footer/>
             </div>
           )}
           {tab === 1 && (
@@ -135,10 +137,25 @@ export default function App() {
               }}
             >
               <ProductPage products={products}/>
+              <Footer/>
             </div>
           )}
           {tab === 2 && (
-            <DemoBox/>
+            <div
+              style={{
+                overflowY: "hidden",
+                height: "100%",
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column",
+                gap: 10,
+              }}
+            >
+              <DemoBox/>
+              <Footer/>
+            </div>
           )}
           {tab === 3 && (
             <div
@@ -154,6 +171,7 @@ export default function App() {
               }}
             >
               <ContactPage />
+              <Footer/>
             </div>
           )}
         </Box>
