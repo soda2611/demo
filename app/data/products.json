@@ -2,147 +2,147 @@
   "Rau": {
     "Rau muống": {
       "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Ong_choy_water_spinach.png/960px-Ong_choy_water_spinach.png",
-      "description": "",
+      "description": "Rau muống - Rau muống tươi ngon. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Rau muống tươi ngon",
       "price": 15000,
       "sale": 2000
     },
     "Cải bẹ xanh": {
       "img": "data:image/webp;base64,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",
-      "description": "",
+      "description": "Cải bẹ xanh - Cải bẹ xanh giòn ngọt. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Cải bẹ xanh giòn ngọt",
       "price": 18000,
       "sale": 15000
     },
     "Cà chua": {
       "img": "data:image/webp;base64,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",
-      "description": "",
+      "description": "Cà chua - Cà chua đỏ mọng. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Cà chua đỏ mọng",
       "price": 20000,
       "sale": 20000
     },
     "Xà lách": {
       "img": "https://th.bing.com/th/id/OIP.65QroVVqf-aGfbtBdxlJ5wHaHa?w=177&h=180&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1",
-      "description": "",
+      "description": "Xà lách - Xà lách tươi giòn. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Xà lách tươi giòn",
       "price": 12000,
       "sale": 12000
     },
     "Bắp cải": {
       "img": "data:image/webp;base64,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",
-      "description": "",
+      "description": "Bắp cải - Bắp cải xanh. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Bắp cải xanh",
       "price": 25000,
       "sale": 2500
     },
     "Rau ngót": {
       "img": "data:image/webp;base64,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",
-      "description": "",
+      "description": "Rau ngót - Rau ngót sạch. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Rau ngót sạch",
       "price": 16000,
       "sale": 16000
     },
     "Mồng tơi": {
       "img": "https://th.bing.com/th/id/OIP.Q1wBPssvjJWmIyWZwXv36AHaFF?w=248&h=180&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1",
-      "description": "",
+      "description": "Mồng tơi - Rau mồng tơi tươi. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Rau mồng tơi tươi",
       "price": 17000,
       "sale": 17000
     },
     "Cải bó xôi": {
       "img": "https://product.hstatic.net/1000141988/product/c_i_b__x_i_vietgap_tr__ng_ph_t_300_g__i0018473__9140a507241a4ed1a5e33d1ec43da186_master.jpg",
-      "description": "",
+      "description": "Cải bó xôi - Cải bó xôi 300g. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Cải bó xôi 300g",
       "price": 39000,
       "sale": 39000
     },
     "Xà lách mỡ hữu cơ": {
       "img": "https://product.hstatic.net/1000141988/product/x__l_ch_m__h_u_c__food_king_71a54fe034924fa8a0cb94dc12b1db37_master.jpg",
-      "description": "",
+      "description": "Xà lách mỡ hữu cơ - Xà lách mỡ hữu cơ. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Xà lách mỡ hữu cơ",
       "price": 47500,
       "sale": 47500
     },
     "Xà lách Romaine xanh hữu cơ": {
       "img": "https://product.hstatic.net/1000141988/product/x__l_ch_romaine_xanh_h_u_c__orlar_40805d49f5354833935baeefda59520a_master.jpg",
-      "description": "",
+      "description": "Xà lách Romaine xanh hữu cơ - Xà lách Romaine Xanh hữu cơ. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Xà lách Romaine Xanh hữu cơ",
       "price": 99000,
       "sale": 99000
     },
     "Bông hẹ": {
       "img": "https://product.hstatic.net/1000141988/product/bong_he_vietgap_200g_c67fbde822d1467bbff0fc784db96590_master.png",
-      "description": "",
+      "description": "Bông hẹ - Bông hẹ 200G/Gói - Rau sạch, thơm ngon, bổ dưỡng. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Bông hẹ 200G/Gói - Rau sạch, thơm ngon, bổ dưỡng",
       "price": 39000,
       "sale": 39000
     },
     "Ngò gai hữu cơ": {
       "img": "https://cdn.hstatic.net/products/1000141988/ng__gai_h_u_c__vi_t_h__50_g___g_i___f8020f676e714073b739b78a9a2fa322_master.png",
-      "description": "",
+      "description": "Ngò gai hữu cơ - Ngò gai hữu cơ (Gói 50G). Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Ngò gai hữu cơ (Gói 50G)",
       "price": 22000,
       "sale": 22000
     },
     "Tía tô hữu cơ": {
       "img": "https://cdn.hstatic.net/products/1000141988/t_a_t__h_u_c__vi_t_h__50_g___g_i___308423f161fb475d852b04b17b3ddad2_master.png",
-      "description": "",
+      "description": "Tía tô hữu cơ - Tía tô hữu cơ (Gói 50g). Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Tía tô hữu cơ (Gói 50g)",
       "price": 19000,
       "sale": 19000
     },
     "Cải thìa": {
       "img": "https://product.hstatic.net/1000141988/product/cai_thia_vietgap_bio_ngon_-_300g__i0013792__67879620e7e3462fb20def0fabaa06f1_master.jpg",
-      "description": "",
+      "description": "Cải thìa - Cải thìa 300g. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Cải thìa 300g",
       "price": 19500,
       "sale": 19500
     },
     "Rau diếp cá hữu cơ": {
       "img": "https://cdn.hstatic.net/products/1000141988/rau_di_p_c__h_u_c__vi_t_h__50_g___g_i___5951990702f24b2d9c458170ea1229bd_master.png",
-      "description": "",
+      "description": "Rau diếp cá hữu cơ - Rau diếp cá hữu cơ (Gói 50g). Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Rau diếp cá hữu cơ (Gói 50g)",
       "price": 19000,
       "sale": 19000
     },
     "Súp lơ trắng": {
       "img": "https://product.hstatic.net/1000141988/product/sup_lo_trang_vietgap_-_500g_1e089583da9b43918cc3dc1ba8fb6602_master.jpg",
-      "description": "",
+      "description": "Súp lơ trắng - Súp lơ trắng 500g: Hoa trắng tinh khiết, dinh dưỡng trọn vẹn. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Súp lơ trắng 500g: Hoa trắng tinh khiết, dinh dưỡng trọn vẹn",
       "price": 54500,
       "sale": 54500
     },
     "Súp lơ xanh baby": {
       "img": "https://product.hstatic.net/1000141988/product/bong_cai_xanh_baby_vietgap_f5df5020a1c3488f83e6d61465afcaa8_large_46322c5017ae4c9d8af8e86241d873dd_master.jpg",
-      "description": "",
+      "description": "Súp lơ xanh baby - Bí quyết cho sự phát triển khỏe mạnh của bé. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Bí quyết cho sự phát triển khỏe mạnh của bé",
       "price": 59000,
       "sale": 59000
     },
     "Bắp cải trắng": {
       "img": "https://product.hstatic.net/1000141988/product/bap_cai_trang_vietgap_-_800g_0cdb47dbc84747d3bc2bf70838a44faf_master.jpg",
-      "description": "",
+      "description": "Bắp cải trắng - Bắp cải trắng: Bí quyết cho sức khỏe trọn vẹn. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Bắp cải trắng: Bí quyết cho sức khỏe trọn vẹn",
       "price": 40000,
       "sale": 40000
     },
     "Rau tần ô": {
       "img": "https://product.hstatic.net/1000141988/product/rau_tan_o_vietgap_-_300gr_fd5ac19f2d934a9391b1370bbb5a8643_master.jpg",
-      "description": "",
+      "description": "Rau tần ô - Rau tần ô 300G . Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Rau tần ô 300G ",
       "price": 25000,
       "sale": 21250
     },
     "Lá mè": {
       "img": "https://product.hstatic.net/1000141988/product/la_me_vietgap_50g_341b30596954402188cbc2d6ec19c599_master.png",
-      "description": "",
+      "description": "Lá mè - Lá mè 50g: Bí quyết tạo nên những món ăn ngon khó quên. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Lá mè 50g: Bí quyết tạo nên những món ăn ngon khó quên",
       "price": 15000,
       "sale": 10000
     },
     "Gía sống": {
       "img": "https://product.hstatic.net/1000141988/product/gia_song_vietgap_truong_phat_300_g__i0014109__22865428951e4a5b8c4c0c1fbe170c23_master.jpg",
-      "description": "",
+      "description": "Gía sống - Giá sống 300g - Món ăn dân dã, dinh dưỡng hiện đại. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Giá sống 300g - Món ăn dân dã, dinh dưỡng hiện đại",
       "price": 10000,
       "sale": 7500
@@ -151,147 +151,147 @@
   "Củ": {
     "Khoai tây": {
       "img": "https://th.bing.com/th/id/OIP.Dvlw9rfDr7pm9QnF6w26iwHaE0?w=291&h=189&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1",
-      "description": "",
+      "description": "Khoai tây - Khoai tây vàng. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Khoai tây vàng",
       "price": 25000,
       "sale": 4000
     },
     "Khoai lang": {
       "img": "https://th.bing.com/th/id/OIP.TflKf5ufkVLvLqw3-2rfawHaFj?w=202&h=180&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1",
-      "description": "",
+      "description": "Khoai lang - Khoai lang tím. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Khoai lang tím",
       "price": 22000,
       "sale": 22000
     },
     "Su hào hữu cơ": {
       "img": "https://cdn.hstatic.net/products/1000141988/su_h_o_h_u_c__vi_t_h__500_g___khay___97e00764b69a4d5aa8cd8c5e9710441a_master.png",
-      "description": "",
+      "description": "Su hào hữu cơ - Su hào hữu cơ (Khay 500g). Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Su hào hữu cơ (Khay 500g)",
       "price": 55000,
       "sale": 55000
     },
     "Củ cải": {
       "img": "data:image/webp;base64,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",
-      "description": "",
+      "description": "Củ cải - Củ cải trắng. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Củ cải trắng",
       "price": 20000,
       "sale": 20000
     },
     "Hành tây": {
       "img": "https://th.bing.com/th/id/OIP.2dsKXrKfY6_rJLFiCOlsXwHaFj?w=227&h=180&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1",
-      "description": "",
+      "description": "Hành tây - Hành tây trắng. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Hành tây trắng",
       "price": 30000,
       "sale": 30000
     },
     "Gừng": {
       "img": "https://th.bing.com/th/id/OIP.wpOxnPxLip9ygk1SbxH_fQHaHa?w=179&h=180&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1",
-      "description": "",
+      "description": "Gừng - Gừng tươi. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Gừng tươi",
       "price": 40000,
       "sale": 40000
     },
     "Cà rốt": {
       "img": "data:image/webp;base64,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",
-      "description": "",
+      "description": "Cà rốt - Cà rốt ngọt. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Cà rốt ngọt",
       "price": 22000,
       "sale": 3500
     },
     "Sắn": {
       "img": "https://th.bing.com/th/id/OIP.tmLdiO5Fm-pAaazKZZChyAHaEo?w=265&h=180&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1",
-      "description": "",
+      "description": "Sắn - Củ sắn tươi. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Củ sắn tươi",
       "price": 18000,
       "sale": 18000
     },
     "Củ cải đỏ hữu cơ": {
       "img": "https://cdn.hstatic.net/products/1000141988/c__c_i_d__h_u_c__vi_t_h__300_g___khay___2b08aca556c64df99939ce7b4378a012_master.png",
-      "description": "",
+      "description": "Củ cải đỏ hữu cơ - Củ cải đỏ hữu cơ ( Khay 300g ). Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Củ cải đỏ hữu cơ ( Khay 300g )",
       "price": 59000,
       "sale": 59000
     },
     "Củ cải trắng hữu cơ": {
       "img": "https://cdn.hstatic.net/products/1000141988/c__c_i_tr_ng_h_u_c__vi_t_h__500_g___khay___43a61d69a0d24ac59645489626a96d5f_master.png",
-      "description": "",
+      "description": "Củ cải trắng hữu cơ - Củ cải trắng hữu cơ ( Khay 500g ). Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Củ cải trắng hữu cơ ( Khay 500g )",
       "price": 65000,
       "sale": 65000
     },
     "Bí đỏ": {
       "img": "https://product.hstatic.net/1000141988/product/bi_do_vietgap_a780df9498ad45d0a2942f2649c0301f_master.jpg",
-      "description": "",
+      "description": "Bí đỏ - Bí đỏ 500g. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Bí đỏ 500g",
       "price": 19500,
       "sale": 16575
     },
     "Đậu bắp": {
       "img": "https://product.hstatic.net/1000141988/product/dau_bap_vietgap_f49137cfdc714671a2d3809519854149_master.png",
-      "description": "",
+      "description": "Đậu bắp - Đậu bắp 300g. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Đậu bắp 300g",
       "price": 17250,
       "sale": 17250
     },
     "Bắp Mỹ": {
       "img": "https://product.hstatic.net/1000141988/product/bap_my_vietgap_-_2_trai_b24e30ee73f04fb49b62b9692279f180_master.jpg",
-      "description": "",
+      "description": "Bắp Mỹ - Bắp Mỹ: Món quà ngọt ngào từ thiên nhiên. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Bắp Mỹ: Món quà ngọt ngào từ thiên nhiên",
       "price": 29000,
       "sale": 24360
     },
     "Cà tím": {
       "img": "https://product.hstatic.net/1000141988/product/ca_tim_vietgap_-_300g_e8ab8473334742569b06dfc1942312d0_large_ecf8e869c1ff46e2b77e95e217c38af3_master.jpg",
-      "description": "",
+      "description": "Cà tím - Cà tím: Viên ngọc tím trong vườn rau. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Cà tím: Viên ngọc tím trong vườn rau",
       "price": 17400,
       "sale": 17400
     },
     "Bắp cải trắng": {
       "img": "https://product.hstatic.net/1000141988/product/bap_cai_trang_vietgap_-_800g_0cdb47dbc84747d3bc2bf70838a44faf_master.jpg",
-      "description": "",
+      "description": "Bắp cải trắng - Bắp cải trắng: Bí quyết cho sức khỏe trọn vẹn. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Bắp cải trắng: Bí quyết cho sức khỏe trọn vẹn",
       "price": 40000,
       "sale": 40000
     },
     "Súp lơ trắng": {
       "img": "https://product.hstatic.net/1000141988/product/sup_lo_trang_vietgap_-_500g_1e089583da9b43918cc3dc1ba8fb6602_master.jpg",
-      "description": "",
+      "description": "Súp lơ trắng - Súp lơ trắng 500g. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Súp lơ trắng 500g",
       "price": 54500,
       "sale": 54500
     },
     "Súp lơ xanh baby": {
       "img": "https://product.hstatic.net/1000141988/product/bong_cai_xanh_baby_vietgap_f5df5020a1c3488f83e6d61465afcaa8_large_46322c5017ae4c9d8af8e86241d873dd_master.jpg",
-      "description": "",
+      "description": "Súp lơ xanh baby - Súp lơ xanh baby. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Súp lơ xanh baby",
       "price": 59000,
       "sale": 59000
     },
     "Khoai tây Đà Lạt": {
       "img": "https://product.hstatic.net/1000141988/product/khoai_tay_da_lat_vietgap_500g_93ec1207558d450d8a1e5450a82405a2_master.png",
-      "description": "",
+      "description": "Khoai tây Đà Lạt - Khoai Tây Đà Lạt. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Khoai Tây Đà Lạt",
       "price": 30000,
       "sale": 30000
     },
     "Cà chua trứng": {
       "img": "https://product.hstatic.net/1000141988/product/ca_chua_trung_vietgap_500g_e99665f3befe40ffbcce63d424cd5f85_master.png",
-      "description": "",
+      "description": "Cà chua trứng - Cà chua trứng 500g: Quả đỏ tròn trịa, vị ngọt thanh. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Cà chua trứng 500g: Quả đỏ tròn trịa, vị ngọt thanh",
       "price": 39000,
       "sale": 31500
     },
     "Bí đao": {
       "img": "https://product.hstatic.net/1000141988/product/bi_dao_vietgap_500g_bb8d7de2de174b058b960208b3a534d6_master.png",
-      "description": "",
+      "description": "Bí đao - Bí Đao 500G: Thanh Mát Tự Nhiên, An Tâm Chất Lượng. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Bí Đao 500G: Thanh Mát Tự Nhiên, An Tâm Chất Lượng",
       "price": 19500,
       "sale": 16575
     },
     "Bầu xanh": {
       "img": "https://product.hstatic.net/1000141988/product/bau_xanh_huu_co_bio_ngon_550g_6a27cdc6dac64ba89c32d1a6ab690be6_master.png",
-      "description": "",
+      "description": "Bầu xanh - Bầu xanh 500g/trái. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Bầu xanh 500g/trái",
       "price": 22500,
       "sale": 19575
@@ -300,49 +300,49 @@
   "Nấm": {
     "Nấm hương": {
       "img": "https://product.hstatic.net/1000141988/product/nam_huong_nam_xanh_150g_726b8caae13246a3b5b1963da254feea_master.jpg",
-      "description": "",
+      "description": "Nấm hương - Hương Vị Đậm Đà, Dinh Dưỡng Tuyệt Vời. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Hương Vị Đậm Đà, Dinh Dưỡng Tuyệt Vời",
       "price": 34000,
       "sale": 34000
     },
     "Nấm kim châm": {
       "img": "https://product.hstatic.net/1000141988/product/nam_kim_cham_nam_xanh_200g_7185f11d929d4df291f158b43ba0b9eb_master.jpg",
-      "description": "",
+      "description": "Nấm kim châm - Giòn Ngọt Tự Nhiên, Bổ Dưỡng Cho Sức Khỏe. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Giòn Ngọt Tự Nhiên, Bổ Dưỡng Cho Sức Khỏe",
       "price": 23000,
       "sale": 23000
     },
     "Nấm rơm": {
       "img": "https://product.hstatic.net/1000141988/product/nam_rom_nam_xanh_200g_550a8d3ec8f341c39643b09676492d9b_master.jpg",
-      "description": "",
+      "description": "Nấm rơm - Hương Vị Đồng Quê, Dinh Dưỡng Dồi Dào. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Hương Vị Đồng Quê, Dinh Dưỡng Dồi Dào",
       "price": 34500,
       "sale": 34500
     },
     "Nấm sò trắng": {
       "img": "https://product.hstatic.net/1000141988/product/nam_so_trang_nam_xanh_200g_23aac5170bff4c35a77607ed32b52f92_master.jpg",
-      "description": "",
+      "description": "Nấm sò trắng - Nấm sò trắng. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Nấm sò trắng",
       "price": 19500,
       "sale": 19500
     },
     "Nấm bào ngư xám non Rica": {
       "img": "https://product.hstatic.net/1000141988/product/ban_sao_cua_frame_co_icon_10x10_6ad923e5e6ce46eda59c6ab6d35e99e1_master.png",
-      "description": "",
+      "description": "Nấm bào ngư xám non Rica - Nấm Bào Ngư Xám Non Rica (Khay 200G). Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Nấm Bào Ngư Xám Non Rica (Khay 200G)",
       "price": 27000,
       "sale": 22950
     },
     "Nấm mối đen": {
       "img": "https://product.hstatic.net/1000141988/product/nam_moi_den_nam_xanh_150g_0aea096a78c9476a83bad3f02ca2a503_master.jpg",
-      "description": "",
+      "description": "Nấm mối đen - Nấm Mối Đen: Hương Vị Độc Đáo, Bổ Dưỡng Tuyệt Vời. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Nấm Mối Đen: Hương Vị Độc Đáo, Bổ Dưỡng Tuyệt Vời",
       "price": 75000,
       "sale": 60000
     },
     "Nấm ngọc châm trắng Rica": {
       "img": "https://product.hstatic.net/1000141988/product/63_fa4eb8e77136445fbe81284d5b2ea268_master.jpg",
-      "description": "",
+      "description": "Nấm ngọc châm trắng Rica - Nấm ngọc châm trắng Rica (Khay 0.15Kg). Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Nấm ngọc châm trắng Rica (Khay 0.15Kg)",
       "price": 47000,
       "sale": 37600
@@ -351,70 +351,70 @@
   "Trái cây": {
     "Táo": {
       "img": "data:image/webp;base64,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",
-      "description": "",
+      "description": "Táo - Táo đỏ Mỹ. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Táo đỏ Mỹ",
       "price": 40000,
       "sale": 5000
     },
     "Chuối": {
       "img": "https://th.bing.com/th/id/OIP.8Ql1rBlcXfOorO8Y4RyXngHaFv?w=211&h=180&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1",
-      "description": "",
+      "description": "Chuối - Chuối chín vàng. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Chuối chín vàng",
       "price": 30000,
       "sale": 0
     },
     "Cam": {
       "img": "https://product.hstatic.net/200000401369/product/cam-sanh-tui-1kg-3-4-trai-202205111923328302_265e2f81b3eb4185b0e43ceca25dafda_1024x1024.jpg",
-      "description": "",
+      "description": "Cam - Cam sành. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Cam sành",
       "price": 35000,
       "sale": 35000
     },
     "Nho": {
       "img": "https://th.bing.com/th/id/OIP.eXKqQqNOeD4VKU7KEUTnYAHaHa?w=161&h=180&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1",
-      "description": "",
+      "description": "Nho - Nho tím ngọt. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Nho tím ngọt",
       "price": 60000,
       "sale": 8000
     },
     "Dưa hấu": {
       "img": "https://th.bing.com/th/id/OIP.haX_-i5h74s5A8Um6xV8DQHaFQ?w=258&h=183&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1",
-      "description": "",
+      "description": "Dưa hấu - Dưa hấu đỏ ngọt. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Dưa hấu đỏ ngọt",
       "price": 50000,
       "sale": 50000
     },
     "Xoài": {
       "img": "https://th.bing.com/th/id/OIP.MYkijNNxUwuMWdAADbjOOgHaFW?w=283&h=191&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1",
-      "description": "",
+      "description": "Xoài - Xoài cát Hòa Lộc. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Xoài cát Hòa Lộc",
       "price": 45000,
       "sale": 0
     },
     "Ổi": {
       "img": "https://th.bing.com/th/id/OIP.6GIkxeSAlmFhpp72VTkW2gHaFe?w=247&h=183&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1",
-      "description": "",
+      "description": "Ổi - Ổi xanh giòn. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Ổi xanh giòn",
       "price": 25000,
       "sale": 0
     },
     "Lê": {
       "img": "data:image/webp;base64,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",
-      "description": "",
+      "description": "Lê - Lê Hàn Quốc. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Lê Hàn Quốc",
       "price": 55000,
       "sale": 55000
     },
     "Mít": {
       "img": "https://th.bing.com/th/id/OIP.3JKrqtb4vzR7v7c6dRL03AHaFl?w=206&h=180&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1",
-      "description": "",
+      "description": "Mít - Mít Thái thơm ngọt. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Mít Thái thơm ngọt",
       "price": 35000,
       "sale": 35000
     },
     "Dứa": {
       "img": "https://th.bing.com/th/id/OIP.FcOyZTqYc-NPqIzHvC1B_QHaHa?w=181&h=182&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1",
-      "description": "",
+      "description": "Dứa - Dứa vàng. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Dứa vàng",
       "price": 20000,
       "sale": 3000
@@ -423,21 +423,21 @@
   "Đậu hủ": {
     "Đậu hủ bìa Tojy": {
       "img": "https://product.hstatic.net/1000141988/product/dau_hu_bia_tojy_f0710f7e5c704409af275d389eb1338d_master.jpg",
-      "description": "",
+      "description": "Đậu hủ bìa Tojy - Đậu Hũ Bìa Tojy 340g. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Đậu Hũ Bìa Tojy 340g",
       "price": 22000,
       "sale": 22000
     },
     "Đậu hủ trứng Tojy": {
       "img": "https://product.hstatic.net/1000141988/product/dau_hu_trung_tojy_140gr_e764a509643b4e67a506ef0e63a01d3f_master.jpg",
-      "description": "",
+      "description": "Đậu hủ trứng Tojy - Đậu Hũ Trứng Tojy 140g. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Đậu Hũ Trứng Tojy 140g",
       "price": 20500,
       "sale": 20500
     },
     "Đậu hũ ky khô Tojy": {
       "img": "https://product.hstatic.net/1000141988/product/dau_hu_ky_kho_tojy_80_g_783502f99ec2495aa13d50e35f6886e9_master.png",
-      "description": "",
+      "description": "Đậu hũ ky khô Tojy - Đậu hũ ky khô Tojy 80g. Sản phẩm được tuyển chọn kỹ lưỡng, đảm bảo độ tươi ngon và an toàn vệ sinh thực phẩm. Giàu dưỡng chất, thích hợp cho nhiều món ăn gia đình. Bảo quản nơi khô ráo, thoáng mát và sử dụng trong thời gian sớm nhất để giữ nguyên hương vị tự nhiên.",
       "short description": "Đậu hũ ky khô Tojy 80g",
       "price": 43500,
       "sale": 34800
