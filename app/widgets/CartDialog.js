@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import NumberSpinner from "./NumberSpinner";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function CartDialog({
@@ -107,7 +108,7 @@ export default function CartDialog({
   return (
     <>
       <Dialog open={open} onClose={handleClose} maxWidth={"md"}>
-        <DialogTitle>Giỏ hàng</DialogTitle>
+        <DialogTitle sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><ShoppingCartIcon sx={{ color: '#1faa54ff' }}/>Giỏ hàng</DialogTitle>
         <DialogContent
           sx={{
             display: "flex",
@@ -130,7 +131,7 @@ export default function CartDialog({
             }}
           >
             {items.length === 0 ? (
-              <Typography align="center">Giỏ hàng đang trống</Typography>
+              <Typography align="center" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1 }}><ShoppingCartIcon sx={{ color: '#1faa54ff' }}/>Giỏ hàng đang trống</Typography>
             ) : (
               items.map((item) => {
                 const unitPrice =
