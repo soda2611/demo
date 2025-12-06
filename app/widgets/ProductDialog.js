@@ -145,6 +145,7 @@ export default function ProductDialog({
           </div>
           <Typography variant="h6">Thông tin sản phẩm</Typography>
           <Typography variant="body1">{item["description"]}</Typography>
+          {isMobile && <br/>}
         </Box>
       </DialogContent>
     </Dialog>
