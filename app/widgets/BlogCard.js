@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Avatar } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite"
 import CommentIcon from "@mui/icons-material/Comment"
 
@@ -7,7 +7,7 @@ export default function BlogCard(){
         <Box sx={{ display: 'flex', flexDirection: 'column', maxWidth: 800, width: '90%', borderRadius: 5, border: "2px solid #37be3cff", overflow: 'hidden', backgroundColor: '#f1f1f1', }}>
             <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', width: '95%', height: 90, gap: 2 }}>
-                    <Box component='img' src="https://github.com/soda2611/demo/blob/main/public/image.png?raw=true" alt='avt' sx={{ backgroundColor: 'green', borderRadius: 10, width: 50, height: 50, objectFit: "cover", }}/>
+                    <Avatar src="https://github.com/soda2611/demo/blob/main/public/image.png?raw=true" alt='avt' sx={{ border: '1px solid black' }}/>
                     <Box>
                         <Typography sx={{ width: '100%' }}>GreenFarm</Typography>
                         <Typography variant='caption' sx={{ width: '100%' }}>00:00, 1 tháng 1 năm 2026</Typography>
