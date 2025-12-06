@@ -11,6 +11,8 @@ export default function ProductCard({ name, item }) {
         width: 250,
         height: 400,
         borderRadius: 2.5,
+        border: "2px solid #37be3cff",
+        boxShadow: "10px 10px 20px #303030aa"
       }}
     >
       <div
