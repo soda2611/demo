@@ -80,9 +80,9 @@ export default function ProductCard({ name, item, onAddToCart }) {
                 color="text.secondary"
                 sx={{ marginBottom: 2 }}
               >
-                {`${item["description"]}`.length > 24
-                  ? `${item["description"]}`.substring(0, 20) + "..."
-                  : `${item["description"]}`}
+                {`${item["short description"]}`.length > 24
+                  ? `${item["short description"]}`.substring(0, 20) + "..."
+                  : `${item["short description"]}`}
               </Typography>
               <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                 <Typography
@@ -112,9 +112,9 @@ export default function ProductCard({ name, item, onAddToCart }) {
                 color="text.secondary"
                 sx={{ marginBottom: 2 }}
               >
-                {`${item["description"]}`.length > 24
-                  ? `${item["description"]}`.substring(0, 22) + "..."
-                  : `${item["description"]}`}
+                {`${item["short description"]}`.length > 24
+                  ? `${item["short description"]}`.substring(0, 22) + "..."
+                  : `${item["short description"]}`}
               </Typography>
               <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                 <Typography
