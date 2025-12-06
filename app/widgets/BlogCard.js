@@ -14,7 +14,7 @@ export default function BlogCard(){
                     </Box>
                 </Box>
                 <Typography variant="body1" sx={{ width: '95%', mb: 2, mt: 2 }}>[content]</Typography>
-                <Box component='img' src="https://github.com/soda2611/demo/blob/main/public/banner.png?raw=true" alt='img' sx={{ backgroundColor: '#ffffffff', width: '95%', height: '100%', borderRadius: 5, mb: 2 }}></Box>
+                <Box component='img' src="https://github.com/soda2611/demo/blob/main/public/banner.png?raw=true" alt='img' sx={{ backgroundColor: '#ffffffff', width: '95%', height: '100%', borderRadius: 5, mb: 3, border: '1px solid #1faa54ff' }}></Box>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', height: '10%', backgroundColor: '#37be3cff', color: 'white', padding: 2, gap: 2 }}>
                 <div style={{ display: 'flex', gap: 5 }}><FavoriteIcon/>{Math.floor(Math.random() * 1000) + 100}</div>
