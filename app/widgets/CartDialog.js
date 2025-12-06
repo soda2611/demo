@@ -166,7 +166,7 @@ export default function CartDialog({
                       <Box
                         component="img"
                         src={item["img"]}
-                        alt={name}
+                        alt={item.name}
                         sx={{
                           width: 100,
                           height: 100,
@@ -175,7 +175,9 @@ export default function CartDialog({
                         }}
                       />
                       <Typography sx={{ flexGrow: 1 }}>
-                        <strong>{item.name}</strong>
+                        <strong>{`${item.name}`.length > 16
+                                ? `${item.name}`.substring(0, 16) + "..."
+                                : `${item.name}`}</strong>
                         {" — "}
                         <span
                           style={{
