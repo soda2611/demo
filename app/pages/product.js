@@ -2,7 +2,7 @@ import React from "react";
 import { Typography, Box } from "@mui/material";
 import ProductCard from "../widgets/ProductCard";
 
-export default function ProductPage({ products }) {
+export default function ProductPage({ products, onAddToCart }) {
   return (
     <div
       style={{
@@ -35,7 +35,12 @@ export default function ProductPage({ products }) {
             }}
           >
             {Object.entries(items).map(([name, item]) => (
-              <ProductCard name={name} item={item} key={name} />
+              <ProductCard
+                key={name}
+                name={name}
+                item={{ ...item, name, id: `${category}__${name}` }} // ID ổn định
+                onAddToCart={(product, qty) => onAddToCart?.(product, qty)}
+              />
             ))}
           </Box>
         </>
@@ -43,3 +48,4 @@ export default function ProductPage({ products }) {
     </div>
   );
 }
+

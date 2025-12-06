@@ -1,4 +1,5 @@
-import React from "react";
+// ProductDialog.js
+import React, { useState } from "react";
 import { createTheme } from "@mui/material/styles";
 import {
   Box,
@@ -11,20 +12,19 @@ import {
 import NumberSpinner from "./NumberSpinner";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-export default function ProductDialog({ name, item, open, handleClose }) {
+export default function ProductDialog({
+  name,
+  item,
+  open,
+  handleClose,
+  onAddToCart,
+}) {
   const theme = createTheme({
     palette: {
       mode: "light",
-      primary: {
-        main: "#1faa54ff",
-        light: "#37be3cff",
-      },
-      secondary: {
-        main: "#ebff38ff",
-      },
-      text: {
-        primary: "#000000",
-      },
+      primary: { main: "#1faa54ff", light: "#37be3cff" },
+      secondary: { main: "#ebff38ff" },
+      text: { primary: "#000000" },
     },
     typography: {
       fontFamily: "Coiny, Roboto, Arial, sans-serif",
@@ -32,235 +32,125 @@ export default function ProductDialog({ name, item, open, handleClose }) {
     },
     spacing: 8,
   });
-
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  // ✅ Controlled số lượng
+  const [qty, setQty] = useState(1);
+  const handleQtyChange = (v) => setQty(Number(v) || 1); // nếu NumberSpinner trả event, dùng Number(v.target.value)
+
+  const handleAddClick = () => {
+    onAddToCart?.(item, qty); // gửi dữ liệu về page.js qua ProductCard
+    // handleClose?.();         // (tuỳ chọn) đóng dialog
+  };
 
   return (
     <Dialog open={open} onClose={handleClose} maxWidth={"lg"}>
-      {!isMobile ? (
-        <DialogContent sx={{ display: "flex", gap: 2, minWidth: 800, overflowY: 'auto', overflowX: 'hidden' }}>
-          <Box
-            component={"img"}
-            src={item["img"]}
-            sx={{
-              width: 300,
-              height: 400,
-              objectFit: "cover",
-              borderRadius: 2,
-              border: "1px solid black",
-            }}
-          />
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              flexGrow: 1,
-              height: 400,
-              borderRadius: 2,
-              gap: 2,
-            }}
-          >
-            <Typography variant="h3">{name}</Typography>
-            {item["sale"] != item["price"] ? (
-              <>
-                <Typography
-                  variant="h6"
-                  color="text.secondary"
-                  sx={{ marginBottom: 2 }}
-                >
-                  {item["description"]}
-                </Typography>
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                  <Typography
-                    variant="h5"
-                    component="div"
-                    sx={{ fontWeight: "bold", color: "primary.main" }}
-                  >
-                    {item["sale"]}₫
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    component="div"
-                    sx={{
-                      fontWeight: "bold",
-                      color: "gray",
-                      textDecoration: "line-through",
-                    }}
-                  >
-                    {item["price"]}₫
-                  </Typography>
-                </Box>
-              </>
-            ) : (
-              <>
-                <Typography
-                  variant="body1"
-                  color="text.secondary"
-                  sx={{ marginBottom: 2 }}
-                >
-                  {item["description"]}
-                </Typography>
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                  <Typography
-                    variant="h6"
-                    component="div"
-                    sx={{ fontWeight: "bold", color: "primary.main" }}
-                  >
-                    {item["price"]}₫
-                  </Typography>
-                </Box>
-              </>
-            )}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                width: 200,
-                gap: 10,
-              }}
-            >
-              <NumberSpinner
-                label="Số lượng"
-                min={1}
-                max={40}
-                size="small"
-                defaultValue={1}
-              />
-              <IconButton
-                color="inherit"
-                aria-label="cart"
-                sx={{
-                  fontSize: 14,
-                  borderRadius: 2.5,
-                  backgroundColor: "primary.main",
-                  color: "white",
-                  "&:hover": {
-                    backgroundColor: "primary.light",
-                  },
-                }}
-              >
-                <ShoppingCartIcon />
-                <Typography>Thêm vào giỏ hàng</Typography>
-              </IconButton>
-            </div>
-            <Typography variant='h6'>Thông tin sản phẩm</Typography>
-            <Typography variant='body1'>[content]</Typography>
-          </Box>
-        </DialogContent>
-      ) : (
-        <DialogContent
-          sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+      <DialogContent
+        sx={{
+          display: "flex",
+          gap: 2,
+          minWidth: isMobile ? undefined : 800,
+          flexDirection: isMobile ? "column" : undefined,
+          overflowY: "auto",
+          overflowX: "hidden",
+        }}
+      >
+        <Box
+          component={"img"}
+          src={item["img"]}
+          sx={{
+            width: 300,
+            height: 400,
+            objectFit: "cover",
+            borderRadius: 2,
+            border: "1px solid black",
+          }}
+        />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            flexGrow: 1,
+            height: 400,
+            borderRadius: 2,
+            gap: 2,
+          }}
         >
-          <Box
-            component={"img"}
-            src={item["img"]}
-            sx={{
-              width: 300,
-              height: 400,
-              objectFit: "cover",
-              borderRadius: 2,
-              border: "1px solid black",
-              
-            }}
-          />
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              flexGrow: 1,
-              height: 400,
-              borderRadius: 2,
-              gap: 2,
-            }}
+          <Typography variant="h3">{name}</Typography>
+
+          <Typography
+            variant={isMobile ? "body2" : "h6"}
+            color="text.secondary"
           >
-            <Typography variant="h3">{name}</Typography>
-            {item["sale"] != item["price"] ? (
+            {item["description"]}
+          </Typography>
+
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <Typography
+              variant={isMobile ? "h6" : "h5"}
+              component="div"
+              sx={{ fontWeight: "bold", color: "primary.main" }}
+            >
+              {item["sale"]?.toLocaleString("vi-VN")}₫
+            </Typography>
+
+            {item["sale"]!=item["price"] && (
               <>
                 <Typography
-                  variant="h6"
-                  color="text.secondary"
-                  sx={{ marginBottom: 2 }}
+                  variant={isMobile ? "body2" : "body1"}
+                  component="div"
+                  sx={{
+                    fontWeight: "bold",
+                    color: "gray",
+                    textDecoration: "line-through",
+                  }}
                 >
-                  {item["description"]}
+                  {item["price"]?.toLocaleString("vi-VN")}₫
                 </Typography>
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                  <Typography
-                    variant="h5"
-                    component="div"
-                    sx={{ fontWeight: "bold", color: "primary.main" }}
-                  >
-                    {item["sale"]}₫
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    component="div"
-                    sx={{
-                      fontWeight: "bold",
-                      color: "gray",
-                      textDecoration: "line-through",
-                    }}
-                  >
-                    {item["price"]}₫
-                  </Typography>
-                </Box>
-              </>
-            ) : (
-              <>
-                <Typography
-                  variant="body1"
-                  color="text.secondary"
-                  sx={{ marginBottom: 2 }}
-                >
-                  {item["description"]}
+                <Typography variant="caption" color="error">
+                  -{(100-(item["sale"]/item["price"])).toFixed(1)}%
                 </Typography>
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                  <Typography
-                    variant="h6"
-                    component="div"
-                    sx={{ fontWeight: "bold", color: "primary.main" }}
-                  >
-                    {item["price"]}₫
-                  </Typography>
-                </Box>
               </>
             )}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                width: 200,
-                gap: 10,
-              }}
-            >
-              <NumberSpinner
-                label="Số lượng"
-                min={1}
-                max={40}
-                size="small"
-                defaultValue={1}
-              />
-              <IconButton
-                color="inherit"
-                aria-label="cart"
-                sx={{
-                  fontSize: 14,
-                  borderRadius: 2.5,
-                  backgroundColor: "primary.main",
-                  color: "white",
-                  "&:hover": {
-                    backgroundColor: "primary.light",
-                  },
-                }}
-              >
-                <ShoppingCartIcon />
-                <Typography>Thêm vào giỏ hàng</Typography>
-              </IconButton>
-            </div>
-            <Typography variant='h6'>Thông tin sản phẩm</Typography>
-            <Typography variant='body1'>[content]</Typography>
           </Box>
-        </DialogContent>
-      )}
+
+          {/* ✅ Khu vực chọn số lượng + nút thêm */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: 200,
+              gap: 10,
+            }}
+          >
+            <NumberSpinner
+              label="Số lượng"
+              min={1}
+              max={40}
+              size="small"
+              value={qty}
+              onChange={handleQtyChange}
+            />
+            <IconButton
+              color="inherit"
+              aria-label="cart"
+              sx={{
+                fontSize: 14,
+                borderRadius: 2.5,
+                backgroundColor: "primary.main",
+                color: "white",
+                "&:hover": { backgroundColor: "primary.light" },
+              }}
+              onClick={handleAddClick}
+            >
+              <ShoppingCartIcon />
+              <Typography>Thêm vào giỏ hàng</Typography>
+            </IconButton>
+          </div>
+          <Typography variant="h6">Thông tin sản phẩm</Typography>
+          <Typography variant="body1">[content]</Typography>
+        </Box>
+      </DialogContent>
     </Dialog>
   );
 }

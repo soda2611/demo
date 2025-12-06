@@ -16,6 +16,8 @@ import {
   ListItem,
   ListItemText,
   InputBase,
+  Snackbar,
+  Alert,
   useMediaQuery,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -27,6 +29,7 @@ import HomePage from "./pages/home";
 import ContactPage from "./pages/contact";
 import Footer from "./widgets/Footer";
 import Blog from "./pages/blog";
+import CartDialog from "./widgets/CartDialog";
 
 export default function App() {
   const theme = createTheme({
@@ -66,7 +69,85 @@ export default function App() {
     setDrawerOpen(open);
   };
 
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const [openSearch, setOpenSearch] = useState(false);
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMsg, setSnackbarMsg] = useState("");
+
+  const closeSnackbar = (_, reason) => {
+    if (reason === "clickaway") return;
+    setSnackbarOpen(false);
+  };
+
+  const initialCartItems = [];
+
+  const [cartItems, setCartItems] = useState(initialCartItems);
+  const [quantities, setQuantities] = useState(() => {
+    const q = {};
+    initialCartItems.forEach((it) => (q[it.id] = it.quantity ?? 1));
+    return q;
+  });
+
+  const addToCart = (product, qty = 1) => {
+    const id = product.id ?? product.name;
+    const displayPrice = product.sale != null ? product.sale : product.price;
+
+    setCartItems((prev) => {
+      const exists = prev.find((it) => it.id === id);
+      let next;
+
+      if (exists) {
+        // Cộng dồn số lượng
+        setQuantities((q) => ({
+          ...q,
+          [id]: (q[id] ?? exists.quantity ?? 1) + qty,
+        }));
+        next = prev.map((it) =>
+          it.id === id
+            ? {
+                ...it,
+                quantity: (it.quantity ?? 1) + qty,
+                displayPrice,
+                sale: product.sale,
+                price: product.price,
+              }
+            : it
+        );
+      } else {
+        const toAdd = {
+          ...product,
+          id,
+          quantity: qty,
+          min: product.min ?? 1,
+          max: product.max ?? 40,
+          displayPrice,
+        };
+        setQuantities((q) => ({ ...q, [id]: qty }));
+        next = [...prev, toAdd];
+      }
+      const totalByNext = next.reduce((sum, it) => sum + (it.quantity ?? 1), 0);
+      const productName = product.name ?? "Sản phẩm";
+      setSnackbarMsg(
+        `Đã thêm "${productName}" x${qty}. Giỏ hàng hiện có ${totalByNext} sản phẩm.`
+      );
+      setSnackbarOpen(true);
+
+      return next;
+    });
+  };
+
+  const removeItem = (id) => {
+    setCartItems((prev) => prev.filter((it) => it.id !== id));
+    setQuantities((prev) => {
+      const { [id]: _, ...rest } = prev;
+      return rest;
+    });
+  };
 
   const [products, setProducts] = useState(null);
 
@@ -117,7 +198,7 @@ export default function App() {
                 gap: 10,
               }}
             >
-              <HomePage products={products}/>
+              <HomePage products={products} onAddToCart={addToCart} />
             </div>
           )}
           {tab === 1 && (
@@ -132,7 +213,7 @@ export default function App() {
                 gap: 10,
               }}
             >
-              <ProductPage products={products}/>
+              <ProductPage products={products} onAddToCart={addToCart} />
             </div>
           )}
           {tab === 2 && (
@@ -147,7 +228,7 @@ export default function App() {
                 gap: 10,
               }}
             >
-              <Blog/>
+              <Blog />
             </div>
           )}
           {tab === 3 && (
@@ -165,7 +246,7 @@ export default function App() {
               <ContactPage />
             </div>
           )}
-          <Footer/>
+          <Footer />
         </Box>
         <div
           style={{
@@ -270,6 +351,7 @@ export default function App() {
                     borderRadius: 2.5,
                     backgroundColor: "rgba(255, 255, 255, 0.3)",
                   }}
+                  onClick={handleOpen}
                 >
                   <ShoppingCartIcon />
                   {!isMobile && <Typography>Giỏ hàng</Typography>}
@@ -329,7 +411,31 @@ export default function App() {
             )}
           </AppBar>
         </div>
+        <CartDialog
+          items={cartItems}
+          quantities={quantities}
+          setQuantities={setQuantities}
+          setCartItems={setCartItems}
+          onRemove={removeItem}
+          open={open}
+          handleClose={handleClose}
+        />
       </div>
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={2500}
+        onClose={closeSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={closeSnackbar}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMsg}
+        </Alert>
+      </Snackbar>
     </ThemeProvider>
   );
 }

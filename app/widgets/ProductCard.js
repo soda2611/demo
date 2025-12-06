@@ -4,7 +4,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ProductDialog from "./ProductDialog";
 
-export default function ProductCard({ name, item }) {
+export default function ProductCard({ name, item, onAddToCart }) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -12,7 +12,16 @@ export default function ProductCard({ name, item }) {
 
   return (
     <>
-      <ProductDialog name={name} item={item} open={open} handleClose={handleClose}/>
+      <ProductDialog
+        name={name}
+        item={item}
+        open={open}
+        handleClose={() => setOpen(false)}
+        onAddToCart={(product, qty) => {
+          onAddToCart?.(product, qty);
+          setOpen(false);
+        }}
+      />
       <Box
         onClick={handleOpen}
         sx={{
@@ -25,8 +34,8 @@ export default function ProductCard({ name, item }) {
           cursor: "pointer",
           transition: "0.3s",
           "&:hover": {
-            transform: "scale(1.1)"
-          }
+            transform: "scale(1.1)",
+          },
         }}
       >
         <div
@@ -64,7 +73,7 @@ export default function ProductCard({ name, item }) {
               ? `${name}`.substring(0, 16) + "..."
               : `${name}`}
           </Typography>
-          {item["sale"] != item["price"] ? (
+          {item["sale"]?.toLocaleString("vi-VN") != item["price"]?.toLocaleString("vi-VN") ? (
             <>
               <Typography
                 variant="body1"
@@ -81,7 +90,7 @@ export default function ProductCard({ name, item }) {
                   component="div"
                   sx={{ fontWeight: "bold", color: "primary.main" }}
                 >
-                  {item["sale"]}₫
+                  {item["sale"]?.toLocaleString("vi-VN")}₫
                 </Typography>
                 <Typography
                   variant="body2"
@@ -92,7 +101,7 @@ export default function ProductCard({ name, item }) {
                     textDecoration: "line-through",
                   }}
                 >
-                  {item["price"]}₫
+                  {item["price"]?.toLocaleString("vi-VN")}₫
                 </Typography>
               </Box>
             </>
@@ -113,13 +122,13 @@ export default function ProductCard({ name, item }) {
                   component="div"
                   sx={{ fontWeight: "bold", color: "primary.main" }}
                 >
-                  {item["price"]}₫
+                  {item["price"]?.toLocaleString("vi-VN")}₫
                 </Typography>
               </Box>
             </>
           )}
         </Box>
-        {item["sale"] != item["price"] ? (
+        {item["sale"]?.toLocaleString("vi-VN") != item["price"]?.toLocaleString("vi-VN") ? (
           <>
             <Box
               sx={{
@@ -136,19 +145,13 @@ export default function ProductCard({ name, item }) {
                 width: 55,
               }}
             >
-              -{(100 - (item["sale"] / item["price"]) * 100).toFixed(1)}%
+              -{(100 - (item["sale"]?.toLocaleString("vi-VN") / item["price"]?.toLocaleString("vi-VN")) * 100).toFixed(1)}%
             </Box>
-            <IconButton
-              sx={{ position: "relative", bottom: 70, right: -205 }}
-              aria-label="favorite"
-            >
-              <ShoppingCartIcon />
-            </IconButton>
             <IconButton
               sx={{
                 position: "relative",
                 top: -420,
-                left: -35,
+                left: 0,
                 backdropFilter: "blur(10px)",
               }}
               aria-label="favorite"
@@ -159,16 +162,10 @@ export default function ProductCard({ name, item }) {
         ) : (
           <>
             <IconButton
-              sx={{ position: "relative", bottom: 45, right: -205 }}
-              aria-label="favorite"
-            >
-              <ShoppingCartIcon />
-            </IconButton>
-            <IconButton
               sx={{
                 position: "relative",
                 top: -395,
-                left: -35,
+                left: 0,
                 backdropFilter: "blur(10px)",
               }}
               aria-label="favorite"

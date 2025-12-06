@@ -2,7 +2,7 @@ import React from "react";
 import { Typography, Box } from "@mui/material";
 import ProductCard from "../widgets/ProductCard";
 
-export default function HomePage({ products }) {
+export default function HomePage({ products, onAddToCart }) {
   return (
     <div
       style={{
@@ -96,7 +96,12 @@ export default function HomePage({ products }) {
           <>
             {Object.entries(items).map(([name, item]) =>
               category === "Trái cây" && item["sale"] != item["price"] ? (
-                <ProductCard name={name} item={item} />
+                <ProductCard
+                  key={name}
+                  name={name}
+                  item={{ ...item, name, id: `${category}__${name}` }} // ID ổn định
+                  onAddToCart={(product, qty) => onAddToCart?.(product, qty)}
+                />
               ) : null
             )}
           </>
@@ -130,7 +135,12 @@ export default function HomePage({ products }) {
           <>
             {Object.entries(items).map(([name, item]) =>
               100 - (item["sale"] / item["price"]) * 100 > 80 ? (
-                <ProductCard name={name} item={item} key={name} />
+                <ProductCard
+                  key={name}
+                  name={name}
+                  item={{ ...item, name, id: `${category}__${name}` }} // ID ổn định
+                  onAddToCart={(product, qty) => onAddToCart?.(product, qty)}
+                />
               ) : null
             )}
           </>
@@ -165,7 +175,12 @@ export default function HomePage({ products }) {
           <>
             {Object.entries(items).map(([name, item]) =>
               item["sale"] != item["price"] ? (
-                <ProductCard name={name} item={item} />
+                <ProductCard
+                  key={name}
+                  name={name}
+                  item={{ ...item, name, id: `${category}__${name}` }} // ID ổn định
+                  onAddToCart={(product, qty) => onAddToCart?.(product, qty)}
+                />
               ) : null
             )}
           </>
