@@ -106,7 +106,7 @@ export default function ProductDialog({
                   {item["price"]?.toLocaleString("vi-VN")}₫
                 </Typography>
                 <Typography variant="caption" color="error">
-                  -{(100-(item["sale"]/item["price"])).toFixed(1)}%
+                  -{(100-(item["sale"]/item["price"])*100).toFixed(1)}%
                 </Typography>
               </>
             )}
