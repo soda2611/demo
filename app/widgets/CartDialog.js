@@ -126,7 +126,7 @@ export default function CartDialog({
               width: isMobile ? 300 : 800,
               height: 400,
               borderRadius: 2,
-              border: "1px solid black",
+              backgroundColor: '#f1f1f1',
               overflowY: "auto",
             }}
           >
