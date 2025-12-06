@@ -1,12 +1,21 @@
 import Box from "@mui/material/Box";
+import BlogCard from "../widgets/BlogCard";
 
-export default function DemoBox() {
-  const htmlContent = "<p style='color:red'>Nội dung HTML trong Box</p>";
-
+export default function Blog() {
   return (
-    <Box
-      sx={{ padding: 2, backgroundColor: "#f1f1f1" }}
-      dangerouslySetInnerHTML={{ __html: htmlContent }}
-    />
+    <div
+      style={{
+        width: "90%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 50,
+        backgroundColor: "primary.light",
+      }}
+    >
+    {Array.from({ length: 5 }, (_, i) => (
+      <BlogCard key={i} />
+    ))}
+    </div>
   );
 }
