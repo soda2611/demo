@@ -354,7 +354,7 @@ export default function App() {
                   onClick={handleOpen}
                 >
                   <ShoppingCartIcon />
-                  {!isMobile && <Typography>Giỏ hàng</Typography>}
+                  {!isMobile && (<><Typography>Giỏ hàng ({cartItems.length})</Typography></>)}
                 </IconButton>
 
                 {!isMobile ? (
