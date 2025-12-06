@@ -26,7 +26,7 @@ import ProductPage from "./pages/product";
 import HomePage from "./pages/home";
 import ContactPage from "./pages/contact";
 import Footer from "./widgets/Footer";
-import DemoBox from "./pages/blog";
+import Blog from "./pages/blog";
 
 export default function App() {
   const theme = createTheme({
@@ -109,7 +109,6 @@ export default function App() {
             <div
               style={{
                 overflowY: "hidden",
-                height: "100%",
                 width: "100%",
                 display: "flex",
                 alignItems: "center",
@@ -119,14 +118,12 @@ export default function App() {
               }}
             >
               <HomePage products={products}/>
-              <Footer/>
             </div>
           )}
           {tab === 1 && (
             <div
               style={{
                 overflowY: "hidden",
-                height: "100%",
                 width: "100%",
                 display: "flex",
                 alignItems: "center",
@@ -136,14 +133,12 @@ export default function App() {
               }}
             >
               <ProductPage products={products}/>
-              <Footer/>
             </div>
           )}
           {tab === 2 && (
             <div
               style={{
                 overflowY: "hidden",
-                height: "100%",
                 width: "100%",
                 display: "flex",
                 alignItems: "center",
@@ -152,15 +147,13 @@ export default function App() {
                 gap: 10,
               }}
             >
-              <DemoBox/>
-              <Footer/>
+              <Blog/>
             </div>
           )}
           {tab === 3 && (
             <div
               style={{
                 overflowY: "hidden",
-                height: "100%",
                 width: "100%",
                 display: "flex",
                 alignItems: "center",
@@ -170,9 +163,9 @@ export default function App() {
               }}
             >
               <ContactPage />
-              <Footer/>
             </div>
           )}
+          <Footer/>
         </Box>
         <div
           style={{
