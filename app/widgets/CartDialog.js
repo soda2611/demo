@@ -88,10 +88,9 @@ export default function CartDialog({
     const msg = `Thanh toán thành công`;
     setSnackbarMsg(msg);
     setSnackbarOpen(true);
-    
-    setCartItems?.(() => []);
-    setQuantities?.(() => ({})); 
 
+    setCartItems?.(() => []);
+    setQuantities?.(() => ({}));
   };
 
   const handleSnackbarClose = (_, reason) => {
@@ -143,14 +142,37 @@ export default function CartDialog({
                 const lineTotal = unitPrice * qty;
 
                 return (
-                  <Box key={item.id} sx={{ mb: 1 }}>
+                  <Box
+                    key={item.id}
+                    sx={{
+                      mb: 1,
+                      borderRadius: 5,
+                      bgcolor: "#fafafa",
+                      padding: 2,
+                      boxShadow: "10px 10px 20px #303030aa",
+                    }}
+                  >
                     <div
                       style={{
                         display: "flex",
+                        flexDirection: isMobile ? "column" : undefined,
+                        justifyContent: isMobile ? "center" : undefined,
                         alignItems: "center",
                         width: "100%",
+                        gap: 10,
                       }}
                     >
+                      <Box
+                        component="img"
+                        src={item["img"]}
+                        alt={name}
+                        sx={{
+                          width: 100,
+                          height: 100,
+                          objectFit: "cover",
+                          borderRadius: 5,
+                        }}
+                      />
                       <Typography sx={{ flexGrow: 1 }}>
                         <strong>{item.name}</strong>
                         {" — "}
@@ -175,25 +197,34 @@ export default function CartDialog({
                             </span>
                           </>
                         )}
-                        {isMobile && <br />}
+                        <br />
                         {"  ·  Thành tiền: "}
                         <span style={{ fontWeight: 700 }}>
                           {lineTotal.toLocaleString("vi-VN")}₫
                         </span>
                       </Typography>
-
-                      <DeleteIcon
-                        sx={{ color: "red", cursor: "pointer" }}
-                        onClick={() => handleDelete(item.id)}
-                      />
+                      {isMobile && <br />}
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          gap: 10
+                        }}
+                      >
+                        <NumberSpinner
+                          min={item.min ?? 1}
+                          max={item.max ?? 40}
+                          size="small"
+                          value={qty}
+                          onChange={(n) => setQuantity(item.id, n)}
+                        />
+                        <DeleteIcon
+                          sx={{ color: "red", cursor: "pointer" }}
+                          onClick={() => handleDelete(item.id)}
+                        />
+                      </div>
                     </div>
-                    <NumberSpinner
-                      min={item.min ?? 1}
-                      max={item.max ?? 40}
-                      size="small"
-                      value={qty}
-                      onChange={(n) => setQuantity(item.id, n)}
-                    />
                   </Box>
                 );
               })

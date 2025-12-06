@@ -35,7 +35,7 @@ export default function NumberSpinner({
 
   return (
     <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-      <IconButton size={size} onClick={handleMinus} aria-label="decrement" sx={{ bgcolor: '#f1f1f1', borderRadius: 1 }}>
+      <IconButton size={size} onClick={handleMinus} aria-label="decrement" sx={{ bgcolor: '#d1d1d1ff', borderRadius: 1 }}>
         <RemoveIcon />
       </IconButton>
       <TextField
@@ -62,7 +62,7 @@ export default function NumberSpinner({
           },
         }}
       />
-      <IconButton size={size} onClick={handlePlus} aria-label="increment" sx={{ bgcolor: '#f1f1f1', borderRadius: 1 }}>
+      <IconButton size={size} onClick={handlePlus} aria-label="increment" sx={{ bgcolor: '#d1d1d1ff', borderRadius: 1 }}>
         <AddIcon />
       </IconButton>
     </Box>

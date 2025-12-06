@@ -1,4 +1,3 @@
-// ProductDialog.js
 import React, { useState } from "react";
 import { createTheme } from "@mui/material/styles";
 import {
@@ -36,11 +35,10 @@ export default function ProductDialog({
 
   // ✅ Controlled số lượng
   const [qty, setQty] = useState(1);
-  const handleQtyChange = (v) => setQty(Number(v) || 1); // nếu NumberSpinner trả event, dùng Number(v.target.value)
+  const handleQtyChange = (v) => setQty(Number(v) || 1);
 
   const handleAddClick = () => {
-    onAddToCart?.(item, qty); // gửi dữ liệu về page.js qua ProductCard
-    // handleClose?.();         // (tuỳ chọn) đóng dialog
+    onAddToCart?.(item, qty);
   };
 
   return (
@@ -113,8 +111,6 @@ export default function ProductDialog({
               </>
             )}
           </Box>
-
-          {/* ✅ Khu vực chọn số lượng + nút thêm */}
           <div
             style={{
               display: "flex",
