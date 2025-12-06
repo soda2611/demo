@@ -175,8 +175,8 @@ export default function CartDialog({
                         }}
                       />
                       <Typography sx={{ flexGrow: 1 }}>
-                        <strong>{`${item.name}`.length > 16
-                                ? `${item.name}`.substring(0, 16) + "..."
+                        <strong>{(`${item.name}`.length > 5 && isMobile)
+                                ? `${item.name}`.substring(0, 5) + "..."
                                 : `${item.name}`}</strong>
                         {" — "}
                         <span
