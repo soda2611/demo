@@ -18,6 +18,7 @@ import {
   InputBase,
   Snackbar,
   Alert,
+  Badge,
   useMediaQuery,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -349,11 +350,13 @@ export default function App() {
                   sx={{
                     fontSize: 14,
                     borderRadius: 2.5,
-                    backgroundColor: "rgba(255, 255, 255, 0.3)",
+                    backgroundColor: isMobile ? undefined : "rgba(255, 255, 255, 0.3)",
                   }}
                   onClick={handleOpen}
                 >
-                  <ShoppingCartIcon />
+                  {isMobile ? (<Badge badgeContent={cartItems.length} color="success">
+                    <ShoppingCartIcon />
+                  </Badge>) : (<ShoppingCartIcon/>)}
                   {!isMobile && (<><Typography>Giỏ hàng ({cartItems.length})</Typography></>)}
                 </IconButton>
 
