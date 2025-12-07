@@ -29,7 +29,7 @@ export default function ProductPage({ products, banners, onAddToCart }) {
                   }}
                 >
                   <img
-                    src={banners[{category}]}
+                    src={banners[`${category}`]}
                     alt="Banner"
                     style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />
