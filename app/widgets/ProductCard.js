@@ -133,8 +133,8 @@ export default function ProductCard({ name, item, onAddToCart }) {
             <Box
               sx={{
                 position: "relative",
-                top: -390,
-                left: 185,
+                top: -385,
+                left: 180,
                 fontWeight: "bold",
                 color: "white",
                 backgroundColor: "primary.main",
@@ -150,8 +150,8 @@ export default function ProductCard({ name, item, onAddToCart }) {
             <IconButton
               sx={{
                 position: "relative",
-                top: -420,
-                left: 0,
+                top: -415,
+                left: 5,
                 backdropFilter: "blur(10px)",
               }}
               aria-label="favorite"
@@ -164,8 +164,8 @@ export default function ProductCard({ name, item, onAddToCart }) {
             <IconButton
               sx={{
                 position: "relative",
-                top: -395,
-                left: 0,
+                top: -390,
+                left: 5,
                 backdropFilter: "blur(10px)",
               }}
               aria-label="favorite"
