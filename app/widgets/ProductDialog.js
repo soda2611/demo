@@ -46,7 +46,7 @@ export default function ProductDialog({
       <DialogContent
         sx={{
           display: "flex",
-          gap: 2,
+          gap: isMobile ? 2 : 5,
           minWidth: isMobile ? undefined : 800,
           flexDirection: isMobile ? "column" : undefined,
           overflowY: "auto",

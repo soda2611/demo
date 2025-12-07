@@ -108,7 +108,7 @@ export default function CartDialog({
   return (
     <>
       <Dialog open={open} onClose={handleClose} maxWidth={"md"}>
-        <DialogTitle sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><ShoppingCartIcon sx={{ color: '#1faa54ff' }}/>Giỏ hàng</DialogTitle>
+        <DialogTitle sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><ShoppingCartIcon sx={{ color: '#1faa54ff' }}/><b>Giỏ hàng</b></DialogTitle>
         <DialogContent
           sx={{
             display: "flex",
@@ -247,6 +247,7 @@ export default function CartDialog({
                 backgroundColor: "primary.main",
                 color: "white",
                 "&:hover": { backgroundColor: "primary.light" },
+                gap: 0.5
               }}
               onClick={handleCheckout}
             >
