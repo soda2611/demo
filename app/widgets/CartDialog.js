@@ -62,11 +62,25 @@ export default function CartDialog({
 
   const setQuantity = (id, newValue) => {
     if (!setQuantities) return;
-    const parsed = Number(newValue);
+
+    let parsed = Number(newValue);
+    if (!Number.isFinite(parsed)) parsed = quantities?.[id] ?? 1;
+    parsed = Math.floor(parsed);
+    const minOfItem = items.find((it) => it.id === id)?.min ?? 1;
+    if (parsed < minOfItem) parsed = minOfItem;
+
     setQuantities((prev) => ({
       ...prev,
-      [id]: Number.isNaN(parsed) ? prev[id] ?? 1 : parsed,
+      [id]: parsed,
     }));
+
+    setCartItems?.((prev) =>
+      prev.map((it) =>
+        it.id === id
+          ? { ...it, quantity: parsed }
+          : it
+      )
+    );
   };
 
   const handleDelete = (id) => {
@@ -108,7 +122,10 @@ export default function CartDialog({
   return (
     <>
       <Dialog open={open} onClose={handleClose} maxWidth={"md"}>
-        <DialogTitle sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><ShoppingCartIcon sx={{ color: '#1faa54ff' }}/><b>Giỏ hàng</b></DialogTitle>
+        <DialogTitle sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          <ShoppingCartIcon sx={{ color: "#1faa54ff" }} />
+          <b>Giỏ hàng</b>
+        </DialogTitle>
         <DialogContent
           sx={{
             display: "flex",
@@ -126,12 +143,24 @@ export default function CartDialog({
               width: isMobile ? 300 : 800,
               height: 400,
               borderRadius: 2,
-              backgroundColor: '#f1f1f1',
+              backgroundColor: "#f1f1f1",
               overflowY: "auto",
             }}
           >
             {items.length === 0 ? (
-              <Typography align="center" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1 }}><ShoppingCartIcon sx={{ color: '#1faa54ff' }}/>Giỏ hàng đang trống</Typography>
+              <Typography
+                align="center"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexGrow: 1,
+                }}
+              >
+                <ShoppingCartIcon sx={{ color: "#1faa54ff" }} />
+                Giỏ hàng đang trống
+              </Typography>
             ) : (
               items.map((item) => {
                 const unitPrice =
@@ -175,9 +204,11 @@ export default function CartDialog({
                         }}
                       />
                       <Typography sx={{ flexGrow: 1 }}>
-                        <strong>{(`${item.name}`.length > 5 && isMobile)
-                                ? `${item.name}`.substring(0, 5) + "..."
-                                : `${item.name}`}</strong>
+                        <strong>
+                          {`${item.name}`.length > 5 && isMobile
+                            ? `${item.name}`.substring(0, 5) + "..."
+                            : `${item.name}`}
+                        </strong>
                         {" — "}
                         <span
                           style={{
@@ -212,12 +243,11 @@ export default function CartDialog({
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
-                          gap: 10
+                          gap: 10,
                         }}
                       >
                         <NumberSpinner
                           min={item.min ?? 1}
-                          max={item.max ?? 40}
                           size="small"
                           value={qty}
                           onChange={(n) => setQuantity(item.id, n)}
@@ -247,7 +277,7 @@ export default function CartDialog({
                 backgroundColor: "primary.main",
                 color: "white",
                 "&:hover": { backgroundColor: "primary.light" },
-                gap: 0.5
+                gap: 0.5,
               }}
               onClick={handleCheckout}
             >

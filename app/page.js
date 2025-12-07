@@ -100,7 +100,13 @@ export default function App() {
   );
 
   const addToCart = (product, qty = 1) => {
-    const id = product.id ?? product.name;
+    const rawId = product.id ?? product.name ?? "";
+    const id = String(rawId).trim().toLowerCase();
+
+    let addQty = Number(qty);
+    if (!Number.isFinite(addQty)) addQty = 1;
+    addQty = Math.max(1, Math.floor(addQty));
+
     const displayPrice = product.sale != null ? product.sale : product.price;
 
     setCartItems((prev) => {
@@ -108,38 +114,44 @@ export default function App() {
       let next;
 
       if (exists) {
-        // Cộng dồn số lượng
-        setQuantities((q) => ({
-          ...q,
-          [id]: (q[id] ?? exists.quantity ?? 1) + qty,
-        }));
+        const newQuantity = (exists.quantity ?? 1) + addQty;
+
         next = prev.map((it) =>
           it.id === id
             ? {
                 ...it,
-                quantity: (it.quantity ?? 1) + qty,
+                quantity: newQuantity,
                 displayPrice,
                 sale: product.sale,
                 price: product.price,
+                min: it.min ?? product.min ?? 1,
+                max: undefined,
               }
             : it
         );
+
+        setQuantities((q) => ({ ...q, [id]: newQuantity }));
       } else {
+        const initialQty = Math.max(product.min ?? 1, addQty);
+
         const toAdd = {
           ...product,
           id,
-          quantity: qty,
+          quantity: initialQty,
           min: product.min ?? 1,
-          max: product.max ?? 40,
+          max: undefined,
           displayPrice,
         };
-        setQuantities((q) => ({ ...q, [id]: qty }));
+
         next = [...prev, toAdd];
+        setQuantities((q) => ({ ...q, [id]: initialQty }));
       }
+
       const totalByNext = next.reduce((sum, it) => sum + (it.quantity ?? 1), 0);
       const productName = product.name ?? "Sản phẩm";
+
       setSnackbarMsg(
-        `Đã thêm "${productName}" x${qty}. Giỏ hàng hiện có ${totalByNext} sản phẩm.`
+        `Đã thêm "${productName}" x${addQty}. Giỏ hàng hiện có ${totalByNext} sản phẩm.`
       );
       setSnackbarOpen(true);
 

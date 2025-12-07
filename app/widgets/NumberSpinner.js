@@ -1,3 +1,4 @@
+
 // ./NumberSpinner.jsx
 import React from "react";
 import { Box, IconButton, TextField } from "@mui/material";
@@ -8,7 +9,8 @@ export default function NumberSpinner({
   value,
   onChange,
   min = 0,
-  max = 100,
+  // CHO PHÉP VÔ HẠN: dùng Infinity là không giới hạn
+  max = Infinity,
   size = "small",
 }) {
   const toNumber = (v) => {
@@ -16,7 +18,12 @@ export default function NumberSpinner({
     return Number.isNaN(n) ? min : n;
   };
 
-  const clamp = (n) => Math.min(max, Math.max(min, n));
+  // Nếu max = Infinity hoặc undefined => bỏ giới hạn trên
+  const clamp = (n) => {
+    const boundedMin = Math.max(min, n);
+    const hasMax = Number.isFinite(max); // chỉ clamp max nếu là số hữu hạn
+    return hasMax ? Math.min(max, boundedMin) : boundedMin;
+  };
 
   const handleMinus = () => {
     const n = clamp(toNumber(value) - 1);
@@ -24,8 +31,10 @@ export default function NumberSpinner({
   };
 
   const handlePlus = () => {
-    const n = clamp(toNumber(value) + 1);
-    onChange?.(n);
+    // KHÔNG giới hạn max khi vô hạn
+    const current = toNumber(value);
+    const next = current + 1;
+    onChange?.(clamp(next));
   };
 
   const handleInput = (e) => {
@@ -33,9 +42,19 @@ export default function NumberSpinner({
     onChange?.(n);
   };
 
+  // Không set inputProps.max khi max là vô hạn để tránh browser chặn
+  const inputProps = Number.isFinite(max)
+    ? { min, max }
+    : { min };
+
   return (
     <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-      <IconButton size={size} onClick={handleMinus} aria-label="decrement" sx={{ bgcolor: '#d1d1d1ff', borderRadius: 1 }}>
+      <IconButton
+        size={size}
+        onClick={handleMinus}
+        aria-label="decrement"
+        sx={{ bgcolor: '#d1d1d1ff', borderRadius: 1 }}
+      >
         <RemoveIcon />
       </IconButton>
       <TextField
@@ -43,12 +62,10 @@ export default function NumberSpinner({
         size={size}
         value={value} // controlled
         onChange={handleInput}
-        inputProps={{ min, max }}
+        inputProps={inputProps}
         sx={{
           width: 60,
-          "& input": {
-            textAlign: "center",
-          },
+          "& input": { textAlign: "center" },
           "& input[type=number]::-webkit-inner-spin-button": {
             WebkitAppearance: "none",
             margin: 0,
@@ -62,7 +79,12 @@ export default function NumberSpinner({
           },
         }}
       />
-      <IconButton size={size} onClick={handlePlus} aria-label="increment" sx={{ bgcolor: '#d1d1d1ff', borderRadius: 1 }}>
+      <IconButton
+        size={size}
+        onClick={handlePlus}
+        aria-label="increment"
+        sx={{ bgcolor: '#d1d1d1ff', borderRadius: 1 }}
+      >
         <AddIcon />
       </IconButton>
     </Box>

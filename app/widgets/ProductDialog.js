@@ -123,7 +123,6 @@ export default function ProductDialog({
             <NumberSpinner
               label="Số lượng"
               min={1}
-              max={40}
               size="small"
               value={qty}
               onChange={handleQtyChange}
