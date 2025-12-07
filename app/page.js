@@ -94,6 +94,11 @@ export default function App() {
     return q;
   });
 
+  const cartTotalQty = React.useMemo(
+    () => cartItems.reduce((sum, it) => sum + (it.quantity ?? 1), 0),
+    [cartItems]
+  );
+
   const addToCart = (product, qty = 1) => {
     const id = product.id ?? product.name;
     const displayPrice = product.sale != null ? product.sale : product.price;
@@ -350,14 +355,24 @@ export default function App() {
                   sx={{
                     fontSize: 14,
                     borderRadius: 2.5,
-                    backgroundColor: isMobile ? undefined : "rgba(255, 255, 255, 0.3)",
+                    backgroundColor: isMobile
+                      ? undefined
+                      : "rgba(255, 255, 255, 0.3)",
                   }}
                   onClick={handleOpen}
                 >
-                  {isMobile ? (<Badge badgeContent={cartItems.length} color="success">
+                  {isMobile ? (
+                    <Badge badgeContent={cartTotalQty} color="success">
+                      <ShoppingCartIcon />
+                    </Badge>
+                  ) : (
                     <ShoppingCartIcon />
-                  </Badge>) : (<ShoppingCartIcon/>)}
-                  {!isMobile && (<><Typography>Giỏ hàng ({cartItems.length})</Typography></>)}
+                  )}
+                  {!isMobile && (
+                    <>
+                      <Typography>Giỏ hàng ({cartTotalQty})</Typography>
+                    </>
+                  )}
                 </IconButton>
 
                 {!isMobile ? (
