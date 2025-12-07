@@ -17,47 +17,48 @@ export default function ProductPage({ products, banners, onAddToCart }) {
       {Object.entries(products).map(([category, items]) => (
         <>
           <Box
-                  sx={{
-                    backgroundColor: "primary.main",
-                    height: 300,
-                    width: "100%",
-                    overflow: "hidden",
-                    borderRadius: 5,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <img
-                    src={banners[`${category}`]}
-                    alt="Banner"
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                  />
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      position: "absolute",
-                      color: "white",
-                      textAlign: "center",
-                      padding: 2,
-                      borderRadius: 5,
-                      height: 300,
-                      width: "90%",
-                      backgroundColor: "rgba(0, 0, 0, 0.5)",
-                    }}
-                  >
-                    <Typography
-                      variant="h4"
-                      component="div"
-                      sx={{ fontWeight: "bold", marginBottom: 1, color: "white" }}
-                    >
-                      {category}
-                    </Typography>
-                  </Box>
-                </Box>
+            sx={{
+              backgroundColor: "primary.main",
+              height: 200,
+              width: "70%",
+              overflow: "hidden",
+              borderRadius: 5,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              mb: 5
+            }}
+          >
+            <img
+              src={banners[`${category}`]}
+              alt="Banner"
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                position: "absolute",
+                color: "white",
+                textAlign: "center",
+                padding: 2,
+                borderRadius: 5,
+                height: 200,
+                width: "63%",
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+              }}
+            >
+              <Typography
+                variant="h4"
+                component="div"
+                sx={{ fontWeight: "bold", marginBottom: 1, color: "white" }}
+              >
+                {category}
+              </Typography>
+            </Box>
+          </Box>
           <Box
             sx={{
               width: "100%",
@@ -83,4 +84,3 @@ export default function ProductPage({ products, banners, onAddToCart }) {
     </div>
   );
 }
-
