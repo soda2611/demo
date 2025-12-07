@@ -57,13 +57,78 @@ export default function App() {
   });
   const [tab, setTab] = useState(0);
 
-  useEffect(() => {
-    window.scrollTo({ top: tab === 1 ? 70 : 0, behavior: "smooth" });
-  }, [tab]);
-
   const handleTabChange = (event, newValue) => {
     setTab(newValue);
   };
+
+  const getScrollEl = () =>
+    document.scrollingElement || document.documentElement || document.body;
+
+  const getScrollTop = () => getScrollEl().scrollTop;
+
+  const scrollToTop = (top, behavior = "smooth") => {
+    getScrollEl().scrollTo({ top, behavior });
+  };
+  const [lastCategoryInteractAt, setLastCategoryInteractAt] = useState(0);
+  const handleCategoryInteract = () => setLastCategoryInteractAt(Date.now());
+
+  useEffect(() => {
+    const THRESHOLD = 70;
+    const HOLD_MS = 2000;
+    const HYSTERESIS = 2;
+
+    if (tab !== 1) {
+      // tuỳ chọn: các tab khác về đầu
+      scrollToTop(0, "auto");
+      return;
+    }
+
+    let timer = null;
+
+    const isWithinThreshold = () => {
+      const y = getScrollTop();
+      return y >= 0 && y < THRESHOLD - HYSTERESIS;
+    };
+
+    const isNoRecentCategoryInteraction = () => {
+      const now = Date.now();
+      return now - lastCategoryInteractAt >= HOLD_MS;
+    };
+
+    const startOrResetTimerIfEligible = () => {
+      if (isWithinThreshold() && isNoRecentCategoryInteraction()) {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(() => {
+          if (isWithinThreshold() && isNoRecentCategoryInteraction()) {
+            scrollToTop(THRESHOLD, "smooth");
+          }
+        }, HOLD_MS);
+      } else {
+        if (timer) {
+          clearTimeout(timer);
+          timer = null;
+        }
+      }
+    };
+
+    const onScroll = () => startOrResetTimerIfEligible();
+    const onResize = () => startOrResetTimerIfEligible();
+    const onVisibility = () => {
+      if (!document.hidden) startOrResetTimerIfEligible();
+    };
+
+    startOrResetTimerIfEligible();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
+    document.addEventListener("visibilitychange", onVisibility);
+
+    return () => {
+      if (timer) clearTimeout(timer);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, [tab, lastCategoryInteractAt]);
 
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -319,6 +384,7 @@ export default function App() {
                     products={products}
                     banners={banners}
                     onAddToCart={addToCart}
+                    onCategoryInteract={handleCategoryInteract}
                   />
                 </div>
               )}

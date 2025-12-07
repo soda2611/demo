@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { createTheme } from "@mui/material/styles";
 import { Typography, Box, Tab, Tabs, useMediaQuery } from "@mui/material";
 import ProductCard from "../widgets/ProductCard";
 
-export default function ProductPage({ products, banners, onAddToCart }) {
+export default function ProductPage({ products, banners, onAddToCart, onCategoryInteract }) {
   const theme = useMemo(
     () =>
       createTheme({
@@ -21,6 +21,25 @@ export default function ProductPage({ products, banners, onAddToCart }) {
       }),
     []
   );
+
+  const tabsRef = useRef(null);
+
+  useEffect(() => {
+    const el = tabsRef.current;
+    if (!el) return;
+
+    const notifyInteract = () => onCategoryInteract?.();
+
+    el.addEventListener("mousedown", notifyInteract);
+    el.addEventListener("touchstart", notifyInteract, { passive: true });
+    el.addEventListener("keydown", notifyInteract);
+
+    return () => {
+      el.removeEventListener("mousedown", notifyInteract);
+      el.removeEventListener("touchstart", notifyInteract);
+      el.removeEventListener("keydown", notifyInteract);
+    };
+  }, [onCategoryInteract]);
 
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -54,13 +73,15 @@ export default function ProductPage({ products, banners, onAddToCart }) {
         indicatorColor="primary"
         variant="scrollable"
         scrollButtons="auto"
-        sx={{ width: isMobile? '70%' : undefined }}
+        sx={{ width: isMobile ? "70%" : undefined }}
       >
-        <Tab label="Tất cả"/>
-        {Object.entries(products).map(([category, items]) => (<Tab label={category} key={category}/>))}
+        <Tab label="Tất cả" />
+        {Object.entries(products).map(([category, items]) => (
+          <Tab label={category} key={category} />
+        ))}
       </Tabs>
-      {Object.entries(products).map(([category, items]) => (
-        ((tab===0 || label===category) ? (
+      {Object.entries(products).map(([category, items]) =>
+        tab === 0 || label === category ? (
           <>
             <Box
               key={category}
@@ -126,9 +147,9 @@ export default function ProductPage({ products, banners, onAddToCart }) {
                 />
               ))}
             </Box>
-        </>
-      ) : (null))
-      ))}
+          </>
+        ) : null
+      )}
     </div>
   );
 }
