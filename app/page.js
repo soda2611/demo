@@ -289,7 +289,7 @@ export default function App() {
 
   useEffect(() => {
     fetch(
-      "images/branding/banner.png"
+      "https://raw.githubusercontent.com/soda2611/demo/refs/heads/main/app/data/banners.json"
     )
       .then((res) => res.json())
       .then((data) => setBanners(data))
@@ -300,7 +300,7 @@ export default function App() {
 
   useEffect(() => {
     fetch(
-      "data/products.json"
+      "https://raw.githubusercontent.com/soda2611/demo/refs/heads/main/app/data/products.json"
     )
       .then((res) => res.json())
       .then((data) => setProducts(data))
@@ -493,7 +493,7 @@ export default function App() {
                 ) : null}
 
                 <img
-                  src="images/branding/logo.png"
+                  src="https://github.com/soda2611/demo/blob/main/public/image.png?raw=true"
                   alt="Logo"
                   style={{ height: 40 }}
                 />
