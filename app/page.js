@@ -587,7 +587,6 @@ export default function App() {
         anchorEl={searchAnchor}
         suggestions={suggestions}
         onPick={(sug) => {
-          // Lấy full object sản phẩm từ cây products theo category + name
           const item = products?.[sug.category]?.[sug.name];
           if (!item) return;
           setProductDialogData({ name: sug.name, item });
@@ -601,14 +600,14 @@ export default function App() {
           name={productDialogData.name}
           item={productDialogData.item}
           open={productDialogOpen}
-          handleClose={() => {
-            setProductDialogOpen(false);
-            setProductDialogData({ name: "", item: null }); // dọn state (khuyến nghị)
-          }}
+          handleClose={() => setProductDialogOpen(false)}
           onAddToCart={(product, qty) => {
-            addToCart(product, qty);
+            const productWithName = {
+              ...product,
+              name: productDialogData.name,
+            };
+            addToCart(productWithName, qty);
             setProductDialogOpen(false);
-            setProductDialogData({ name: "", item: null }); // dọn state (khuyến nghị)
           }}
         />
       )}
