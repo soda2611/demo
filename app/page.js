@@ -529,7 +529,19 @@ export default function App() {
               <Toolbar sx={{ p: 1, gap: 2 }}>
                 <InputBase
                   autoFocus
-                  placeholder="Nhập từ khóa..."
+                  placeholder="Tìm kiếm sản phẩm..."
+                  value={query}
+                  onChange={(e) => {
+                    setQuery(e.target.value);
+                    setSearchAnchor(e.currentTarget);
+                  }}
+                  onFocus={(e) => {
+                    setSearchAnchor(e.currentTarget);
+                    if (suggestions.length) setShowPopper(true);
+                  }}
+                  onBlur={() => {
+                    setTimeout(() => setShowPopper(false), 150); // giữ thời gian đóng để click gợi ý không bị mất
+                  }}
                   sx={{
                     flex: 1,
                     backgroundColor: "white",
