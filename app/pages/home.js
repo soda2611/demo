@@ -30,7 +30,7 @@ export default function HomePage({ products, onAddToCart }) {
         }}
       >
         <img
-          src="https://github.com/soda2611/demo/blob/main/public/banner.png?raw=true"
+          src="https://github.com/huydhb/greenfarm/blob/main/public/images/branding/banner.png?raw=true"
           alt="Banner"
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
