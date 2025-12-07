@@ -167,6 +167,17 @@ export default function App() {
     });
   };
 
+  const [banners, setBanners] = useState(null);
+  
+  useEffect(() => {
+    fetch(
+      "https://raw.githubusercontent.com/soda2611/demo/refs/heads/main/app/data/banners.json"
+    )
+      .then((res) => res.json())
+      .then((data) => setBanners(data))
+      .catch((err) => console.error("Lỗi khi tải JSON:", err));
+  }, []);
+
   const [products, setProducts] = useState(null);
 
   useEffect(() => {
@@ -178,7 +189,7 @@ export default function App() {
       .catch((err) => console.error("Lỗi khi tải JSON:", err));
   }, []);
 
-  if (!products) return <div>Đang tải dữ liệu...</div>;
+  if (!products || !banners) return <div>Đang tải dữ liệu...</div>;
 
   return (
     <ThemeProvider theme={theme}>
@@ -231,7 +242,7 @@ export default function App() {
                 gap: 10,
               }}
             >
-              <ProductPage products={products} onAddToCart={addToCart} />
+              <ProductPage products={products} banners={banners} onAddToCart={addToCart} />
             </div>
           )}
           {tab === 2 && (

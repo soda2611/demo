@@ -2,7 +2,7 @@ import React from "react";
 import { Typography, Box } from "@mui/material";
 import ProductCard from "../widgets/ProductCard";
 
-export default function ProductPage({ products, onAddToCart }) {
+export default function ProductPage({ products, banners, onAddToCart }) {
   return (
     <div
       style={{
@@ -16,13 +16,48 @@ export default function ProductPage({ products, onAddToCart }) {
     >
       {Object.entries(products).map(([category, items]) => (
         <>
-          <Typography
-            variant="h3"
-            component="div"
-            sx={{ fontWeight: "bold", marginBottom: 1, color: "text.primary" }}
-          >
-            {category}
-          </Typography>
+          <Box
+                  sx={{
+                    backgroundColor: "primary.main",
+                    height: 300,
+                    width: "100%",
+                    overflow: "hidden",
+                    borderRadius: 5,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <img
+                    src={banners[{category}]}
+                    alt="Banner"
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      position: "absolute",
+                      color: "white",
+                      textAlign: "center",
+                      padding: 2,
+                      borderRadius: 5,
+                      height: 300,
+                      width: "90%",
+                      backgroundColor: "rgba(0, 0, 0, 0.5)",
+                    }}
+                  >
+                    <Typography
+                      variant="h4"
+                      component="div"
+                      sx={{ fontWeight: "bold", marginBottom: 1, color: "white" }}
+                    >
+                      {category}
+                    </Typography>
+                  </Box>
+                </Box>
           <Box
             sx={{
               width: "100%",
