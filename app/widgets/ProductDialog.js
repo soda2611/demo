@@ -81,7 +81,7 @@ export default function ProductDialog({
             variant={isMobile ? "body2" : "h6"}
             color="text.secondary"
           >
-            {item["short description"]}
+            {item["shortDescription"]}
           </Typography>
 
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
