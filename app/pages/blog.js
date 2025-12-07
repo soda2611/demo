@@ -10,7 +10,7 @@ export default function Blog() {
 
   useEffect(() => {
     fetch(
-      "https://raw.githubusercontent.com/huydhb/greenfarm/refs/heads/main/public/data/blogs.json"
+      "https://raw.githubusercontent.com/soda2611/demo/refs/heads/main/app/data/blogs.json"
     )
       .then((res) => res.json())
       .then((data) => setBlogData(data))
