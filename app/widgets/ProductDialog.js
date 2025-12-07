@@ -72,6 +72,7 @@ export default function ProductDialog({
             height: 400,
             borderRadius: 2,
             gap: 2,
+            overflowY: !isMobile ? 'auto' : undefined
           }}
         >
           <Typography variant="h3">{name}</Typography>
