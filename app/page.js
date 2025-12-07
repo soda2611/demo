@@ -31,6 +31,8 @@ import ContactPage from "./pages/contact";
 import Footer from "./widgets/Footer";
 import Blog from "./pages/blog";
 import CartDialog from "./widgets/CartDialog";
+import SearchPopper from "./widgets/SearchPopper";
+import ProductDialog from "./widgets/ProductDialog";
 
 export default function App() {
   const theme = createTheme({
@@ -56,7 +58,7 @@ export default function App() {
   const [tab, setTab] = useState(0);
 
   useEffect(() => {
-    window.scrollTo({ top: tab===1 ? 70 : 0, behavior: "smooth" });
+    window.scrollTo({ top: tab === 1 ? 70 : 0, behavior: "smooth" });
   }, [tab]);
 
   const handleTabChange = (event, newValue) => {
@@ -69,6 +71,12 @@ export default function App() {
   const toggleDrawer = (open) => () => {
     setDrawerOpen(open);
   };
+
+  const [productDialogOpen, setProductDialogOpen] = useState(false);
+  const [productDialogData, setProductDialogData] = useState({
+    name: "",
+    item: null,
+  });
 
   const [open, setOpen] = useState(false);
 
@@ -167,8 +175,50 @@ export default function App() {
     });
   };
 
+  // Bỏ dấu tiếng Việt + lowercase để so khớp dễ
+  const normalize = (s) =>
+    String(s)
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
+  // Tạo mảng tất cả sản phẩm từ cấu trúc { category: { name: item } }
+  const buildAllProducts = (productsObj) => {
+    const arr = [];
+    Object.entries(productsObj || {}).forEach(([category, items]) => {
+      Object.entries(items || {}).forEach(([name, item]) => {
+        // Ảnh lấy từ item.img (hỗ trợ URL hoặc data URI/base64)
+        const thumbnail = item?.img ?? null;
+
+        // Giá hiển thị: nếu có sale (hợp lệ) thì dùng sale, ngược lại price
+        let displayPrice = item?.price;
+        if (item?.sale != null && Number(item.sale) > 0) {
+          displayPrice = item.sale;
+        }
+
+        arr.push({
+          name,
+          category,
+          price: item?.price ?? null,
+          sale: item?.sale ?? null,
+          displayPrice,
+          thumbnail, // <-- dùng đúng key `img`
+          shortDesc: item?.["short description"] ?? "", // key có khoảng trắng cần bracket
+          _normName: normalize(name),
+        });
+      });
+    });
+    return arr;
+  };
+
+  const [searchAnchor, setSearchAnchor] = useState(null);
+  const [query, setQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showPopper, setShowPopper] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
   const [banners, setBanners] = useState(null);
-  
+
   useEffect(() => {
     fetch(
       "https://raw.githubusercontent.com/soda2611/demo/refs/heads/main/app/data/banners.json"
@@ -189,7 +239,26 @@ export default function App() {
       .catch((err) => console.error("Lỗi khi tải JSON:", err));
   }, []);
 
-  if (!products || !banners) return <div>Đang tải dữ liệu...</div>;
+  const allProducts = React.useMemo(
+    () => buildAllProducts(products ?? {}),
+    [products]
+  );
+
+  useEffect(() => {
+    const q = normalize(query);
+    if (!q) {
+      setSuggestions([]);
+      setShowPopper(false);
+      return;
+    }
+
+    const matched = allProducts
+      .filter((p) => p._normName.includes(q))
+      .slice(0, 10);
+
+    setSuggestions(matched);
+    setShowPopper(matched.length > 0);
+  }, [query, allProducts]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -215,67 +284,77 @@ export default function App() {
             marginTop: 15,
           }}
         >
-          {tab === 0 && (
-            <div
-              style={{
-                overflowY: "hidden",
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "column",
-                gap: 10,
-              }}
-            >
-              <HomePage products={products} onAddToCart={addToCart} />
-            </div>
+          {!products || !banners ? (
+            <div>Đang tải dữ liệu...</div>
+          ) : (
+            <>
+              {tab === 0 && (
+                <div
+                  style={{
+                    overflowY: "hidden",
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                    gap: 10,
+                  }}
+                >
+                  <HomePage products={products} onAddToCart={addToCart} />
+                </div>
+              )}
+              {tab === 1 && (
+                <div
+                  style={{
+                    overflowY: "hidden",
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                    gap: 10,
+                  }}
+                >
+                  <ProductPage
+                    products={products}
+                    banners={banners}
+                    onAddToCart={addToCart}
+                  />
+                </div>
+              )}
+              {tab === 2 && (
+                <div
+                  style={{
+                    overflowY: "hidden",
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                    gap: 10,
+                  }}
+                >
+                  <Blog />
+                </div>
+              )}
+              {tab === 3 && (
+                <div
+                  style={{
+                    overflowY: "hidden",
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                    gap: 10,
+                  }}
+                >
+                  <ContactPage />
+                </div>
+              )}
+              <Footer />
+            </>
           )}
-          {tab === 1 && (
-            <div
-              style={{
-                overflowY: "hidden",
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "column",
-                gap: 10,
-              }}
-            >
-              <ProductPage products={products} banners={banners} onAddToCart={addToCart} />
-            </div>
-          )}
-          {tab === 2 && (
-            <div
-              style={{
-                overflowY: "hidden",
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "column",
-                gap: 10,
-              }}
-            >
-              <Blog />
-            </div>
-          )}
-          {tab === 3 && (
-            <div
-              style={{
-                overflowY: "hidden",
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "column",
-                gap: 10,
-              }}
-            >
-              <ContactPage />
-            </div>
-          )}
-          <Footer />
         </Box>
         <div
           style={{
@@ -393,7 +472,9 @@ export default function App() {
                   )}
                   {!isMobile && (
                     <>
-                      <Typography>Giỏ hàng ({cartTotalQty<=99 ? cartTotalQty : '99+'})</Typography>
+                      <Typography>
+                        Giỏ hàng ({cartTotalQty <= 99 ? cartTotalQty : "99+"})
+                      </Typography>
                     </>
                   )}
                 </IconButton>
@@ -420,6 +501,18 @@ export default function App() {
                         border: "none",
                       }}
                       placeholder="Tìm kiếm sản phẩm..."
+                      value={query}
+                      onChange={(e) => {
+                        setQuery(e.target.value);
+                        setSearchAnchor(e.currentTarget);
+                      }}
+                      onFocus={(e) => {
+                        setSearchAnchor(e.currentTarget);
+                        if (suggestions.length) setShowPopper(true);
+                      }}
+                      onBlur={() => {
+                        setTimeout(() => setShowPopper(false), 150); // giữ thời gian đóng để click gợi ý không bị mất
+                      }}
                     />
                   </div>
                 ) : (
@@ -476,6 +569,37 @@ export default function App() {
           {snackbarMsg}
         </Alert>
       </Snackbar>
+
+      <SearchPopper
+        open={showPopper}
+        anchorEl={searchAnchor}
+        suggestions={suggestions}
+        onPick={(sug) => {
+          // Lấy full object sản phẩm từ cây products theo category + name
+          const item = products?.[sug.category]?.[sug.name];
+          if (!item) return;
+          setProductDialogData({ name: sug.name, item });
+          setProductDialogOpen(true);
+        }}
+        onClose={() => setShowPopper(false)}
+      />
+
+      {productDialogOpen && productDialogData.item && (
+        <ProductDialog
+          name={productDialogData.name}
+          item={productDialogData.item}
+          open={productDialogOpen}
+          handleClose={() => {
+            setProductDialogOpen(false);
+            setProductDialogData({ name: "", item: null }); // dọn state (khuyến nghị)
+          }}
+          onAddToCart={(product, qty) => {
+            addToCart(product, qty);
+            setProductDialogOpen(false);
+            setProductDialogData({ name: "", item: null }); // dọn state (khuyến nghị)
+          }}
+        />
+      )}
     </ThemeProvider>
   );
 }
