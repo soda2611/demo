@@ -36,7 +36,7 @@ export default function CartDialog({
           text: { primary: "#000000" },
         },
         typography: {
-          fontFamily: "Coiny, Roboto, Arial, sans-serif",
+          fontFamily: "Roboto, Arial, sans-serif",
           h4: { fontWeight: 700 },
         },
         spacing: 8,

@@ -26,7 +26,7 @@ export default function ProductDialog({
       text: { primary: "#000000" },
     },
     typography: {
-      fontFamily: "Coiny, Roboto, Arial, sans-serif",
+      fontFamily: "Roboto, Arial, sans-serif",
       h4: { fontWeight: 700 },
     },
     spacing: 8,
@@ -75,7 +75,7 @@ export default function ProductDialog({
             overflowY: !isMobile ? 'auto' : undefined
           }}
         >
-          <Typography variant="h3">{name}</Typography>
+          <Typography variant="h3" sx={{ fontWeight: 'bold' }}>{name}</Typography>
 
           <Typography
             variant={isMobile ? "body2" : "h6"}
@@ -144,7 +144,7 @@ export default function ProductDialog({
               <Typography>Thêm vào giỏ hàng</Typography>
             </IconButton>
           </div>
-          <Typography variant="h6">Thông tin sản phẩm</Typography>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Thông tin sản phẩm</Typography>
           <Typography variant="body1">{item["description"]}</Typography>
           {isMobile && <br/>}
         </Box>

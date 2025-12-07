@@ -26,7 +26,7 @@ export default function ContactPage() {
       },
     },
     typography: {
-      fontFamily: "Coiny, Roboto, Arial, sans-serif",
+      fontFamily: "Roboto, Arial, sans-serif",
       h4: { fontWeight: 700 },
     },
     spacing: 8,
@@ -82,7 +82,6 @@ export default function ContactPage() {
                   outlineColor: "#1faa54ff",
                   flexGrow: 1,
                   border: "none",
-                  fontFamily: "Coiny",
                   padding: 10,
                 }}
                 placeholder="Họ và tên"
@@ -94,7 +93,6 @@ export default function ContactPage() {
                   borderRadius: 10,
                   outlineColor: "#1faa54ff",
                   border: "none",
-                  fontFamily: "Coiny",
                   padding: 10,
                   maxLength: 10,
                 }}
@@ -108,7 +106,6 @@ export default function ContactPage() {
                 outlineColor: "#1faa54ff",
                 flexGrow: 1,
                 border: "none",
-                fontFamily: "Coiny",
                 padding: 10,
               }}
               placeholder="Email"
@@ -120,7 +117,6 @@ export default function ContactPage() {
                 outlineColor: "#1faa54ff",
                 flexGrow: 1,
                 border: "none",
-                fontFamily: "Coiny",
                 padding: 10,
               }}
               placeholder="Chủ đề"
@@ -132,7 +128,6 @@ export default function ContactPage() {
                 outlineColor: "#1faa54ff",
                 flexGrow: 1,
                 border: "none",
-                fontFamily: "Coiny",
                 padding: 10,
               }}
               placeholder="Nội dung"
@@ -249,7 +244,6 @@ export default function ContactPage() {
                   borderRadius: 10,
                   outlineColor: "#1faa54ff",
                   border: "none",
-                  fontFamily: "Coiny",
                   padding: 10,
                 }}
                 placeholder="Họ và tên"
@@ -261,7 +255,6 @@ export default function ContactPage() {
                   borderRadius: 10,
                   outlineColor: "#1faa54ff",
                   border: "none",
-                  fontFamily: "Coiny",
                   padding: 10,
                   maxLength: 10,
                 }}
@@ -274,7 +267,6 @@ export default function ContactPage() {
                 borderRadius: 10,
                 outlineColor: "#1faa54ff",
                 border: "none",
-                fontFamily: "Coiny",
                 padding: 10,
               }}
               placeholder="Email"
@@ -285,7 +277,6 @@ export default function ContactPage() {
                 borderRadius: 10,
                 outlineColor: "#1faa54ff",
                 border: "none",
-                fontFamily: "Coiny",
                 padding: 10,
               }}
               placeholder="Chủ đề"
@@ -296,7 +287,6 @@ export default function ContactPage() {
                 borderRadius: 10,
                 outlineColor: "#1faa54ff",
                 border: "none",
-                fontFamily: "Coiny",
                 padding: 10,
               }}
               placeholder="Nội dung"

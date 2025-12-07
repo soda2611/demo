@@ -47,7 +47,7 @@ export default function App() {
       },
     },
     typography: {
-      fontFamily: "Coiny, Roboto, Arial, sans-serif",
+      fontFamily: "Roboto, Arial, sans-serif",
       h4: { fontWeight: 700 },
     },
     spacing: 8,
@@ -377,7 +377,6 @@ export default function App() {
                         outline: "none",
                         width: "100%",
                         border: "none",
-                        fontFamily: "Coiny",
                       }}
                       placeholder="Tìm kiếm sản phẩm..."
                     />
