@@ -374,7 +374,7 @@ export default function App() {
                   onClick={handleOpen}
                 >
                   {isMobile ? (
-                    <Badge badgeContent={cartTotalQty} color="success">
+                    <Badge badgeContent={cartTotalQty} color="success" showZero>
                       <ShoppingCartIcon />
                     </Badge>
                   ) : (
