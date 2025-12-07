@@ -69,9 +69,12 @@ export default function App() {
   const scrollToTop = (top, behavior = "smooth") => {
     getScrollEl().scrollTo({ top, behavior });
   };
+
+  // Trong component App:
   const [lastCategoryInteractAt, setLastCategoryInteractAt] = useState(0);
   const handleCategoryInteract = () => setLastCategoryInteractAt(Date.now());
 
+  // useEffect auto-scroll liên tục theo điều kiện
   useEffect(() => {
     const THRESHOLD = 70;
     const HOLD_MS = 2000;
@@ -384,7 +387,6 @@ export default function App() {
                     products={products}
                     banners={banners}
                     onAddToCart={addToCart}
-                    onCategoryInteract={handleCategoryInteract}
                   />
                 </div>
               )}
