@@ -74,7 +74,7 @@ export default function HomePage({ products, onAddToCart }) {
         sx={{
           fontWeight: "bold",
           marginTop: 10,
-          marginBottom: 1,
+          marginBottom: 5,
           color: "text.primary",
           textAlign: "center",
         }}
@@ -107,13 +107,14 @@ export default function HomePage({ products, onAddToCart }) {
           </>
         ))}
       </Box>
+
       <Typography
         variant="h3"
         component="div"
         sx={{
           fontWeight: "bold",
           marginTop: 10,
-          marginBottom: 1,
+          marginBottom: 5,
           color: "text.primary",
           textAlign: "center",
         }}
@@ -153,7 +154,7 @@ export default function HomePage({ products, onAddToCart }) {
         sx={{
           fontWeight: "bold",
           marginTop: 10,
-          marginBottom: 1,
+          marginBottom: 5,
           color: "text.primary",
           textAlign: "center",
         }}

@@ -56,7 +56,7 @@ export default function App() {
   const [tab, setTab] = useState(0);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: tab===1 ? 70 : 0, behavior: "smooth" });
   }, [tab]);
 
   const handleTabChange = (event, newValue) => {
@@ -393,7 +393,7 @@ export default function App() {
                   )}
                   {!isMobile && (
                     <>
-                      <Typography>Giỏ hàng ({cartTotalQty})</Typography>
+                      <Typography>Giỏ hàng ({cartTotalQty<=99 ? cartTotalQty : '99+'})</Typography>
                     </>
                   )}
                 </IconButton>
