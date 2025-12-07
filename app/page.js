@@ -2,7 +2,7 @@
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Typography,
   Box,
@@ -215,7 +215,7 @@ export default function App() {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showPopper, setShowPopper] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const toolbarRef = useRef(null);
 
   const [banners, setBanners] = useState(null);
 
@@ -526,17 +526,17 @@ export default function App() {
                 )}
               </Toolbar>
             ) : (
-              <Toolbar sx={{ p: 1, gap: 2 }}>
+              <Toolbar sx={{ p: 1, gap: 2 }} ref={toolbarRef}>
                 <InputBase
                   autoFocus
                   placeholder="Tìm kiếm sản phẩm..."
                   value={query}
                   onChange={(e) => {
                     setQuery(e.target.value);
-                    setSearchAnchor(e.currentTarget);
+                    setSearchAnchor(toolbarRef.current);
                   }}
                   onFocus={(e) => {
-                    setSearchAnchor(e.currentTarget);
+                    setSearchAnchor(toolbarRef.current);
                     if (suggestions.length) setShowPopper(true);
                   }}
                   onBlur={() => {
@@ -571,7 +571,7 @@ export default function App() {
         open={snackbarOpen}
         autoHideDuration={2500}
         onClose={closeSnackbar}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       >
         <Alert
           onClose={closeSnackbar}
