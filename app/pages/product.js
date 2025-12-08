@@ -171,7 +171,6 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
         alignItems: "center",
       }}
     >
-      {/* Header */}
       <Typography variant="h4" sx={{ mb: 2 }}>
         Sản phẩm
       </Typography>
@@ -190,6 +189,55 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
           <Tab key={c} label={c} />
         ))}
       </Tabs>
+
+      {tab > 0 && banners?.[categories[tab - 1]] ? (
+        <>
+          <Box
+            key={tab > 0 ? categories[tab - 1] : "Sản phẩm"}
+            sx={{
+              backgroundColor: "primary.main",
+              height: !isMobile ? 200 : 100,
+              width: !isMobile ? "70%" : "100%",
+              overflow: "hidden",
+              borderRadius: 5,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              mb: 5,
+            }}
+          >
+            <img
+              src={banners[`${categories[tab - 1]}`]}
+              alt="Banner"
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                position: "absolute",
+                color: "white",
+                textAlign: "center",
+                padding: 2,
+                borderRadius: 5,
+                height: !isMobile ? 200 : 100,
+                width: !isMobile ? "56%" : "80%",
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+              }}
+            >
+              <Typography
+                variant="h4"
+                component="div"
+                sx={{ fontWeight: "bold", marginBottom: 1, color: "white" }}
+              >
+                {categories[tab - 1]}
+              </Typography>
+            </Box>
+          </Box>
+        </>
+      ) : null}
 
       {/* Khu vực bộ lọc */}
       <Box
@@ -272,56 +320,6 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
           />
         </Box>
       </Box>
-
-      {/* Banner theo danh mục (nếu có) */}
-      {tab > 0 && banners?.[categories[tab - 1]] ? (
-        <>
-          <Box
-            key={categories[tab - 1]}
-            sx={{
-              backgroundColor: "primary.main",
-              height: !isMobile ? 200 : 75,
-              width: "100%",
-              overflow: "hidden",
-              borderRadius: 5,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              mb: 5,
-            }}
-          >
-            <img
-              src={banners[`${categories[tab - 1]}`]}
-              alt="Banner"
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            />
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                position: "absolute",
-                color: "white",
-                textAlign: "center",
-                padding: 2,
-                borderRadius: 5,
-                height: !isMobile ? 200 : 75,
-                width: "80%",
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
-              }}
-            >
-              <Typography
-                variant="h4"
-                component="div"
-                sx={{ fontWeight: "bold", marginBottom: 1, color: "white" }}
-              >
-                {categories[tab - 1]}
-              </Typography>
-            </Box>
-          </Box>
-        </>
-      ) : null}
 
       {/* Lưới sản phẩm */}
       <Box
