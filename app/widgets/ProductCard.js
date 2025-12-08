@@ -144,7 +144,7 @@ export default function ProductCard({ name, item, onAddToCart }) {
                 width: 55,
               }}
             >
-              -{(100 - (item["sale"]?.toLocaleString("vi-VN") / item["price"]?.toLocaleString("vi-VN")) * 100).toFixed(1)}%
+              -{(100 - (item["sale"] / item["price"]) * 100).toFixed(1)}%
             </Box>
             <IconButton
               sx={{
