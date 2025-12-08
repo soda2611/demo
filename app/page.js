@@ -25,6 +25,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import HomeIcon from "@mui/icons-material/Home";
+import InventoryIcon from "@mui/icons-material/Inventory";
+import BookIcon from "@mui/icons-material/Book";
+import CallIcon from "@mui/icons-material/Call";
 import ProductPage from "./pages/product";
 import HomePage from "./pages/home";
 import ContactPage from "./pages/contact";
@@ -50,7 +54,7 @@ export default function App() {
       },
     },
     typography: {
-      fontFamily: "Roboto, Arial, sans-serif",
+      fontFamily: "Coiny, Roboto, Arial, sans-serif",
       h4: { fontWeight: 700 },
     },
     spacing: 8,
@@ -461,39 +465,68 @@ export default function App() {
                       anchor="left"
                       open={drawerOpen}
                       onClose={toggleDrawer(false)}
+                      sx={{
+                        "& .MuiDrawer-paper": {
+                          width: 250,
+                          height: "calc(100% - 44px)",
+                          left: 10,
+                          top: 22,
+                          borderRadius: 2,
+                          boxSizing: "border-box",
+                          bgcolor: "primary.main",
+                          color: "white",
+                        },
+                      }}
                     >
                       <List sx={{ width: 250 }}>
                         <ListItem
-                          onClick={() => {handleTabChange(null, 0)
-                                          setDrawerOpen(false)
+                          onClick={() => {
+                            handleTabChange(null, 0);
+                            setDrawerOpen(false);
                           }}
-                          sx={{ cursor: "pointer" }}
+                          sx={{ cursor: "pointer", gap: 2 }}
                         >
-                          <ListItemText primary="Trang chủ" />
+                          <ListItemText
+                            primary="Trang chủ"
+                            sx={{ flexGrow: 1 }}
+                          />
+                          <HomeIcon />
                         </ListItem>
                         <ListItem
-                          onClick={() => {handleTabChange(null, 1)
-                                          setDrawerOpen(false)
+                          onClick={() => {
+                            handleTabChange(null, 1);
+                            setDrawerOpen(false);
                           }}
-                          sx={{ cursor: "pointer" }}
+                          sx={{ cursor: "pointer", gap: 2 }}
                         >
-                          <ListItemText primary="Sản phẩm" />
+                          <ListItemText
+                            primary="Sản phẩm"
+                            sx={{ flexGrow: 1 }}
+                          />
+                          <InventoryIcon />
                         </ListItem>
                         <ListItem
-                          onClick={() => {handleTabChange(null, 2)
-                                          setDrawerOpen(false)
+                          onClick={() => {
+                            handleTabChange(null, 2);
+                            setDrawerOpen(false);
                           }}
-                          sx={{ cursor: "pointer" }}
+                          sx={{ cursor: "pointer", gap: 2 }}
                         >
-                          <ListItemText primary="Blog" />
+                          <ListItemText primary="Blog" sx={{ flexGrow: 1 }} />
+                          <BookIcon />
                         </ListItem>
                         <ListItem
-                          onClick={() => {handleTabChange(null, 3)
-                                          setDrawerOpen(false)
+                          onClick={() => {
+                            handleTabChange(null, 3);
+                            setDrawerOpen(false);
                           }}
-                          sx={{ cursor: "pointer" }}
+                          sx={{ cursor: "pointer", gap: 2 }}
                         >
-                          <ListItemText primary="Liên hệ" />
+                          <ListItemText
+                            primary="Liên hệ"
+                            sx={{ flexGrow: 1 }}
+                          />
+                          <CallIcon />
                         </ListItem>
                       </List>
                     </Drawer>
@@ -574,6 +607,7 @@ export default function App() {
                         borderRadius: 10,
                         outline: "none",
                         width: "100%",
+                        fontFamily: "Coiny",
                         border: "none",
                       }}
                       placeholder="Tìm kiếm sản phẩm..."

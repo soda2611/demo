@@ -13,7 +13,7 @@ export default function Footer() {
           text: { primary: "#000000" },
         },
         typography: {
-          fontFamily: "Roboto, Arial, sans-serif",
+          fontFamily: "Coiny, Roboto, Arial, sans-serif",
           h4: { fontWeight: 700 },
         },
         spacing: 8,
