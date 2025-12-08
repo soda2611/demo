@@ -320,17 +320,6 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
               </Typography>
             </Box>
           </Box>
-          <Box
-            sx={{
-              width: "100%",
-              mb: 15,
-              maxWidth: "1200px",
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, 250px)",
-              gap: 5,
-              justifyContent: "center",
-            }}
-          ></Box>
         </>
       ) : null}
 
