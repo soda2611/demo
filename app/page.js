@@ -464,25 +464,33 @@ export default function App() {
                     >
                       <List sx={{ width: 250 }}>
                         <ListItem
-                          onClick={() => handleTabChange(null, 0)}
+                          onClick={() => {handleTabChange(null, 0)
+                                          setDrawerOpen(false)
+                          }}
                           sx={{ cursor: "pointer" }}
                         >
                           <ListItemText primary="Trang chủ" />
                         </ListItem>
                         <ListItem
-                          onClick={() => handleTabChange(null, 1)}
+                          onClick={() => {handleTabChange(null, 1)
+                                          setDrawerOpen(false)
+                          }}
                           sx={{ cursor: "pointer" }}
                         >
                           <ListItemText primary="Sản phẩm" />
                         </ListItem>
                         <ListItem
-                          onClick={() => handleTabChange(null, 2)}
+                          onClick={() => {handleTabChange(null, 2)
+                                          setDrawerOpen(false)
+                          }}
                           sx={{ cursor: "pointer" }}
                         >
                           <ListItemText primary="Blog" />
                         </ListItem>
                         <ListItem
-                          onClick={() => handleTabChange(null, 3)}
+                          onClick={() => {handleTabChange(null, 3)
+                                          setDrawerOpen(false)
+                          }}
                           sx={{ cursor: "pointer" }}
                         >
                           <ListItemText primary="Liên hệ" />
