@@ -75,11 +75,7 @@ export default function CartDialog({
     }));
 
     setCartItems?.((prev) =>
-      prev.map((it) =>
-        it.id === id
-          ? { ...it, quantity: parsed }
-          : it
-      )
+      prev.map((it) => (it.id === id ? { ...it, quantity: parsed } : it))
     );
   };
 
@@ -264,26 +260,82 @@ export default function CartDialog({
             )}
           </Box>
 
-          <Box sx={{ display: "flex", flexDirection: "column", mt: 2 }}>
-            <Typography sx={{ fontWeight: 700, textAlign: "right" }}>
-              Tổng thanh toán: {subtotal.toLocaleString("vi-VN")}₫
-            </Typography>
-            <IconButton
-              color="inherit"
-              aria-label="cart"
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: isMobile ? "column" : undefined,
+              mt: 2,
+              padding: 2,
+              borderRadius: 2,
+              border: "1px solid lightgray",
+              gap: 1,
+            }}
+          >
+            <Box
               sx={{
-                fontSize: 14,
-                borderRadius: 2.5,
-                backgroundColor: "primary.main",
-                color: "white",
-                "&:hover": { backgroundColor: "primary.light" },
-                gap: 0.5,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "left",
+                flexGrow: 1,
               }}
-              onClick={handleCheckout}
             >
-              <ShoppingBagIcon />
-              <Typography>Thanh toán</Typography>
-            </IconButton>
+              <Typography sx={{ fontWeight: 700, textAlign: "left" }}>
+                Tổng số lượng:{" "}
+                {React.useMemo(
+                  () => items.reduce((sum, it) => sum + (it.quantity ?? 1), 0),
+                  [items]
+                )}
+              </Typography>
+              <Typography
+                sx={{
+                  fontWeight: 700,
+                  textAlign: "left",
+                  flexGrow: 1,
+                }}
+              >
+                Thành tiền: {subtotal.toLocaleString("vi-VN")}₫
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: isMobile ? "column" : undefined,
+                alignItems: isMobile ? "left" : "center",
+                gap: 1,
+              }}
+            >
+              <IconButton
+                color="inherit"
+                aria-label="cart"
+                sx={{
+                  fontSize: 14,
+                  borderRadius: 2.5,
+                  backgroundColor: "white",
+                  border: "1px solid #1faa54ff",
+                  color: "primary.main",
+                  gap: 0.5,
+                }}
+                onClick={handleClose}
+              >
+                <Typography>Tiếp tục mua sắm</Typography>
+              </IconButton>
+              <IconButton
+                color="inherit"
+                aria-label="cart"
+                sx={{
+                  fontSize: 14,
+                  borderRadius: 2.5,
+                  backgroundColor: "primary.main",
+                  color: "white",
+                  "&:hover": { backgroundColor: "primary.light" },
+                  gap: 0.5,
+                }}
+                onClick={handleCheckout}
+              >
+                <ShoppingBagIcon />
+                <Typography>Thanh toán</Typography>
+              </IconButton>
+            </Box>
           </Box>
         </DialogContent>
       </Dialog>

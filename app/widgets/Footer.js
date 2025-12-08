@@ -1,17 +1,38 @@
 import React from "react";
-import { Typography, Box, Link, Grid } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
+import { Typography, Box, Link, Grid, useMediaQuery } from "@mui/material";
 
 export default function Footer() {
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: "light",
+          primary: { main: "#1faa54ff", light: "#37be3cff" },
+          secondary: { main: "#ebff38ff" },
+          text: { primary: "#000000" },
+        },
+        typography: {
+          fontFamily: "Roboto, Arial, sans-serif",
+          h4: { fontWeight: 700 },
+        },
+        spacing: 8,
+      }),
+    []
+  );
+
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <Box
       sx={{
         width: "100%",
         height: 300,
         backgroundColor: "#1faa54ff",
-        color: 'white',
+        color: "white",
         objectFit: "cover",
         display: "flex",
-        flexDirection: 'column',
+        flexDirection: "column",
         alignItems: "center",
       }}
     >
@@ -20,7 +41,7 @@ export default function Footer() {
         spacing={{ md: 10 }}
         columns={{ md: 3 }}
         sx={{
-          width: "70%",
+          width: !isMobile ? "70%" : "100%",
           justifyContent: "center",
           borderRadius: 5,
           padding: 5,
@@ -102,7 +123,20 @@ export default function Footer() {
           </Box>
         </div>
       </Grid>
-      <div style={{ position: 'relative', bottom: 0, width: '100%', height: 25, backgroundColor: '#0b830fff', color: 'white', textAlign: 'center', fontSize: 'small' }}>©Copyright 2025 GreenFarm</div>
+      <div
+        style={{
+          position: "relative",
+          bottom: 0,
+          width: "100%",
+          height: 25,
+          backgroundColor: "#0b830fff",
+          color: "white",
+          textAlign: "center",
+          fontSize: "small",
+        }}
+      >
+        ©Copyright 2025 GreenFarm
+      </div>
     </Box>
   );
 }
