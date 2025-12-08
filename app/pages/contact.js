@@ -159,7 +159,7 @@ export default function ContactPage() {
               }}
             >
               <img
-                src="https://github.com/soda2611/demo/blob/main/public/image.png?raw=true"
+                src="https://github.com/huydhb/greenfarm/blob/main/public/images/branding/logo.png?raw=true"
                 alt="Logo"
                 style={{ height: 40 }}
               />
