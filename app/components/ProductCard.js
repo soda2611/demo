@@ -9,6 +9,11 @@ export default function ProductCard({ name, item, onAddToCart }) {
 
   const handleOpen = () => setOpen(true);
 
+  const handleQuickAdd = (e) => {
+    e.stopPropagation(); // không mở dialog khi bấm icon
+    onAddToCart?.(item, 1);
+  };
+
   return (
     <>
       <ProductDialog
@@ -72,7 +77,8 @@ export default function ProductCard({ name, item, onAddToCart }) {
               ? `${name}`.substring(0, 16) + "..."
               : `${name}`}
           </Typography>
-          {item["sale"]?.toLocaleString("vi-VN") != item["price"]?.toLocaleString("vi-VN") ? (
+          {item["sale"]?.toLocaleString("vi-VN") !=
+          item["price"]?.toLocaleString("vi-VN") ? (
             <>
               <Typography
                 variant="body1"
@@ -127,7 +133,8 @@ export default function ProductCard({ name, item, onAddToCart }) {
             </>
           )}
         </Box>
-        {item["sale"]?.toLocaleString("vi-VN") != item["price"]?.toLocaleString("vi-VN") ? (
+        {item["sale"]?.toLocaleString("vi-VN") !=
+        item["price"]?.toLocaleString("vi-VN") ? (
           <>
             <Box
               sx={{
@@ -147,10 +154,17 @@ export default function ProductCard({ name, item, onAddToCart }) {
               -{(100 - (item["sale"] / item["price"]) * 100).toFixed(1)}%
             </Box>
             <IconButton
+              sx={{ position: "relative", bottom: 70, right: -205 }}
+              aria-label="add-to-cart"
+              onClick={handleQuickAdd}
+            >
+              <ShoppingCartIcon />
+            </IconButton>
+            <IconButton
               sx={{
                 position: "relative",
                 top: -415,
-                left: 5,
+                left: -35,
                 backdropFilter: "blur(10px)",
               }}
               aria-label="favorite"
@@ -161,10 +175,17 @@ export default function ProductCard({ name, item, onAddToCart }) {
         ) : (
           <>
             <IconButton
+              sx={{ position: "relative", bottom: 45, right: -205 }}
+              aria-label="add-to-cart"
+              onClick={handleQuickAdd}
+            >
+              <ShoppingCartIcon />
+            </IconButton>
+            <IconButton
               sx={{
                 position: "relative",
                 top: -390,
-                left: 5,
+                left: -35,
                 backdropFilter: "blur(10px)",
               }}
               aria-label="favorite"

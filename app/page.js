@@ -207,7 +207,7 @@ export default function App() {
           sale: item?.sale ?? null,
           displayPrice,
           thumbnail, // <-- dùng đúng key `img`
-          shortDesc: item?.["short description"] ?? "", // key có khoảng trắng cần bracket
+          shortDesc: item?.["shortDescription"] ?? "", // key có khoảng trắng cần bracket
           _normName: normalize(name),
         });
       });
