@@ -64,7 +64,7 @@ export default function BlogCard({
         >
           <Box
             component="img"
-            src="https://github.com/huydhb/greenfarm/blob/main/public/images/branding/logo.png?raw=true" // Logo ví dụ
+            src="images/branding/logo.png" // Logo ví dụ
             alt="Avatar"
             sx={{ borderRadius: 2, width: 40, height: 40, objectFit: "cover" }}
           />

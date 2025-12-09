@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { createTheme } from "@mui/material/styles";
-import ProductCard from "../widgets/ProductCard";
+import ProductCard from "../components/ProductCard";
 
 // Helper: chuyển object {category: {name: item}} -> mảng dễ lọc
 const flattenProducts = (productsObj) => {

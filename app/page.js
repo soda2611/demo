@@ -29,14 +29,14 @@ import HomeIcon from "@mui/icons-material/Home";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import BookIcon from "@mui/icons-material/Book";
 import CallIcon from "@mui/icons-material/Call";
-import ProductPage from "./pages/product";
-import HomePage from "./pages/home";
-import ContactPage from "./pages/contact";
-import Footer from "./widgets/Footer";
-import Blog from "./pages/blog";
-import CartDialog from "./widgets/CartDialog";
-import SearchPopper from "./widgets/SearchPopper";
-import ProductDialog from "./widgets/ProductDialog";
+import ProductPage from "./features/ProductSection";
+import HomePage from "./features/HomeSection";
+import ContactPage from "./features/ContactSection";
+import Footer from "./components/Footer";
+import Blog from "./features/BlogSection";
+import CartDialog from "./components/CartDialog";
+import SearchPopper from "./components/SearchPopper";
+import ProductDialog from "./components/ProductDialog";
 
 export default function App() {
   const theme = createTheme({
@@ -64,7 +64,7 @@ export default function App() {
   const handleTabChange = (event, newValue) => {
     setTab(newValue);
   };
-  
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [tab]);
@@ -225,7 +225,7 @@ export default function App() {
 
   useEffect(() => {
     fetch(
-      "https://raw.githubusercontent.com/soda2611/demo/refs/heads/main/app/data/banners.json"
+      "data/banners.json"
     )
       .then((res) => res.json())
       .then((data) => setBanners(data))
@@ -236,7 +236,7 @@ export default function App() {
 
   useEffect(() => {
     fetch(
-      "https://raw.githubusercontent.com/soda2611/demo/refs/heads/main/app/data/products.json"
+      "data/products.json"
     )
       .then((res) => res.json())
       .then((data) => setProducts(data))
@@ -466,7 +466,7 @@ export default function App() {
                 ) : null}
 
                 <img
-                  src="https://github.com/huydhb/greenfarm/blob/main/public/images/branding/logo.png?raw=true"
+                  src="images/branding/logo.png"
                   alt="Logo"
                   style={{ height: 40 }}
                 />
@@ -568,17 +568,18 @@ export default function App() {
                 )}
               </Toolbar>
             ) : (
-              <Toolbar sx={{ p: 1, gap: 2 }} ref={toolbarRef}>
+              <Toolbar sx={{ pl: 2, gap: 2 }} ref={toolbarRef}>
+                <SearchIcon sx={{ color: "white" }} />
                 <InputBase
                   autoFocus
                   placeholder="Tìm kiếm sản phẩm..."
                   value={query}
                   onChange={(e) => {
                     setQuery(e.target.value);
-                    setSearchAnchor(toolbarRef.current);
+                    setSearchAnchor(e.currentTarget);
                   }}
                   onFocus={(e) => {
-                    setSearchAnchor(toolbarRef.current);
+                    setSearchAnchor(e.currentTarget);
                     if (suggestions.length) setShowPopper(true);
                   }}
                   onBlur={() => {
@@ -588,7 +589,7 @@ export default function App() {
                     flex: 1,
                     backgroundColor: "white",
                     borderRadius: 2,
-                    paddingLeft: 2,
+                    pl: 1
                   }}
                 />
                 <IconButton onClick={() => setOpenSearch(false)}>

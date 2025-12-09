@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography, Box } from "@mui/material";
-import ProductCard from "../widgets/ProductCard";
+import ProductCard from "../components/ProductCard";
 
 export default function HomePage({ products, onAddToCart }) {
   return (
@@ -30,7 +30,7 @@ export default function HomePage({ products, onAddToCart }) {
         }}
       >
         <img
-          src="https://github.com/huydhb/greenfarm/blob/main/public/images/branding/banner.png?raw=true"
+          src="images/branding/banner.png"
           alt="Banner"
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />

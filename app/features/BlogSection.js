@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import BlogCard from "../widgets/BlogCard";
+import BlogCard from "../components/BlogCard";
 
 export default function Blog() {
   const [selectedPost, setSelectedPost] = useState(null);
@@ -10,7 +10,7 @@ export default function Blog() {
 
   useEffect(() => {
     fetch(
-      "https://raw.githubusercontent.com/soda2611/demo/refs/heads/main/app/data/blogs.json"
+      "data/blogs.json"
     )
       .then((res) => res.json())
       .then((data) => setBlogData(data))

@@ -65,7 +65,7 @@ export default function Footer() {
             }}
           >
             <img
-              src="https://github.com/huydhb/greenfarm/blob/main/public/images/branding/logo.png?raw=true"
+              src="images/branding/logo.png"
               alt="Logo"
               style={{ height: 40 }}
             />

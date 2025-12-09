@@ -9,7 +9,7 @@ export default function SearchPopper({ open, anchorEl, suggestions = [], onPick,
   const priceStr = (p) => (Number(p)?.toLocaleString("vi-VN") ?? "0") + "₫";
 
   return (
-    <Popper open={open} anchorEl={anchorEl} placement="bottom-start" style={{ zIndex: 1300 }}>
+    <Popper open={open} anchorEl={anchorEl} placement="auto" style={{ zIndex: 1300 }}>
       <Paper elevation={3} sx={{ width: 360, maxHeight: 360, overflowY: "auto", overflowX: 'hidden' }}>
         <Box sx={{ px: 1.5, py: 1 }}>
           <Typography variant="caption" color="text.secondary">
