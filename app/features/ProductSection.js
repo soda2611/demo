@@ -171,9 +171,9 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
         alignItems: "center",
       }}
     >
-      <Typography variant="h4" sx={{ mb: 2 }}>
+      {isMobile && (<Typography variant="h4" sx={{ mb: 2 }}>
         Sản phẩm
-      </Typography>
+      </Typography>)}
 
       {/* Tabs danh mục */}
       <Tabs
