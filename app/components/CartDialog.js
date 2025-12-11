@@ -1,4 +1,4 @@
-// widgets/CartDialog.js
+//app/components/CartDialog.js
 import React, { useMemo, useState, useEffect } from "react";
 import { createTheme } from "@mui/material/styles";
 import {
@@ -25,6 +25,7 @@ export default function CartDialog({
   setQuantities,
   setCartItems,
   onRemove,
+  onCheckout,
 }) {
   const theme = useMemo(
     () =>
@@ -92,16 +93,14 @@ export default function CartDialog({
   };
 
   const handleCheckout = () => {
-    const totalQty = items.reduce(
-      (sum, it) => sum + (quantities?.[it.id] ?? it.quantity ?? 1),
-      0
-    );
-    const msg = `Thanh toán thành công`;
-    setSnackbarMsg(msg);
-    setSnackbarOpen(true);
+    if (!items.length) return;
+    onCheckout?.({
+      items,
+      quantities,
+      subtotal,
+    });
 
-    setCartItems?.(() => []);
-    setQuantities?.(() => ({}));
+    handleClose?.();
   };
 
   const handleSnackbarClose = (_, reason) => {

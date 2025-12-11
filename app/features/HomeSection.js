@@ -1,3 +1,4 @@
+// app/features/HomeSection.js
 import React from "react";
 import { Typography, Box, Grid, Button, Stack, Chip } from "@mui/material";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
@@ -228,20 +229,20 @@ export default function HomePage({ products, onAddToCart }) {
         subtitle="Bùng nổ sắc màu trái cây theo mùa – tươi giòn, ngọt thanh cho mọi bữa ăn."
         gradient="linear-gradient(135deg, #ff9a3c, #ffd166)"
       >
-        {Object.entries(products)
-          .filter(([category]) => category === "Trái cây") // chỉ lấy Trái cây
-          .flatMap(([category, items]) =>
-            Object.entries(items)
-              .filter(([name, item]) => item.sale !== item.price) // có sale
-              .map(([name, item]) => (
+        {Object.entries(products).map(([category, items]) => (
+          <React.Fragment key={category}>
+            {Object.entries(items).map(([name, item]) =>
+              100 - (item.sale / item.price) * 100 > 80 ? (
                 <ProductCard
-                  key={`${category}-${name}`}
+                  key={`${category}-${name}`} // cho chắc ăn luôn
                   name={name}
                   item={{ ...item, name, id: `${category}__${name}` }}
                   onAddToCart={onAddToCart}
                 />
-              ))
-          )}
+              ) : null
+            )}
+          </React.Fragment>
+        ))}
       </SectionCardSection>
 
       {/* ⚡ SIÊU GIẢM GIÁ */}

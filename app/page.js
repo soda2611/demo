@@ -37,6 +37,7 @@ import Blog from "./features/BlogSection";
 import CartDialog from "./components/CartDialog";
 import SearchPopper from "./components/SearchPopper";
 import ProductDialog from "./components/ProductDialog";
+import CheckoutDialog from "./components/CheckoutDialog";
 
 export default function App() {
   const theme = createTheme({
@@ -224,9 +225,7 @@ export default function App() {
   const [banners, setBanners] = useState(null);
 
   useEffect(() => {
-    fetch(
-      "data/banners.json"
-    )
+    fetch("data/banners.json")
       .then((res) => res.json())
       .then((data) => setBanners(data))
       .catch((err) => console.error("Lỗi khi tải JSON:", err));
@@ -235,9 +234,7 @@ export default function App() {
   const [products, setProducts] = useState(null);
 
   useEffect(() => {
-    fetch(
-      "data/products.json"
-    )
+    fetch("data/products.json")
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((err) => console.error("Lỗi khi tải JSON:", err));
@@ -263,6 +260,28 @@ export default function App() {
     setSuggestions(matched);
     setShowPopper(matched.length > 0);
   }, [query, allProducts]);
+
+  // --- CHECKOUT DIALOG ---
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [checkoutData, setCheckoutData] = useState(null);
+
+  const handleOpenCheckout = ({ items, quantities, subtotal }) => {
+    setCheckoutData({ items, quantities, subtotal });
+    setCheckoutOpen(true);
+  };
+
+  const handleCheckoutSuccess = (order) => {
+    console.log("Đơn hàng mới:", order);
+
+    // reset giỏ hàng
+    setCartItems([]);
+    setQuantities({});
+
+    setCheckoutOpen(false);
+
+    setSnackbarMsg("Thanh toán thành công!");
+    setSnackbarOpen(true);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -589,7 +608,7 @@ export default function App() {
                     flex: 1,
                     backgroundColor: "white",
                     borderRadius: 2,
-                    pl: 1
+                    pl: 1,
                   }}
                 />
                 <IconButton onClick={() => setOpenSearch(false)}>
@@ -607,6 +626,11 @@ export default function App() {
           onRemove={removeItem}
           open={open}
           handleClose={handleClose}
+          onCheckout={(payload) => {
+            // payload sẽ gồm: { items, quantities, subtotal }
+            handleOpenCheckout(payload);
+            setOpen(false); // đóng giỏ hàng
+          }}
         />
       </div>
 
@@ -654,6 +678,15 @@ export default function App() {
           }}
         />
       )}
+
+      <CheckoutDialog
+        open={checkoutOpen}
+        onClose={() => setCheckoutOpen(false)}
+        items={checkoutData?.items ?? []}
+        quantities={checkoutData?.quantities ?? {}}
+        subtotal={checkoutData?.subtotal ?? 0}
+        onSuccess={handleCheckoutSuccess}
+      />
     </ThemeProvider>
   );
 }
