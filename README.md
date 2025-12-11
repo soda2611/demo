@@ -110,7 +110,6 @@ greenfarm/
 ├── app/
 │   ├── layout.js
 │   ├── page.js
-│   ├── globals.css
 │   ├── components/
 │   │   ├── ProductCard.js
 │   │   ├── ProductDialog.js
@@ -124,6 +123,9 @@ greenfarm/
 │       ├── ProductSection.js
 │       ├── BlogSection.js
 │       └── ContactSection.js
+│
+├── styles/
+│   └── globals.css
 │
 ├── public/
 │   ├── images/
