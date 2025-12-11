@@ -32,7 +32,7 @@ import CallIcon from "@mui/icons-material/Call";
 import ProductPage from "./features/ProductSection";
 import HomePage from "./features/HomeSection";
 import ContactPage from "./features/ContactSection";
-import Footer from "./components/Footer";
+import Footer from "./features/FooterSection";
 import Blog from "./features/BlogSection";
 import CartDialog from "./components/CartDialog";
 import SearchPopper from "./components/SearchPopper";

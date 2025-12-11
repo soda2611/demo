@@ -1,11 +1,11 @@
-// app/components/Footer.js
+// app/features/FooterSection.js
 import React from "react";
 import { Typography, Box, Link, Grid } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
-export default function Footer() {
+export default function FooterSection() {
   return (
     <Box
       component="footer"

@@ -30,7 +30,7 @@ export default function HomePage({ products, onAddToCart }) {
         }}
       >
         <img
-          src="images/branding/banner.png"
+          src="images/branding/banner.jpg"
           alt="Banner"
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
@@ -93,18 +93,18 @@ export default function HomePage({ products, onAddToCart }) {
         }}
       >
         {Object.entries(products).map(([category, items]) => (
-          <>
+          <React.Fragment key={category}>
             {Object.entries(items).map(([name, item]) =>
-              category === "Trái cây" && item["sale"] != item["price"] ? (
+              100 - (item.sale / item.price) * 100 > 80 ? (
                 <ProductCard
-                  key={name}
+                  key={`${category}-${name}`} // cho chắc ăn luôn
                   name={name}
-                  item={{ ...item, name, id: `${category}__${name}` }} // ID ổn định
-                  onAddToCart={(product, qty) => onAddToCart?.(product, qty)}
+                  item={{ ...item, name, id: `${category}__${name}` }}
+                  onAddToCart={onAddToCart}
                 />
               ) : null
             )}
-          </>
+          </React.Fragment>
         ))}
       </Box>
 
