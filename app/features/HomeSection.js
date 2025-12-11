@@ -118,46 +118,6 @@ export default function HomePage({ products, onAddToCart }) {
                 </Button>
               </Stack>
             </Grid>
-
-            {/* Quick stats card */}
-            <Grid
-              item
-              xs={12}
-              md={5}
-              sx={{
-                display: "flex",
-                justifyContent: { xs: "flex-start", md: "flex-end" },
-                mt: { xs: 3, md: 0 },
-              }}
-            >
-              <Box
-                sx={{
-                  backgroundColor: "rgba(255,255,255,0.92)",
-                  color: "text.primary",
-                  borderRadius: 4,
-                  px: 3,
-                  py: 2.5,
-                  minWidth: 260,
-                  boxShadow: "0 12px 35px rgba(0,0,0,0.35)",
-                }}
-              >
-                <Typography
-                  variant="subtitle2"
-                  sx={{ fontWeight: 700, mb: 1, color: "primary.main" }}
-                >
-                  GreenFarm hôm nay
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 1 }}>
-                  • 20+ nông trại đối tác
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 1 }}>
-                  • 100% nông sản có nguồn gốc rõ ràng
-                </Typography>
-                <Typography variant="body2">
-                  • Giao hàng trong ngày tại TP.HCM
-                </Typography>
-              </Box>
-            </Grid>
           </Grid>
         </Box>
       </Box>
