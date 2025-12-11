@@ -36,12 +36,9 @@ import Blog from "./features/BlogSection";
 import CartDialog from "./components/CartDialog";
 import SearchPopper from "./components/SearchPopper";
 import ProductDialog from "./components/ProductDialog";
-<<<<<<< HEAD
 import CheckoutDialog from "./components/CheckoutDialog";
-=======
 import { useIsMobile } from "./hooks/isMobile";
 import { useCustomTheme } from "./hooks/theme";
->>>>>>> 3b3d1db (WIP: local changes)
 
 export default function App() {
   const theme = useCustomTheme();
