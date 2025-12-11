@@ -15,7 +15,7 @@ export default function AddressForm({ value = {}, onChange }) {
   const [wards, setWards] = useState([]);
 
   useEffect(() => {
-    fetch("/data/locations.json")
+    fetch("data/locations.json")
       .then((res) => res.json())
       .then((data) => setLocations(data));
   }, []);
