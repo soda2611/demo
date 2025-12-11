@@ -104,7 +104,7 @@ Dự án được xây dựng theo yêu cầu báo cáo Thiết kế Web  và h�
 
 ## 📁 **4. Cấu trúc thư mục**
 
-
+```
 greenfarm/
 │
 ├── app/
@@ -204,6 +204,7 @@ npm run deploy
 ## 🧑‍💻 **9. Tác giả & Liên hệ**
 
 Dự án được thực hiện phục vụ học phần **Thiết kế Web – HCMUE**
+
 Mọi thông tin chi tiết vui lòng liên hệ tại trang Contact của website.
 
 
