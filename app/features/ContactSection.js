@@ -4,14 +4,11 @@ import {
   Box,
   Button,
   Grid,
-  useMediaQuery,
   Link,
 } from "@mui/material";
 import { useIsMobile } from "../hooks/isMobile";
-import { useCustomTheme } from "../hooks/theme";
 
 export default function ContactPage() {
-  const theme = useCustomTheme();
   const isMobile = useIsMobile();
 
   return (

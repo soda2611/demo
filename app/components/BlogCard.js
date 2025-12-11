@@ -1,6 +1,6 @@
 // app/components/ui/BlogCard.js
 import React from "react";
-import { Box, Typography, ButtonBase } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CommentIcon from "@mui/icons-material/Comment";
 

@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { createTheme } from "@mui/material/styles";
 import {
   Box,
   DialogContent,
   Dialog,
   Typography,
-  useMediaQuery,
   IconButton,
 } from "@mui/material";
 import NumberSpinner from "./NumberSpinner";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useIsMobile } from "../hooks/isMobile";
 
 export default function ProductDialog({
   name,
@@ -18,20 +17,7 @@ export default function ProductDialog({
   handleClose,
   onAddToCart,
 }) {
-  const theme = createTheme({
-    palette: {
-      mode: "light",
-      primary: { main: "#1faa54ff", light: "#37be3cff" },
-      secondary: { main: "#ebff38ff" },
-      text: { primary: "#000000" },
-    },
-    typography: {
-      fontFamily: "Roboto, Arial, sans-serif",
-      h4: { fontWeight: 700 },
-    },
-    spacing: 8,
-  });
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useIsMobile();
 
   // ✅ Controlled số lượng
   const [qty, setQty] = useState(1);

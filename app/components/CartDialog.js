@@ -1,6 +1,5 @@
 //app/components/CartDialog.js
 import React, { useMemo, useState, useEffect } from "react";
-import { createTheme } from "@mui/material/styles";
 import {
   Box,
   DialogContent,
@@ -16,6 +15,7 @@ import NumberSpinner from "./NumberSpinner";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useIsMobile } from "../hooks/isMobile";
 
 export default function CartDialog({
   open,
@@ -27,25 +27,7 @@ export default function CartDialog({
   onRemove,
   onCheckout,
 }) {
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: "light",
-          primary: { main: "#1faa54ff", light: "#37be3cff" },
-          secondary: { main: "#ebff38ff" },
-          text: { primary: "#000000" },
-        },
-        typography: {
-          fontFamily: "Coiny, Roboto, Arial, sans-serif",
-          h4: { fontWeight: 700 },
-        },
-        spacing: 8,
-      }),
-    []
-  );
-
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (!setQuantities) return;

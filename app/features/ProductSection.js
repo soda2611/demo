@@ -16,7 +16,6 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import ProductCard from "../components/ProductCard";
 import { useIsMobile } from "../hooks/isMobile";
-import { useCustomTheme } from "../hooks/theme";
 
 // Helper: chuyển object {category: {name: item}} -> mảng dễ lọc
 const flattenProducts = (productsObj) => {
@@ -34,8 +33,6 @@ const formatVND = (v) =>
   (v ?? 0).toLocaleString("vi-VN", { maximumFractionDigits: 0 });
 
 export default function ProductPage({ products = {}, banners, onAddToCart }) {
-  const theme = useCustomTheme();
-
   const isMobile = useIsMobile();
 
   // ---- Trạng thái UI bộ lọc ----
