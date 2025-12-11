@@ -1,7 +1,11 @@
 # 🌿 **GreenFarm – Website Nông Sản Sạch & Đặc Sản Địa Phương**
 
-Website giới thiệu & bán nông sản sạch, thân thiện môi trường. Dự án được xây dựng theo kiến trúc hiện đại, tối ưu giao diện – tốc độ – trải nghiệm người dùng.
+![Project Status](https://img.shields.io/badge/Status-Completed-success)
+![Next.js](https://img.shields.io/badge/Next.js-16.0-black?logo=next.js)
+![React](https://img.shields.io/badge/React-19.0-blue?logo=react)
+![MUI](https://img.shields.io/badge/MUI-v7-007FFF?logo=mui)
 
+Website giới thiệu & bán nông sản sạch, thân thiện môi trường. Dự án được xây dựng theo kiến trúc hiện đại, tối ưu giao diện – tốc độ – trải nghiệm người dùng.
 
 
 ## 🚀 **1. Giới thiệu**
