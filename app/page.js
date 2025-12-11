@@ -1,6 +1,6 @@
 "use client";
 
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import React, { useState, useEffect, useRef } from "react";
 import {
@@ -19,7 +19,6 @@ import {
   Snackbar,
   Alert,
   Badge,
-  useMediaQuery,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -37,29 +36,15 @@ import Blog from "./features/BlogSection";
 import CartDialog from "./components/CartDialog";
 import SearchPopper from "./components/SearchPopper";
 import ProductDialog from "./components/ProductDialog";
+<<<<<<< HEAD
 import CheckoutDialog from "./components/CheckoutDialog";
+=======
+import { useIsMobile } from "./hooks/isMobile";
+import { useCustomTheme } from "./hooks/theme";
+>>>>>>> 3b3d1db (WIP: local changes)
 
 export default function App() {
-  const theme = createTheme({
-    palette: {
-      mode: "light",
-      primary: {
-        main: "#1faa54ff",
-        light: "#37be3cff",
-      },
-      secondary: {
-        main: "#ebff38ff",
-      },
-      text: {
-        primary: "#000000",
-      },
-    },
-    typography: {
-      fontFamily: "Coiny, Roboto, Arial, sans-serif",
-      h4: { fontWeight: 700 },
-    },
-    spacing: 8,
-  });
+  const theme = useCustomTheme();
   const [tab, setTab] = useState(0);
 
   const handleTabChange = (event, newValue) => {
@@ -70,7 +55,8 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [tab]);
 
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useIsMobile();
+
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const toggleDrawer = (open) => () => {

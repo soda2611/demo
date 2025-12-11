@@ -1,5 +1,4 @@
 import React from "react";
-import { createTheme } from "@mui/material/styles";
 import {
   Typography,
   Box,
@@ -8,29 +7,12 @@ import {
   useMediaQuery,
   Link,
 } from "@mui/material";
+import { useIsMobile } from "../hooks/isMobile";
+import { useCustomTheme } from "../hooks/theme";
 
 export default function ContactPage() {
-  const theme = createTheme({
-    palette: {
-      mode: "light",
-      primary: {
-        main: "#1faa54ff",
-        light: "#37be3cff",
-      },
-      secondary: {
-        main: "#ebff38ff",
-      },
-      text: {
-        primary: "#000000",
-      },
-    },
-    typography: {
-      fontFamily: "Coiny, Roboto, Arial, sans-serif",
-      h4: { fontWeight: 700 },
-    },
-    spacing: 8,
-  });
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const theme = useCustomTheme();
+  const isMobile = useIsMobile();
 
   return (
     <div

@@ -12,11 +12,11 @@ import {
   MenuItem,
   Tabs,
   Tab,
-  useMediaQuery,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { createTheme } from "@mui/material/styles";
 import ProductCard from "../components/ProductCard";
+import { useIsMobile } from "../hooks/isMobile";
+import { useCustomTheme } from "../hooks/theme";
 
 // Helper: chuyển object {category: {name: item}} -> mảng dễ lọc
 const flattenProducts = (productsObj) => {
@@ -34,25 +34,9 @@ const formatVND = (v) =>
   (v ?? 0).toLocaleString("vi-VN", { maximumFractionDigits: 0 });
 
 export default function ProductPage({ products = {}, banners, onAddToCart }) {
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: "light",
-          primary: { main: "#1faa54ff", light: "#37be3cff" },
-          secondary: { main: "#ebff38ff" },
-          text: { primary: "#000000" },
-        },
-        typography: {
-          fontFamily: "Coiny, Roboto, Arial, sans-serif",
-          h4: { fontWeight: 700 },
-        },
-        spacing: 8,
-      }),
-    []
-  );
+  const theme = useCustomTheme();
 
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useIsMobile();
 
   // ---- Trạng thái UI bộ lọc ----
   const [tab, setTab] = useState(0); // Tab "Tất cả" + từng danh mục

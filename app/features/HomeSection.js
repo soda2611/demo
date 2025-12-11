@@ -9,12 +9,15 @@ import ProductCard from "../components/ProductCard";
 import EmojiFoodBeverageIcon from "@mui/icons-material/EmojiFoodBeverage";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import { useIsMobile } from "../hooks/isMobile";
 
 export default function HomePage({ products, onAddToCart }) {
   const categoryNames = React.useMemo(
     () => (products ? Object.keys(products) : []),
     [products]
   );
+
+  const isMobile = useIsMobile();
 
   return (
     <div
@@ -34,7 +37,7 @@ export default function HomePage({ products, onAddToCart }) {
         sx={{
           position: "relative",
           width: "100%",
-          height: { xs: 260, md: 320 },
+          height: { xs: 350, md: 320 },
           borderRadius: 5,
           overflow: "hidden",
           display: "flex",
@@ -64,7 +67,7 @@ export default function HomePage({ products, onAddToCart }) {
             {/* Text + CTA */}
             <Grid item xs={12} md={7}>
               <Typography
-                variant="h4"
+                variant={isMobile ? "h5" : "h4"}
                 sx={{
                   fontWeight: "bold",
                   mb: 1,
@@ -74,7 +77,7 @@ export default function HomePage({ products, onAddToCart }) {
                 Chào mừng đến với GreenFarm! 🥕
               </Typography>
               <Typography
-                variant="body1"
+                variant={isMobile ? "body2" : "body1"}
                 sx={{
                   mb: 2.5,
                   maxWidth: 500,
@@ -86,7 +89,7 @@ export default function HomePage({ products, onAddToCart }) {
                 nhanh tới tận bếp nhà bạn.
               </Typography>
 
-              <Stack direction="row" spacing={2} flexWrap="wrap">
+              <Stack direction={isMobile ? "column" : "row"} spacing={2} flexWrap="wrap" sx={{width: isMobile ? "200px" : undefined}}>
                 <Button
                   variant="contained"
                   color="secondary"
