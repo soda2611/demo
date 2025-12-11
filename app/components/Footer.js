@@ -1,142 +1,157 @@
+// app/components/Footer.js
 import React from "react";
-import { createTheme } from "@mui/material/styles";
-import { Typography, Box, Link, Grid, useMediaQuery } from "@mui/material";
+import { Typography, Box, Link, Grid } from "@mui/material";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 export default function Footer() {
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: "light",
-          primary: { main: "#1faa54ff", light: "#37be3cff" },
-          secondary: { main: "#ebff38ff" },
-          text: { primary: "#000000" },
-        },
-        typography: {
-          fontFamily: "Coiny, Roboto, Arial, sans-serif",
-          h4: { fontWeight: 700 },
-        },
-        spacing: 8,
-      }),
-    []
-  );
-
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
   return (
     <Box
+      component="footer"
       sx={{
         width: "100%",
-        height: 300,
+        mt: 6,
         backgroundColor: "#1faa54ff",
         color: "white",
-        objectFit: "cover",
+        pt: 4,
+        pb: 0,
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
       }}
     >
+      {/* Grid 3 cột, tự xuống dòng trên mobile */}
       <Grid
         container
-        spacing={{ md: 10 }}
-        columns={{ md: 3 }}
-        sx={{
-          width: !isMobile ? "70%" : "100%",
-          justifyContent: "center",
-          borderRadius: 5,
-          padding: 5,
-        }}
+        spacing={{ xs: 4, md: 8 }}
+        sx={{ maxWidth: 1200, mx: "auto", px: 2, pb: 4 }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "self-start",
-            flexGrow: 1,
-          }}
-        >
-          <div
-            style={{
-              marginBottom: 20,
-              display: "flex",
-              padding: 2,
-              gap: 10,
-              alignItems: "center",
-            }}
-          >
-            <img
+        {/* Cột 1: Logo + liên hệ + social */}
+        <Grid item xs={12} md={4}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
+            <Box
+              component="img"
               src="images/branding/logo.png"
-              alt="Logo"
-              style={{ height: 40 }}
+              alt="GreenFarm"
+              sx={{ height: 40 }}
             />
-            <Typography variant="h5" fontWeight="bold" component="div">
+            <Typography variant="h6" fontWeight="bold">
               GreenFarm
             </Typography>
-          </div>
-          <Typography variant="body1">
-            Hotline: 0123456789
+          </Box>
+
+          <Typography variant="body2">
+            Hotline: 0123 456 789
             <br />
             Email: example@mail.host
             <br />
-            Địa chỉ: 123 đường ABC, phường XYZ, TPHCM
+            Địa chỉ: 123 đường ABC, phường XYZ, TP.HCM
           </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              gap: 2,
-              alignItems: "center",
-              mt: 2,
-            }}
-          >
-            <Link>
-              <Box
-                component="img"
-                src="https://static.xx.fbcdn.net/rsrc.php/y1/r/ay1hV6OlegS.ico"
-                sx={{
-                  width: 36,
-                  border: "3px solid #0866FF",
-                  borderRadius: "25px",
-                }}
-              />
+
+          {/* Social icons có viền */}
+          <Box sx={{ display: "flex", gap: 2, alignItems: "center", mt: 2 }}>
+            {/* Facebook */}
+            <Box
+              sx={{
+                width: 36,
+                height: 36,
+                border: "3px solid #0866FF", // VIỀN XANH DƯƠNG
+                borderRadius: "50%",
+                bgcolor: "white",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <FacebookIcon sx={{ color: "#0866FF", fontSize: 20 }} />
+            </Box>
+
+            {/* Instagram */}
+            <Box
+              sx={{
+                width: 36,
+                height: 36,
+                border: "3px solid #fa00a4", // VIỀN HỒNG
+                borderRadius: "50%",
+                bgcolor: "white",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <InstagramIcon sx={{ color: "#fa00a4", fontSize: 20 }} />
+            </Box>
+
+            {/* GitHub */}
+            <Box
+              sx={{
+                width: 36,
+                height: 36,
+                border: "2px solid #24292e", // VIỀN ĐEN ĐẬM
+                borderRadius: "50%",
+                bgcolor: "white",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <GitHubIcon sx={{ color: "#24292e", fontSize: 20 }} />
+            </Box>
+          </Box>
+        </Grid>
+
+        {/* Cột 2: Liên kết nhanh */}
+        <Grid item xs={12} md={4}>
+          <Typography variant="h6" fontWeight="bold" mb={2}>
+            Liên kết nhanh
+          </Typography>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+            <Link href="#" color="inherit" underline="hover">
+              Trang chủ
             </Link>
-            <Link>
-              <Box
-                component="img"
-                src="https://static.cdninstagram.com/rsrc.php/v4/yI/r/VsNE-OHk_8a.png"
-                sx={{
-                  border: "3px solid #fa00a4",
-                  borderRadius: "10px",
-                }}
-              />
+            <Link href="#" color="inherit" underline="hover">
+              Sản phẩm
             </Link>
-            <Link>
-              <Box
-                component="img"
-                src="https://www.tiktok.com/favicon.ico"
-                sx={{
-                  border: "2px solid #24292e",
-                  borderRadius: "25px",
-                  bgcolor: "white",
-                }}
-              />
+            <Link href="#" color="inherit" underline="hover">
+              Tin tức
+            </Link>
+            <Link href="#" color="inherit" underline="hover">
+              Liên hệ
             </Link>
           </Box>
-        </div>
+        </Grid>
+
+        {/* Cột 3: Chính sách / thông tin thêm */}
+        <Grid item xs={12} md={4}>
+          <Typography variant="h6" fontWeight="bold" mb={2}>
+            Chính sách & hỗ trợ
+          </Typography>
+          <Typography variant="body2">
+            • Giao hàng nội thành trong ngày.
+          </Typography>
+          <Typography variant="body2">
+            • Hỗ trợ đổi trả trong 24 giờ.
+          </Typography>
+          <Typography variant="body2">
+            • Nông sản sạch, nguồn gốc rõ ràng.
+          </Typography>
+        </Grid>
       </Grid>
-      <div
-        style={{
-          position: "relative",
-          bottom: 0,
+
+      {/* Dòng copyright dưới cùng */}
+      <Box
+        sx={{
           width: "100%",
-          height: 25,
+          py: 1,
           backgroundColor: "#0b830fff",
           color: "white",
           textAlign: "center",
           fontSize: "small",
+          mt: "auto",
         }}
       >
         ©Copyright 2025 GreenFarm
-      </div>
+      </Box>
     </Box>
   );
 }
