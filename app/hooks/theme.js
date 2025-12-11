@@ -1,5 +1,6 @@
 "use client";
 import { createTheme } from "@mui/material/styles";
+import { useMemo } from "react";
 
 export function useCustomTheme() {
   const theme = useMemo(

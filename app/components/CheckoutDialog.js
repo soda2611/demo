@@ -343,11 +343,10 @@ export default function CheckoutDialog({
             </Typography>
             <Box sx={{ display: "flex", gap: 1, mb: 2 }}>
               <TextField
-                fullWidth
-                size="small"
                 placeholder="Nhập mã (GREEN10)"
                 value={form.coupon}
                 onChange={handleChange("coupon")}
+                sx={{flexGrow: 1  }}
               />
               <Button variant="outlined" onClick={handleApplyCoupon} size="small">
                 Áp dụng
