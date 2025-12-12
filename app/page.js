@@ -306,7 +306,11 @@ export default function App() {
                     gap: 10,
                   }}
                 >
-                  <HomePage products={products} onAddToCart={addToCart} tab={setTab} />
+                  <HomePage
+                    products={products}
+                    onAddToCart={addToCart}
+                    tab={setTab}
+                  />
                 </div>
               )}
               {tab === 1 && (
@@ -467,14 +471,30 @@ export default function App() {
                   </>
                 ) : null}
 
-                <img
-                  src="images/branding/logo.png"
-                  alt="Logo"
-                  style={{ height: 40 }}
-                />
-                <Typography variant="h5" fontWeight="bold" component="div">
-                  GreenFarm
-                </Typography>
+                <IconButton
+                  onClick={() => setTab(0)}
+                  sx={{ p: 0, borderRadius: 2, gap: 2 }}
+                  aria-label="Về trang chủ"
+                >
+                  <img
+                    src="images/branding/logo.png"
+                    alt="Logo"
+                    style={{ height: 40 }}
+                  />
+                  <Typography
+                    variant="h5"
+                    fontWeight="bold"
+                    component="div"
+                    sx={{
+                      color: "white",
+                      "@media (max-width:500px)": {
+                        display: "none",
+                      },
+                    }}
+                  >
+                    GreenFarm
+                  </Typography>
+                </IconButton>
 
                 {!isMobile ? (
                   <Tabs
