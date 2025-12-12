@@ -57,7 +57,7 @@ export default function FooterSection({ tab }) {
             {/* Facebook */}
             <Box
               component="a"
-              href="https://facebook.com"
+              href="https://facebook.com
               sx={{
                 width: 36,
                 height: 36,
