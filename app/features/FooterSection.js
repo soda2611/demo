@@ -56,6 +56,8 @@ export default function FooterSection({ tab }) {
           <Box sx={{ display: "flex", gap: 2, alignItems: "center", mt: 2 }}>
             {/* Facebook */}
             <Box
+              component="a"
+              href="https://facebook.com"
               sx={{
                 width: 36,
                 height: 36,
@@ -72,6 +74,8 @@ export default function FooterSection({ tab }) {
 
             {/* Instagram */}
             <Box
+              component="a"
+              href="https://instagram.com"
               sx={{
                 width: 36,
                 height: 36,
@@ -88,6 +92,8 @@ export default function FooterSection({ tab }) {
 
             {/* GitHub */}
             <Box
+              component="a"
+              href="https://github.com/soda2611/demo"
               sx={{
                 width: 36,
                 height: 36,
@@ -110,16 +116,36 @@ export default function FooterSection({ tab }) {
             Liên kết nhanh
           </Typography>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-            <Link color="inherit" underline="hover" onClick={() => go(0)} sx={{cursor: "pointer"}}>
+            <Link
+              color="inherit"
+              underline="hover"
+              onClick={() => go(0)}
+              sx={{ cursor: "pointer" }}
+            >
               Trang chủ
             </Link>
-            <Link color="inherit" underline="hover" onClick={() => go(1)} sx={{cursor: "pointer"}}>
+            <Link
+              color="inherit"
+              underline="hover"
+              onClick={() => go(1)}
+              sx={{ cursor: "pointer" }}
+            >
               Sản phẩm
             </Link>
-            <Link color="inherit" underline="hover" onClick={() => go(2)} sx={{cursor: "pointer"}}>
+            <Link
+              color="inherit"
+              underline="hover"
+              onClick={() => go(2)}
+              sx={{ cursor: "pointer" }}
+            >
               Tin tức
             </Link>
-            <Link color="inherit" underline="hover" onClick={() => go(3)} sx={{cursor: "pointer"}}>
+            <Link
+              color="inherit"
+              underline="hover"
+              onClick={() => go(3)}
+              sx={{ cursor: "pointer" }}
+            >
               Liên hệ
             </Link>
           </Box>

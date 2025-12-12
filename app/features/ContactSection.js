@@ -163,6 +163,8 @@ export default function ContactPage() {
               }}
             >
               <Box
+                component="a"
+                href="https://facebook.com"
                 sx={{
                   width: 36,
                   height: 36,
@@ -177,6 +179,8 @@ export default function ContactPage() {
                 <FacebookIcon sx={{ color: "#24292e", fontSize: 20 }} />
               </Box>
               <Box
+                component="a"
+                href="https://instagram.com"
                 sx={{
                   width: 36,
                   height: 36,
@@ -191,6 +195,8 @@ export default function ContactPage() {
                 <InstagramIcon sx={{ color: "#24292e", fontSize: 20 }} />
               </Box>
               <Box
+                component="a"
+                href="https://github.com/soda2611/demo"
                 sx={{
                   width: 36,
                   height: 36,
