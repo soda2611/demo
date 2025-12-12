@@ -1,5 +1,5 @@
 // product.js
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect, useRef } from "react";
 import {
   Box,
   Typography,
@@ -12,8 +12,11 @@ import {
   MenuItem,
   Tabs,
   Tab,
+  IconButton,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import ProductCard from "../components/ProductCard";
 import { useIsMobile } from "../hooks/isMobile";
 
@@ -44,6 +47,7 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
 
   // Danh sách danh mục từ products
   const categories = useMemo(() => Object.keys(products || {}), [products]);
+  const totalTabs = (categories?.length ?? 0) + 1;
 
   // Dữ liệu phẳng để lọc
   const flat = useMemo(() => flattenProducts(products), [products]);
@@ -98,7 +102,6 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
     });
 
     // 5) Sắp xếp
-    const comp = (a, b) => 0;
     switch (sortBy) {
       case "priceAsc":
         list.sort(
@@ -139,7 +142,81 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
     return list;
   }, [flat, tab, categories, keyword, onlySale, priceRange, sortBy]);
 
-  const shouldCenter = useMemo(() => categories.length <= 5, [categories]);
+  // --- SWIPE CONFIG & REFS ---
+  const SWIPE_THRESHOLD = 50; // ngưỡng px để tính là vuốt
+  const MIN_TAB = 0;
+  const MAX_TAB = categories.length; // tab = 0..categories.length (0 = Tất cả)
+
+  const touchStartX = useRef(null);
+  const touchStartY = useRef(null);
+  const isTouching = useRef(false);
+
+  const mouseStartX = useRef(null);
+  const isDragging = useRef(false);
+
+  // Mobile: touch handlers
+  const handleTouchStart = (e) => {
+    const t = e.touches[0];
+    touchStartX.current = t.clientX;
+    touchStartY.current = t.clientY;
+    isTouching.current = true;
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isTouching.current) return;
+    const t = e.touches[0];
+    const dx = t.clientX - (touchStartX.current ?? t.clientX);
+    const dy = t.clientY - (touchStartY.current ?? t.clientY);
+    // Nếu chủ yếu vuốt ngang, hạn chế cuộn dọc mặc định cho mượt
+    if (Math.abs(dx) > Math.abs(dy)) {
+      e.preventDefault();
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    if (!isTouching.current) return;
+    const ct = e.changedTouches?.[0];
+    const dx = (ct?.clientX ?? 0) - (touchStartX.current ?? 0);
+    const dy = (ct?.clientY ?? 0) - (touchStartY.current ?? 0);
+
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SWIPE_THRESHOLD) {
+      if (dx < 0 && tab < MAX_TAB) {
+        // Vuốt sang trái -> Next
+        setTab((t) => Math.min(MAX_TAB, t + 1));
+      } else if (dx > 0 && tab > MIN_TAB) {
+        // Vuốt sang phải -> Prev
+        setTab((t) => Math.max(MIN_TAB, t - 1));
+      }
+    }
+    isTouching.current = false;
+    touchStartX.current = null;
+    touchStartY.current = null;
+  };
+
+  // Desktop: mouse drag handlers
+  const handleMouseDown = (e) => {
+    isDragging.current = true;
+    mouseStartX.current = e.clientX;
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging.current) return;
+    // Có thể thêm hiệu ứng kéo nếu muốn (parallax, translateX...), để trống cho nhẹ
+  };
+
+  const handleMouseUp = (e) => {
+    if (!isDragging.current) return;
+    const dx = e.clientX - (mouseStartX.current ?? e.clientX);
+    if (Math.abs(dx) > SWIPE_THRESHOLD) {
+      if (dx < 0 && tab < MAX_TAB) {
+        setTab((t) => Math.min(MAX_TAB, t + 1));
+      } else if (dx > 0 && tab > MIN_TAB) {
+        setTab((t) => Math.max(MIN_TAB, t - 1));
+      }
+    }
+    isDragging.current = false;
+    mouseStartX.current = null;
+  };
 
   // ---- Render ----
   return (
@@ -152,73 +229,141 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
         alignItems: "center",
       }}
     >
-      <Typography variant="h4" sx={{ mb: 2 }}>
-        Sản phẩm
-      </Typography>
+      
 
-      {/* Tabs danh mục */}
-      <Tabs
-        value={tab}
-        onChange={(_, newValue) => setTab(newValue)}
-        variant="scrollable"
-        scrollButtons
-        allowScrollButtonsMobile
-        sx={{ mb: 2, width: isMobile ? "100%" : undefined }}
+      <Box
+        key={tab > 0 ? categories[tab - 1] : "Sản phẩm"}
+        sx={{
+          backgroundColor: "primary.main",
+          height: !isMobile ? 200 : 100,
+          width: !isMobile ? "70%" : "100%",
+          overflow: "hidden",
+          borderRadius: 5,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          mb: 5,
+          position: "relative",
+          userSelect: "none",
+          touchAction: "pan-y",
+          cursor: "grab",
+        }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
       >
-        <Tab label="Tất cả" />
-        {categories.map((c) => (
-          <Tab key={c} label={c} />
-        ))}
-      </Tabs>
+        <img
+          src={
+            tab > 0
+              ? banners[`${categories[tab - 1]}`]
+              : "images/branding/banner.jpg"
+          }
+          alt="Banner"
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          draggable={false}
+        />
 
-      {tab > 0 && banners?.[categories[tab - 1]] ? (
-        <>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "absolute",
+            color: "white",
+            textAlign: "center",
+            padding: 0,
+            borderRadius: 5,
+            height: !isMobile ? 200 : 100,
+            width: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",  
+          }}
+        >
+          <IconButton
+            disabled={tab === 0}
+            sx={{ color: "white", height: "100%", borderRadius: 0 }}
+            onClick={() => setTab((t) => Math.max(0, t - 1))}
+            aria-label="Danh mục trước"
+          >
+            <KeyboardArrowLeftIcon />
+          </IconButton>
+
+          <Typography
+            variant="h4"
+            component="div"
+            sx={{ fontWeight: "bold", mb: 1, color: "white", flexGrow: 1 }}
+          >
+            {tab > 0 ? categories[tab - 1] : "Sản phẩm"}
+          </Typography>
+
+          <IconButton
+            disabled={tab === totalTabs - 1}
+            sx={{ color: "white", height: "100%", borderRadius: 0 }}
+            onClick={() => setTab((t) => Math.min(totalTabs - 1, t + 1))}
+            aria-label="Danh mục tiếp theo"
+          >
+            <KeyboardArrowRightIcon />
+          </IconButton>
+
+          {/* Indicator dạng chấm */}
           <Box
-            key={tab > 0 ? categories[tab - 1] : "Sản phẩm"}
             sx={{
-              backgroundColor: "primary.main",
-              height: !isMobile ? 200 : 100,
-              width: !isMobile ? "70%" : "100%",
-              overflow: "hidden",
-              borderRadius: 5,
+              position: "absolute",
+              bottom: !isMobile ? 8 : 6,
+              left: "50%",
+              transform: "translateX(-50%)",
               display: "flex",
+              gap: !isMobile ? 1 : 0.75,
+              px: 1,
+              py: 0.5,
+              borderRadius: 999,
+              bgcolor: "rgba(0,0,0,0.3)",
               alignItems: "center",
               justifyContent: "center",
-              mb: 5,
+              "@media (max-width:240px)": { display: "none" },
             }}
           >
-            <img
-              src={banners[`${categories[tab - 1]}`]}
-              alt="Banner"
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            />
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                position: "absolute",
-                color: "white",
-                textAlign: "center",
-                padding: 2,
-                borderRadius: 5,
-                height: !isMobile ? 200 : 100,
-                width: !isMobile ? "56%" : "80%",
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
-              }}
-            >
-              <Typography
-                variant="h4"
-                component="div"
-                sx={{ fontWeight: "bold", marginBottom: 1, color: "white" }}
-              >
-                {categories[tab - 1]}
-              </Typography>
-            </Box>
+            {Array.from({ length: totalTabs }).map((_, i) => {
+              const isActive = i === tab;
+              return (
+                <Box
+                  key={`dot-${i}`}
+                  role="button"
+                  aria-label={
+                    i === 0
+                      ? "Chuyển tới tab Tất cả"
+                      : `Chuyển tới tab ${categories[i - 1]}`
+                  }
+                  tabIndex={0}
+                  onClick={() => setTab(i)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") setTab(i);
+                  }}
+                  sx={{
+                    width: isActive ? 12 : 8,
+                    height: isActive ? 12 : 8,
+                    borderRadius: "50%",
+                    bgcolor: isActive ? "white" : "rgba(255,255,255,0.5)",
+                    outline: "none",
+                    transition: "all 0.2s ease",
+                    cursor: "pointer",
+                    "&:hover": {
+                      bgcolor: isActive ? "white" : "rgba(255,255,255,0.75)",
+                      transform: isActive ? "scale(1.05)" : "scale(1.1)",
+                    },
+                    "&:focus-visible": {
+                      boxShadow: "0 0 0 2px rgba(255,255,255,0.8)",
+                    },
+                  }}
+                />
+              );
+            })}
           </Box>
-        </>
-      ) : null}
+        </Box>
+      </Box>
 
       {/* Khu vực bộ lọc */}
       <Box
