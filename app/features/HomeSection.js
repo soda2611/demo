@@ -11,13 +11,17 @@ import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { useIsMobile } from "../hooks/isMobile";
 
-export default function HomePage({ products, onAddToCart }) {
+export default function HomePage({ products, onAddToCart, tab }) {
   const categoryNames = React.useMemo(
     () => (products ? Object.keys(products) : []),
     [products]
   );
 
   const isMobile = useIsMobile();
+
+  const go = (index) => {
+    if (typeof tab === "function") tab(index);
+  };
 
   return (
     <div
@@ -89,25 +93,46 @@ export default function HomePage({ products, onAddToCart }) {
                 nhanh tới tận bếp nhà bạn.
               </Typography>
 
-              <Stack direction={isMobile ? "column" : "row"} spacing={2} flexWrap="wrap" sx={{width: isMobile ? "200px" : undefined}}>
+              <Stack
+                direction={isMobile ? "column" : "row"}
+                spacing={2}
+                flexWrap="wrap"
+                sx={{ width: isMobile ? "200px" : undefined }}
+              >
                 <Button
                   variant="contained"
                   color="secondary"
                   size="large"
                   endIcon={<ArrowForwardIosIcon />}
-                  href="#section-sale"
-                  sx={{
-                    borderRadius: 999,
-                    fontWeight: "bold",
-                    px: 3,
+                  href="#fruits-party"
+                  sx={{ borderRadius: 999, fontWeight: "bold", px: 3 }}
+                  onClick={(e) => {
+                    // Nếu giữ href để hiển thị URL hash, ta chặn hành vi cuộn mặc định
+                    e.preventDefault();
+
+                    // Nếu cần đổi sang tab Sản phẩm trước khi cuộn, gọi go(1) (tuỳ vào app của bạn)
+                    // go?.(1);
+
+                    // Đợi layout/tab render xong rồi cuộn
+                    setTimeout(() => {
+                      const el = document.getElementById("fruits-party");
+                      if (!el) return;
+                      const headerOffset = 100;
+                      const y =
+                        el.getBoundingClientRect().top +
+                        window.pageYOffset -
+                        headerOffset;
+                      window.scrollTo({ top: y, behavior: "smooth" });
+                    }, 50);
                   }}
                 >
                   Đặt ngay
                 </Button>
+
                 <Button
                   variant="outlined"
                   size="large"
-                  href="#section-discount"
+                  onClick={() => go(1)}
                   sx={{
                     borderRadius: 999,
                     borderColor: "rgba(255,255,255,0.7)",
@@ -235,7 +260,7 @@ export default function HomePage({ products, onAddToCart }) {
         {Object.entries(products).map(([category, items]) => (
           <React.Fragment key={category}>
             {Object.entries(items).map(([name, item]) =>
-              100 - (item.sale / item.price) * 100 > 80 ? (
+              item.sale != item.price && category === "Trái cây" ? (
                 <ProductCard
                   key={`${category}-${name}`} // cho chắc ăn luôn
                   name={name}

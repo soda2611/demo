@@ -306,7 +306,7 @@ export default function App() {
                     gap: 10,
                   }}
                 >
-                  <HomePage products={products} onAddToCart={addToCart} />
+                  <HomePage products={products} onAddToCart={addToCart} tab={setTab} />
                 </div>
               )}
               {tab === 1 && (
