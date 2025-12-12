@@ -253,7 +253,7 @@ export default function HomePage({ products, onAddToCart, tab }) {
         id="fruits-party"
         icon={<EmojiFoodBeverageIcon />}
         label="Bộ sưu tập trái cây"
-        title="Bữa tiêc trái cây"
+        title="Bữa tiệc trái cây"
         subtitle="Bùng nổ sắc màu trái cây theo mùa – tươi giòn, ngọt thanh cho mọi bữa ăn."
         gradient="linear-gradient(135deg, #ff9a3c, #ffd166)"
       >
