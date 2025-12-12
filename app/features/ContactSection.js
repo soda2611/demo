@@ -208,129 +208,87 @@ export default function ContactPage() {
           </div>
         </Grid>
       ) : (
-        <Grid
-          container
-          spacing={{ xs: 3, md: 3 }}
-          columns={{ xs: 2, sm: 4, md: 4 }}
-          sx={{ width: "100%" }}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "initial",
+            width: "100%",
+            gap: 25,
+            backgroundColor: "#f1f1f1",
+            padding: 20,
+            borderRadius: 10,
+          }}
         >
-          <div
+          <div style={{ display: "flex", gap: 25 }}>
+            <input
+              style={{
+                height: 50,
+                width: "100%",
+                borderRadius: 10,
+                outlineColor: "#1faa54ff",
+                border: "none",
+                fontFamily: "Coiny",
+                padding: 10,
+              }}
+              placeholder="Họ và tên"
+            />
+            <input
+              style={{
+                height: 50,
+                width: 135,
+                borderRadius: 10,
+                outlineColor: "#1faa54ff",
+                border: "none",
+                fontFamily: "Coiny",
+                padding: 10,
+                maxLength: 10,
+              }}
+              placeholder="SĐT"
+            />
+          </div>
+          <input
             style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "initial",
-              width: "100%",
-              gap: 25,
-              backgroundColor: "#f1f1f1",
-              padding: 20,
+              height: 50,
               borderRadius: 10,
+              outlineColor: "#1faa54ff",
+              border: "none",
+              fontFamily: "Coiny",
+              padding: 10,
             }}
-          >
-            <div style={{ display: "flex", gap: 25 }}>
-              <input
-                style={{
-                  height: 50,
-                  width: "100%",
-                  borderRadius: 10,
-                  outlineColor: "#1faa54ff",
-                  border: "none",
-                  fontFamily: "Coiny",
-                  padding: 10,
-                }}
-                placeholder="Họ và tên"
-              />
-              <input
-                style={{
-                  height: 50,
-                  width: 135,
-                  borderRadius: 10,
-                  outlineColor: "#1faa54ff",
-                  border: "none",
-                  fontFamily: "Coiny",
-                  padding: 10,
-                  maxLength: 10,
-                }}
-                placeholder="SĐT"
-              />
-            </div>
-            <input
-              style={{
-                height: 50,
-                borderRadius: 10,
-                outlineColor: "#1faa54ff",
-                border: "none",
-                fontFamily: "Coiny",
-                padding: 10,
-              }}
-              placeholder="Email"
-            />
-            <input
-              style={{
-                height: 50,
-                borderRadius: 10,
-                outlineColor: "#1faa54ff",
-                border: "none",
-                fontFamily: "Coiny",
-                padding: 10,
-              }}
-              placeholder="Chủ đề"
-            />
-            <textarea
-              style={{
-                height: 200,
-                borderRadius: 10,
-                outlineColor: "#1faa54ff",
-                border: "none",
-                fontFamily: "Coiny",
-                padding: 10,
-              }}
-              placeholder="Nội dung"
-            />
-            <div>
-              <Button
-                variant="contained"
-                sx={{ bgcolor: "primary.main", color: "white" }}
-              >
-                Gửi
-              </Button>
-            </div>
-          </div>
-          <div
+            placeholder="Email"
+          />
+          <input
             style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "self-start",
-              flexGrow: 1,
-              marginTop: 50,
+              height: 50,
+              borderRadius: 10,
+              outlineColor: "#1faa54ff",
+              border: "none",
+              fontFamily: "Coiny",
+              padding: 10,
             }}
-          >
-            <div
-              style={{
-                marginBottom: 20,
-                display: "flex",
-                padding: 2,
-                gap: 10,
-                alignItems: "center",
-              }}
+            placeholder="Chủ đề"
+          />
+          <textarea
+            style={{
+              height: 200,
+              borderRadius: 10,
+              outlineColor: "#1faa54ff",
+              border: "none",
+              fontFamily: "Coiny",
+              padding: 10,
+            }}
+            placeholder="Nội dung"
+          />
+          <div>
+            <Button
+              variant="contained"
+              sx={{ bgcolor: "primary.main", color: "white" }}
             >
-              <img
-                src="images/branding/logo.png"
-                alt="Logo"
-                style={{ height: 40 }}
-              />
-              <Typography variant="h5" fontWeight="bold" component="div">
-                GreenFarm
-              </Typography>
-            </div>
-            <Typography variant="body1">
-              Hotline: 0123456789
-              <br />
-              Email: example@mail.host
-              <br />
-              Địa chỉ: 123 đường ABC, phường XYZ, TPHCM
-            </Typography>
+              Gửi
+            </Button>
           </div>
-        </Grid>
+        </div>
       )}
     </div>
   );
