@@ -9,13 +9,18 @@ export default function Blog() {
   const [blogData, setBlogData] = useState([]);
 
   useEffect(() => {
-    fetch(
-      "data/blogs.json"
-    )
+    fetch("data/blogs.json")
       .then((res) => res.json())
       .then((data) => setBlogData(data))
       .catch((err) => console.error("Lỗi khi tải JSON:", err));
   }, []);
+
+  useEffect(() => {
+    if (selectedPost && typeof window !== "undefined") {
+      // Có thể dùng 'smooth' cho trải nghiệm mượt
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
 
   if (selectedPost) {
     return (
