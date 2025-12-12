@@ -337,38 +337,48 @@ export default function ContactPage() {
                 mt: 2,
               }}
             >
-              <Link>
-                <Box
-                  component="img"
-                  src="https://static.xx.fbcdn.net/rsrc.php/y1/r/ay1hV6OlegS.ico"
-                  sx={{
-                    width: 36,
-                    border: "3px solid #0866FF",
-                    borderRadius: "25px",
-                  }}
-                />
-              </Link>
-              <Link>
-                <Box
-                  component="img"
-                  src="https://static.cdninstagram.com/rsrc.php/v4/yI/r/VsNE-OHk_8a.png"
-                  sx={{
-                    border: "3px solid #fa00a4",
-                    borderRadius: "10px",
-                  }}
-                />
-              </Link>
-              <Link>
-                <Box
-                  component="img"
-                  src="https://www.tiktok.com/favicon.ico"
-                  sx={{
-                    border: "2px solid #24292e",
-                    borderRadius: "25px",
-                    bgcolor: "white",
-                  }}
-                />
-              </Link>
+              <Box
+                sx={{
+                  width: 36,
+                  height: 36,
+                  border: "2px solid #24292e", // VIỀN ĐEN ĐẬM
+                  borderRadius: "50%",
+                  bgcolor: "white",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <FacebookIcon sx={{ color: "#24292e", fontSize: 20 }} />
+              </Box>
+              <Box
+                sx={{
+                  width: 36,
+                  height: 36,
+                  border: "2px solid #24292e", // VIỀN ĐEN ĐẬM
+                  borderRadius: "50%",
+                  bgcolor: "white",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <InstagramIcon sx={{ color: "#24292e", fontSize: 20 }} />
+              </Box>
+              <Box
+                sx={{
+                  width: 36,
+                  height: 36,
+                  border: "2px solid #24292e", // VIỀN ĐEN ĐẬM
+                  borderRadius: "50%",
+                  bgcolor: "white",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <GitHubIcon sx={{ color: "#24292e", fontSize: 20 }} />
+              </Box>
             </Box>
           </div>
         </Grid>
