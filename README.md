@@ -1,219 +1,187 @@
-# 🌿 **GreenFarm – Website Nông Sản Sạch & Đặc Sản Địa Phương**
+# 🌱 GreenFarm – Website Bán Nông Sản Sạch & Đặc Sản Địa Phương
 
-![Project Status](https://img.shields.io/badge/Status-Completed-success)
-![Next.js](https://img.shields.io/badge/Next.js-16.0-black?logo=next.js)
-![React](https://img.shields.io/badge/React-19.0-blue?logo=react)
-![MUI](https://img.shields.io/badge/MUI-v7-007FFF?logo=mui)
-
-Website giới thiệu & bán nông sản sạch, thân thiện môi trường. Dự án được xây dựng theo kiến trúc hiện đại, tối ưu giao diện – tốc độ – trải nghiệm người dùng.
-
-
-## 🚀 **1. Giới thiệu**
-
-GreenFarm là website trưng bày và kinh doanh nông sản sạch, bao gồm các nhóm sản phẩm:
-
-* Rau
-* Củ
-* Nấm
-* Trái cây
-* Đậu hủ
-
-Website cung cấp trải nghiệm xem sản phẩm, lọc nâng cao, đọc tin tức, xem blog, xem chi tiết sản phẩm và giỏ hàng demo.
-
-Dự án được xây dựng theo yêu cầu báo cáo Thiết kế Web  và hướng đến trải nghiệm thực tế như một website thương mại điện tử mini.
+![Next.js](https://img.shields.io/badge/Next.js-16.0-black?style=for-the-badge&logo=next.js)
+![React](https://img.shields.io/badge/React-19.0-blue?style=for-the-badge&logo=react)
+![MUI](https://img.shields.io/badge/MUI-v7-007FFF?style=for-the-badge&logo=mui)
+![Status](https://img.shields.io/badge/Status-Development-green?style=for-the-badge)
+**GreenFarm** là một website bán nông sản sạch được xây dựng theo hướng **Single Page Application (SPA)**, tập trung vào **trải nghiệm người dùng (UX)**, **giao diện hiện đại**, và **tính tương tác cao**.
+Dự án được thực hiện phục vụ **báo cáo môn Thiết kế Web (COMP1802)** tại **Trường Đại học Sư phạm TP. Hồ Chí Minh (HCMUE)**.
 
 
+## 📌 Mục tiêu dự án
 
-## 🖼️ **2. Tính năng nổi bật**
-
-### 🌟 **Trang chủ (Home)**
-
-* Banner giới thiệu thương hiệu GreenFarm
-* Khu vực *Siêu giảm giá*: tự động lọc sản phẩm có mức giảm lớn
-* Gợi ý sản phẩm theo danh mục
-* Giao diện hiện đại, tối ưu trải nghiệm người dùng
+* Xây dựng website giới thiệu & bán nông sản sạch, rõ nguồn gốc
+* Mô phỏng quy trình mua hàng:
+  **xem sản phẩm → tìm kiếm → lọc → thêm giỏ → thanh toán**
+* Ứng dụng **React + Next.js + Material UI** để tạo giao diện chuyên nghiệp
+* Tối ưu trải nghiệm trên **Desktop / Tablet / Mobile**
 
 
+## 👥 Đối tượng người dùng
 
-### 🥬 **Trang Sản phẩm (Products)**
-
-* Tabs danh mục (Rau, Củ, Nấm, Trái cây, Đậu hủ)
-* Banner lớn theo từng danh mục
-* Bộ lọc nâng cao:
-
-  * Lọc theo danh mục
-  * Lọc theo từ khóa
-  * Lọc sản phẩm giảm giá
-  * Khoảng giá
-  * Sắp xếp theo giá, tên, % giảm
-* Grid sản phẩm responsive
-* Popup xem chi tiết (Product Dialog)
+* Người tiêu dùng quan tâm đến thực phẩm sạch
+* Sinh viên, nhân viên văn phòng, hộ gia đình
+* Giảng viên & sinh viên tham khảo mô hình website thương mại điện tử cơ bản
 
 
+## 🚀 Công nghệ sử dụng (Tech Stack)
 
-### 🛒 **Giỏ hàng (Cart)**
-
-* Thêm sản phẩm từ Home, Products, Popup chi tiết
-* Tăng/giảm số lượng qua Number Spinner
-* Tự động tính tổng tiền
-* Xóa sản phẩm
-* Thanh toán demo (hiển thị Snackbar thành công)
-
-
-
-### 📰 **Trang Blog**
-
-* Danh sách bài viết từ JSON
-* Xem chi tiết bài viết với HTML render
-* Ảnh lớn + nội dung trình bày rõ ràng
-* Nút quay lại danh sách
-* Icon “favorite” và “comment” mô phỏng UX mạng xã hội
+* **Next.js 16** (App Router)
+* **React 19**
+* **Material UI (MUI v7)** + Emotion
+* **JavaScript (ES6+)**
+* **JSON tĩnh** (quản lý dữ liệu sản phẩm, banner, blog)
+* **GitHub Actions** (CI/CD – Deploy GitHub Pages)
 
 
+## 🧱 Kiến trúc & Cấu trúc thư mục
 
-### 📞 **Trang Liên hệ (Contact)**
-
-* Form liên hệ gồm:
-
-  * Họ tên
-  * Email
-  * Chủ đề
-  * Nội dung
-* Thông tin liên hệ: địa chỉ, email, hotline
-* Hình minh họa/bản đồ
-* Icon mạng xã hội
-
-
-
-### 🔍 **Tìm kiếm gợi ý (SearchPopper)**
-
-* Search theo tên (bỏ dấu tiếng Việt)
-* Xuất hiện gợi ý dạng Popper
-* Click gợi ý → mở Product Dialog
-
-
-
-## 🎨 **3. Công nghệ sử dụng**
-
-| Công nghệ                                | Vai trò                                     |
-| ---------------------------------------- | ------------------------------------------- |
-| **Next.js 16 (App Router)**              | Cấu trúc project, tối ưu SEO                |
-| **React 19**                             | Xây dựng UI component-based                 |
-| **Material UI v7**                       | UI chính: AppBar, Tabs, Card, Dialog, Grid… |
-| **MUI Icons**                            | Icon cho điều hướng & hành động             |
-| **CSS + globals.css**                    | Style chung, scrollbar, font                |
-| **JSON tĩnh (products, blogs, banners)** | Lưu trữ dữ liệu sản phẩm & bài viết         |
-
-
-
-## 📁 **4. Cấu trúc thư mục**
-
-```
+```bash
 greenfarm/
-│
 ├── app/
-│   ├── layout.js
-│   ├── page.js
-│   ├── components/
+│   ├── layout.js              # Layout chung + metadata
+│   ├── page.js                # App chính (Tabs, AppBar, Cart, Search)
+│   ├── features/              # Các trang/section
+│   │   ├── HomeSection.js
+│   │   ├── ProductSection.js
+│   │   ├── BlogSection.js
+│   │   ├── ContactSection.js
+│   │   └── FooterSection.js
+│   ├── components/            # Component tái sử dụng
 │   │   ├── ProductCard.js
 │   │   ├── ProductDialog.js
 │   │   ├── CartDialog.js
+│   │   ├── CheckoutDialog.js
 │   │   ├── SearchPopper.js
-│   │   ├── NumberSpinner.js
-│   │   ├── BlogCard.js
-│   │   └── Footer.js
-│   └── features/
-│       ├── HomeSection.js
-│       ├── ProductSection.js
-│       ├── BlogSection.js
-│       └── ContactSection.js
+│   │   └── AddressForm.js
+│   └── hooks/
+│       ├── isMobile.js        # Hook responsive
+│       └── theme.js           # Custom MUI Theme
+│
+├── public/
+│   ├── data/
+│   │   ├── products.json
+│   │   ├── banners.json
+│   │   ├── blogs.json
+│   │   └── locations.json
+│   └── images/
 │
 ├── styles/
 │   └── globals.css
 │
-├── public/
-│   ├── images/
-│   └── data/
-│       ├── products.json
-│       ├── banners.json
-│       └── blogs.json
-│
+├── .github/workflows/
+│   └── nextjs.yml             # CI/CD GitHub Actions
 ├── package.json
 └── README.md
 ```
 
 
+## ✨ Các tính năng nổi bật
 
-## 🧠 **5. Kiến trúc & Quy trình hoạt động**
+### 🔍 Tìm kiếm & Gợi ý sản phẩm
 
-* Dữ liệu được load từ JSON → build thành mảng sản phẩm → truyền cho các section.
-* Bộ lọc hoạt động bằng cách:
+* Tìm kiếm theo tên, mô tả
+* Gợi ý sản phẩm realtime (Search Popper)
+* Chuẩn hóa từ khóa (bỏ dấu tiếng Việt)
 
-  * Lọc danh mục
-  * Lọc keyword
-  * Lọc giá / khuyến mãi
-  * Sắp xếp dữ liệu
-* Mọi thao tác thêm giỏ hàng đều thông qua `addToCart()` trong `page.js`.
-* ProductDialog & CartDialog là component reuse toàn trang.
+### 🧺 Giỏ hàng thông minh
+
+* Thêm / xoá / cập nhật số lượng
+* Snackbar thông báo trực quan
+* Tự động tính tổng tiền
+
+### 🎯 Lọc & Sắp xếp sản phẩm
+
+* Lọc theo danh mục (Rau, Củ, Trái cây, …)
+* Lọc theo khoảng giá
+* Lọc **“Siêu giảm giá”**
+* Sắp xếp theo giá, tên, % giảm
+
+### 💳 Thanh toán mô phỏng
+
+* Thanh toán **COD**
+* Thanh toán **Chuyển khoản QR (VietQR)**
+* Áp dụng **mã giảm giá**
+* Reset trạng thái khi đóng cửa sổ thanh toán
+
+### 📱 Responsive Design
+
+* Desktop: Menu ngang + Grid nhiều cột
+* Mobile: Drawer menu + layout tối ưu
+* Áp dụng breakpoint chuẩn của Material UI
 
 
+## 📊 Quản lý dữ liệu
 
-## 📱 **6. Responsive Design**
+Dữ liệu được lưu dưới dạng **JSON tĩnh**, giúp:
 
-* Header tùy chỉnh:
+* Dễ demo
+* Không cần backend
+* Phù hợp đồ án học phần
 
-  * Desktop: Tabs + Search Bar
-  * Mobile: Drawer + Search Icon
-* Grid sản phẩm tự co giãn `auto-fill`
-* Banner, filter, blog được tối ưu theo breakpoint của MUI
+Ví dụ `products.json`:
 
-
-
-## 🧩 **7. Cách chạy dự án**
-
-### ✔ Cài đặt thư viện
-
-```sh
-npm install
+```json
+{
+  "Rau": {
+    "Rau muống": {
+      "img": "/images/products/rau/rau-muong.jpg",
+      "shortDescription": "Rau xanh tươi",
+      "description": "Rau muống tươi, sạch, an toàn...",
+      "price": 15000,
+      "sale": 12000
+    }
+  }
+}
 ```
 
-### ✔ Chạy development server
 
-```sh
+## ⚙️ Cài đặt & Chạy dự án
+
+```bash
+# Cài đặt thư viện
+npm install
+
+# Chạy môi trường development
 npm run dev
 ```
 
-### ✔ Build production
+Truy cập:
+👉 `http://localhost:3000`
 
-```sh
+
+## 🌐 Deploy GitHub Pages
+
+Dự án đã cấu hình **GitHub Actions** để tự động build & deploy.
+
+```bash
 npm run build
-```
-
-### ✔ Deploy (GitHub Pages)
-
-```sh
 npm run deploy
 ```
 
 
+## 📌 Định hướng phát triển (Future Improvements)
 
-## 💡 **8. Hướng phát triển tương lai**
-
-* Thêm Đăng ký / Đăng nhập user
-* Lưu giỏ hàng bằng localStorage
-* Kết nối backend thật (Node.js + MongoDB)
-* Tính năng yêu thích sản phẩm
-* Thêm thanh toán thật (VNPay / Momo)
-
+* Tích hợp Backend (Firebase / Node.js)
+* Thanh toán online thật (VNPay / Momo)
+* Trang quản trị Admin
+* Lưu đơn hàng & người dùng
+* Đánh giá & bình luận sản phẩm
 
 
-## 🧑‍💻 **9. Tác giả & Liên hệ**
+## 🎓 Thông tin học phần
 
-Dự án được thực hiện phục vụ học phần **Thiết kế Web – HCMUE**
+* **Môn học:** Thiết kế Web (COMP1802)
+* **Trường:** Đại học Sư phạm TP. Hồ Chí Minh (HCMUE)
+* **Loại dự án:** Đồ án học phần – Frontend Web
 
-Mọi thông tin chi tiết vui lòng liên hệ tại trang Contact của website.
+
+## 📄 License
+
+Dự án phục vụ **mục đích học tập**.
+Không sử dụng cho mục đích thương mại.
 
 
+> 💚 *GreenFarm – Kết nối nông sản sạch với người tiêu dùng bằng công nghệ hiện đại.*
 
-# 🌱 **GreenFarm – Ăn sạch, sống xanh!**
 
