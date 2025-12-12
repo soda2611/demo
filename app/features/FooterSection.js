@@ -1,11 +1,15 @@
 // app/features/FooterSection.js
-import React from "react";
+import React, { useEffect } from "react";
 import { Typography, Box, Link, Grid } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
-export default function FooterSection() {
+export default function FooterSection({ tab }) {
+  const go = (index) => {
+    if (typeof tab === "function") tab(index);
+  };
+
   return (
     <Box
       component="footer"
@@ -106,16 +110,16 @@ export default function FooterSection() {
             Liên kết nhanh
           </Typography>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-            <Link href="#" color="inherit" underline="hover">
+            <Link color="inherit" underline="hover" onClick={() => go(0)} sx={{cursor: "pointer"}}>
               Trang chủ
             </Link>
-            <Link href="#" color="inherit" underline="hover">
+            <Link color="inherit" underline="hover" onClick={() => go(1)} sx={{cursor: "pointer"}}>
               Sản phẩm
             </Link>
-            <Link href="#" color="inherit" underline="hover">
+            <Link color="inherit" underline="hover" onClick={() => go(2)} sx={{cursor: "pointer"}}>
               Tin tức
             </Link>
-            <Link href="#" color="inherit" underline="hover">
+            <Link color="inherit" underline="hover" onClick={() => go(3)} sx={{cursor: "pointer"}}>
               Liên hệ
             </Link>
           </Box>

@@ -358,7 +358,7 @@ export default function App() {
                   <ContactPage />
                 </div>
               )}
-              <Footer />
+              <Footer tab={setTab} />
             </>
           )}
         </Box>
