@@ -1,10 +1,10 @@
 # 🌱 GreenFarm – Website Bán Nông Sản Sạch & Đặc Sản Địa Phương
 
-
 ![Next.js](https://img.shields.io/badge/Next.js-16.0-black?style=for-the-badge&logo=next.js)
 ![React](https://img.shields.io/badge/React-19.0-blue?style=for-the-badge&logo=react)
 ![MUI](https://img.shields.io/badge/MUI-v7-007FFF?style=for-the-badge&logo=mui)
 ![Status](https://img.shields.io/badge/Status-Development-green?style=for-the-badge)
+
 **GreenFarm** là một website bán nông sản sạch được xây dựng theo hướng **Single Page Application (SPA)**, tập trung vào **trải nghiệm người dùng (UX)**, **giao diện hiện đại**, và **tính tương tác cao**.
 Dự án được thực hiện phục vụ **báo cáo môn Thiết kế Web (COMP1802)** tại **Trường Đại học Sư phạm TP. Hồ Chí Minh (HCMUE)**.
 
