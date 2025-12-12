@@ -266,6 +266,14 @@ export default function App() {
     setSnackbarOpen(true);
   };
 
+  const goHome = React.useCallback(() => {
+    setTab(0);
+    // Cuộn mượt lên top
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <div
@@ -472,7 +480,7 @@ export default function App() {
                 ) : null}
 
                 <IconButton
-                  onClick={() => setTab(0)}
+                  onClick={goHome}
                   sx={{ p: 0, borderRadius: 2, gap: 2 }}
                   aria-label="Về trang chủ"
                 >
