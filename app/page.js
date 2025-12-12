@@ -479,9 +479,9 @@ export default function App() {
                   </>
                 ) : null}
 
-                <IconButton
+                <Box
                   onClick={goHome}
-                  sx={{ p: 0, borderRadius: 2, gap: 2 }}
+                  sx={{ display: 'flex', alignItems: 'center', p: 0, borderRadius: 2, gap: 2, cursor: "pointer" }}
                   aria-label="Về trang chủ"
                 >
                   <img
@@ -502,7 +502,7 @@ export default function App() {
                   >
                     GreenFarm
                   </Typography>
-                </IconButton>
+                </Box>
 
                 {!isMobile ? (
                   <Tabs
