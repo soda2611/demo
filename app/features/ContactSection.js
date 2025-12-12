@@ -329,57 +329,6 @@ export default function ContactPage() {
               <br />
               Địa chỉ: 123 đường ABC, phường XYZ, TPHCM
             </Typography>
-            <Box
-              sx={{
-                display: "flex",
-                gap: 2,
-                alignItems: "center",
-                mt: 2,
-              }}
-            >
-              <Box
-                sx={{
-                  width: 36,
-                  height: 36,
-                  border: "2px solid #24292e", // VIỀN ĐEN ĐẬM
-                  borderRadius: "50%",
-                  bgcolor: "white",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <FacebookIcon sx={{ color: "#24292e", fontSize: 20 }} />
-              </Box>
-              <Box
-                sx={{
-                  width: 36,
-                  height: 36,
-                  border: "2px solid #24292e", // VIỀN ĐEN ĐẬM
-                  borderRadius: "50%",
-                  bgcolor: "white",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <InstagramIcon sx={{ color: "#24292e", fontSize: 20 }} />
-              </Box>
-              <Box
-                sx={{
-                  width: 36,
-                  height: 36,
-                  border: "2px solid #24292e", // VIỀN ĐEN ĐẬM
-                  borderRadius: "50%",
-                  bgcolor: "white",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <GitHubIcon sx={{ color: "#24292e", fontSize: 20 }} />
-              </Box>
-            </Box>
           </div>
         </Grid>
       )}
