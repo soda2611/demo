@@ -390,31 +390,34 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
           alignItems: "center",
         }}
       >
-        {/* Tìm kiếm */}
-        <TextField
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-          placeholder="Tìm sản phẩm (tên, mô tả)..."
-          size="small"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'right', gap: 2 }}>
+          {/* Tìm kiếm */}
+          <TextField
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            placeholder={isMobile ? "Tìm sản phẩm" : "Tìm sản phẩm (tên, mô tả)..."}
+            size="small"
+            sx={{ "@media (max-width: 500px)": {width: "75%"}, "@media (min-width: 500px)": {flexGrow: 1} }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
 
-        {/* Chỉ hàng giảm giá */}
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={onlySale}
-              onChange={(e) => setOnlySale(e.target.checked)}
-            />
-          }
-          label="Hàng đang giảm giá"
-        />
+          {/* Chỉ hàng giảm giá */}
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={onlySale}
+                onChange={(e) => setOnlySale(e.target.checked)}
+              />
+            }
+            label="Hàng đang giảm giá"
+          />
+        </Box>
 
         {!isMobile && (
           <Box
@@ -430,35 +433,37 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
           />
         )}
 
-        {/* Sắp xếp */}
-        <Select
-          size="small"
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-          displayEmpty
-        >
-          <MenuItem value="default">Mặc định</MenuItem>
-          <MenuItem value="priceAsc">Giá ↑</MenuItem>
-          <MenuItem value="priceDesc">Giá ↓</MenuItem>
-          <MenuItem value="nameAsc">Tên A–Z</MenuItem>
-          <MenuItem value="nameDesc">Tên Z–A</MenuItem>
-          <MenuItem value="discountDesc">% giảm ↓</MenuItem>
-        </Select>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          {/* Sắp xếp */}
+          <Select
+            size="small"
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            displayEmpty
+          >
+            <MenuItem value="default">Mặc định</MenuItem>
+            <MenuItem value="priceAsc">Giá ↑</MenuItem>
+            <MenuItem value="priceDesc">Giá ↓</MenuItem>
+            <MenuItem value="nameAsc">Tên A–Z</MenuItem>
+            <MenuItem value="nameDesc">Tên Z–A</MenuItem>
+            <MenuItem value="discountDesc">% giảm ↓</MenuItem>
+          </Select>
 
-        {/* Khoảng giá */}
-        <Box sx={{ px: 1 }}>
-          <Typography variant="caption" sx={{ display: "block", mb: 0.5 }}>
-            Khoảng giá: {formatVND(priceRange[0])}₫ – {formatVND(priceRange[1])}
-            ₫
-          </Typography>
-          <Slider
-            value={priceRange}
-            min={minPrice}
-            max={maxPrice}
-            step={1000}
-            onChange={(_, v) => setPriceRange(v)}
-            valueLabelDisplay="auto"
-          />
+          {/* Khoảng giá */}
+          <Box sx={{ px: 1 }}>
+            <Typography variant="caption" sx={{ display: "block", mb: 0.5 }}>
+              Khoảng giá: {formatVND(priceRange[0])}₫ – {formatVND(priceRange[1])}
+              ₫
+            </Typography>
+            <Slider
+              value={priceRange}
+              min={minPrice}
+              max={maxPrice}
+              step={1000}
+              onChange={(_, v) => setPriceRange(v)}
+              valueLabelDisplay="auto"
+            />
+          </Box>
         </Box>
       </Box>
 
