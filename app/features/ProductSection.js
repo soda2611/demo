@@ -234,7 +234,7 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
         sx={{
           backgroundColor: "primary.main",
           height: !isMobile ? 200 : 125,
-          width: !isMobile ? "70%" : "100%",
+          width: "100%",
           overflow: "hidden",
           borderRadius: 5,
           display: "flex",
