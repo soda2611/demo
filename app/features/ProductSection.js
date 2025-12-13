@@ -296,7 +296,7 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
             component="div"
             sx={{ fontWeight: "bold", mb: 1, color: "white", flexGrow: 1 }}
           >
-            {tab > 0 ? categories[tab - 1] : "Sản phẩm"}
+            {tab > 0 ? categories[tab - 1] : "Tất cả sản phẩm"}
           </Typography>
 
           <IconButton
