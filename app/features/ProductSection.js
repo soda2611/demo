@@ -288,15 +288,31 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
           >
             <KeyboardArrowLeftIcon />
           </IconButton>
-
-          <Typography
-            variant="h4"
-            component="div"
-            sx={{ fontWeight: "bold", mb: 1, color: "white", flexGrow: 1, "@media (max-width:500px)": {fontSize: 24} }}
-          >
-            {tab > 0 ? categories[tab - 1] : "Tất cả sản phẩm"}
-          </Typography>
-
+          <Box sx={{display: 'flex', alignItems: 'center', flexGrow: 1}}>
+            <Typography
+              onClick={() => setTab(tab - 1)}
+              variant="h6"
+              component="div"
+              sx={{ fontWeight: "bold", mb: 1, color: "#ffffff6c", textAlign: "right", width: "26%", cursor: 'pointer', "@media (max-width:500px)": {fontSize: 14, textAlign: 'center'} }}
+            >
+              {(tab > 0) && (tab > 1 ? categories[tab - 2] : "Tất cả")}
+            </Typography>
+            <Typography
+              variant="h4"
+              component="div"
+              sx={{ fontWeight: "bold", mb: 1, color: "white", width: "48%", "@media (max-width:500px)": {fontSize: 24} }}
+            >
+              {tab > 0 ? categories[tab - 1] : "Tất cả"}
+            </Typography>
+            <Typography
+              onClick={() => setTab(tab + 1)}
+              variant="h6"
+              component="div"
+              sx={{ fontWeight: "bold", mb: 1, color: "#ffffff6c", textAlign: "left", width: "26%", cursor: 'pointer', "@media (max-width:500px)": {fontSize: 14, textAlign: 'center'} }}
+            >
+              {tab < MAX_TAB && categories[tab]}
+            </Typography>
+          </Box>
           <IconButton
             disabled={tab === totalTabs - 1}
             sx={{ color: "white", height: "100%", borderRadius: 0 }}
