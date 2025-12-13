@@ -28,7 +28,7 @@ export default function Blog() {
         sx={{
           width: "90%",
           maxWidth: "900px",
-          my: 4,
+          mb: 4,
           display: "flex",
           flexDirection: "column",
           gap: 2,
