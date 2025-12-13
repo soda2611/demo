@@ -229,13 +229,11 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
         alignItems: "center",
       }}
     >
-      
-
       <Box
         key={tab > 0 ? categories[tab - 1] : "Sản phẩm"}
         sx={{
           backgroundColor: "primary.main",
-          height: !isMobile ? 200 : 100,
+          height: !isMobile ? 200 : 125,
           width: !isMobile ? "70%" : "100%",
           overflow: "hidden",
           borderRadius: 5,
@@ -277,9 +275,9 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
             textAlign: "center",
             padding: 0,
             borderRadius: 5,
-            height: !isMobile ? 200 : 100,
+            height: !isMobile ? 200 : 125,
             width: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",  
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
           }}
         >
           <IconButton
@@ -294,7 +292,7 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
           <Typography
             variant="h4"
             component="div"
-            sx={{ fontWeight: "bold", mb: 1, color: "white", flexGrow: 1 }}
+            sx={{ fontWeight: "bold", mb: 1, color: "white", flexGrow: 1, "@media (max-width:500px)": {fontSize: 24} }}
           >
             {tab > 0 ? categories[tab - 1] : "Tất cả sản phẩm"}
           </Typography>
@@ -313,7 +311,6 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
             sx={{
               position: "absolute",
               bottom: !isMobile ? 8 : 6,
-              left: "50%",
               transform: "translateX(-50%)",
               display: "flex",
               gap: !isMobile ? 1 : 0.75,
@@ -324,6 +321,8 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
               alignItems: "center",
               justifyContent: "center",
               "@media (max-width:240px)": { display: "none" },
+              "@media (max-width:500px)": { transform: "scale(0.7)" },
+              "@media (min-width:500px)": { left: "50%" }
             }}
           >
             {Array.from({ length: totalTabs }).map((_, i) => {
