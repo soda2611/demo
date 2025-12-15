@@ -1,25 +1,27 @@
+// app/page.js
 "use client";
 
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import React, { useState, useEffect, useRef } from "react";
 import {
-  Typography,
-  Box,
+  Alert,
   AppBar,
-  Toolbar,
-  Tab,
-  Tabs,
-  IconButton,
+  Badge,
+  Box,
   Drawer,
+  IconButton,
+  InputBase,
   List,
   ListItem,
   ListItemText,
-  InputBase,
   Snackbar,
-  Alert,
-  Badge,
+  Tab,
+  Tabs,
+  Toolbar,
+  Typography,
 } from "@mui/material";
+
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -28,264 +30,372 @@ import HomeIcon from "@mui/icons-material/Home";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import BookIcon from "@mui/icons-material/Book";
 import CallIcon from "@mui/icons-material/Call";
+
 import ProductPage from "./features/ProductSection";
 import HomePage from "./features/HomeSection";
 import ContactPage from "./features/ContactSection";
 import Footer from "./features/FooterSection";
 import Blog from "./features/BlogSection";
+
 import CartDialog from "./components/CartDialog";
 import SearchPopper from "./components/SearchPopper";
 import ProductDialog from "./components/ProductDialog";
 import CheckoutDialog from "./components/CheckoutDialog";
+
 import { useIsMobile } from "./hooks/isMobile";
 import { useCustomTheme } from "./hooks/theme";
 
-export default function App() {
-  const theme = useCustomTheme();
-  const [tab, setTab] = useState(0);
-  const [CategoryTab, setCategoryTab] = useState(0); // Tab "Tất cả" + từng danh mục
+const POPPER_CLOSE_DELAY_MS = 150;
+const MAX_SUGGESTIONS = 10;
+const MAX_CART_QTY_DISPLAY = 99;
 
-  const handleTabChange = (event, newValue) => {
-    setTab(newValue);
-  };
+const APP_CONTAINER_STYLE = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: 16,
+};
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [tab]);
+const TAB_SECTION_STYLE = {
+  overflowY: "hidden",
+  width: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  flexDirection: "column",
+  gap: 10,
+};
 
-  const isMobile = useIsMobile();
+const HEADER_WRAPPER_STYLE = {
+  backdropFilter: "blur(5px)",
+  width: "100%",
+  height: 100,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  position: "fixed",
+  top: 0,
+};
 
-  const [drawerOpen, setDrawerOpen] = useState(false);
+function normalizeText(value) {
+  return String(value ?? "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
 
-  const toggleDrawer = (open) => () => {
-    setDrawerOpen(open);
-  };
+function toSafeId(value) {
+  return String(value ?? "").trim().toLowerCase();
+}
 
-  const [productDialogOpen, setProductDialogOpen] = useState(false);
-  const [productDialogData, setProductDialogData] = useState({
-    name: "",
-    item: null,
+function toSafeQuantity(value, fallback = 1) {
+  let qty = Number(value);
+  if (!Number.isFinite(qty)) qty = fallback;
+  return Math.max(1, Math.floor(qty));
+}
+
+/**
+ * Chuyển cấu trúc { category: { name: item } } -> mảng sản phẩm để tìm kiếm.
+ * Lưu thêm _normName để so khớp nhanh (không dấu + lowercase).
+ */
+function buildAllProducts(productsByCategory = {}) {
+  const result = [];
+
+  Object.entries(productsByCategory).forEach(([category, items]) => {
+    Object.entries(items ?? {}).forEach(([name, item]) => {
+      const thumbnail = item?.img ?? null;
+
+      // Giá hiển thị: nếu có sale (hợp lệ) thì dùng sale, ngược lại dùng price.
+      let displayPrice = item?.price ?? null;
+      if (item?.sale != null && Number(item.sale) > 0) {
+        displayPrice = item.sale;
+      }
+
+      result.push({
+        name,
+        category,
+        price: item?.price ?? null,
+        sale: item?.sale ?? null,
+        displayPrice,
+        thumbnail,
+        shortDesc: item?.["shortDescription"] ?? "",
+        _normName: normalizeText(name),
+      });
+    });
   });
 
-  const [open, setOpen] = useState(false);
+  return result;
+}
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+export default function App() {
+  const theme = useCustomTheme();
+  const isMobile = useIsMobile();
 
-  const [openSearch, setOpenSearch] = useState(false);
+  const [activeTab, setActiveTab] = useState(0);
+  const [categoryTab, setCategoryTab] = useState(0); // Tab "Tất cả" + từng danh mục
+
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const toggleDrawer = useCallback((open) => () => setIsDrawerOpen(open), []);
+
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const openCart = useCallback(() => setIsCartOpen(true), []);
+  const closeCart = useCallback(() => setIsCartOpen(false), []);
+
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMsg, setSnackbarMsg] = useState("");
 
-  const closeSnackbar = (_, reason) => {
+  const closeSnackbar = useCallback((_, reason) => {
     if (reason === "clickaway") return;
     setSnackbarOpen(false);
-  };
+  }, []);
 
-  const initialCartItems = [];
+  const showSnackbar = useCallback((message) => {
+    setSnackbarMsg(message);
+    setSnackbarOpen(true);
+  }, []);
 
-  const [cartItems, setCartItems] = useState(initialCartItems);
-  const [quantities, setQuantities] = useState(() => {
-    const q = {};
-    initialCartItems.forEach((it) => (q[it.id] = it.quantity ?? 1));
-    return q;
-  });
+  const [cartItems, setCartItems] = useState([]);
+  const [quantities, setQuantities] = useState({});
 
-  const cartTotalQty = React.useMemo(
+  const cartTotalQty = useMemo(
     () => cartItems.reduce((sum, it) => sum + (it.quantity ?? 1), 0),
     [cartItems]
   );
 
-  const addToCart = (product, qty = 1) => {
-    const rawId = product.id ?? product.name ?? "";
-    const id = String(rawId).trim().toLowerCase();
+  /**
+   * Thêm sản phẩm vào giỏ:
+   * - Chuẩn hóa id để tránh trùng lặp do khác hoa/thường hoặc có khoảng trắng.
+   * - Đảm bảo số lượng là số nguyên >= 1.
+   */
+  const addToCart = useCallback(
+    (product, qty = 1) => {
+      const id = toSafeId(product?.id ?? product?.name ?? "");
+      if (!id) return;
 
-    let addQty = Number(qty);
-    if (!Number.isFinite(addQty)) addQty = 1;
-    addQty = Math.max(1, Math.floor(addQty));
+      const addQty = toSafeQuantity(qty, 1);
+      const displayPrice =
+        product?.sale != null ? product.sale : product?.price;
 
-    const displayPrice = product.sale != null ? product.sale : product.price;
+      setCartItems((prevItems) => {
+        const existing = prevItems.find((it) => it.id === id);
 
-    setCartItems((prev) => {
-      const exists = prev.find((it) => it.id === id);
-      let next;
+        let nextItems = prevItems;
+        let nextQuantity = addQty;
 
-      if (exists) {
-        const newQuantity = (exists.quantity ?? 1) + addQty;
+        if (existing) {
+          nextQuantity = (existing.quantity ?? 1) + addQty;
 
-        next = prev.map((it) =>
-          it.id === id
-            ? {
-                ...it,
-                quantity: newQuantity,
-                displayPrice,
-                sale: product.sale,
-                price: product.price,
-                min: it.min ?? product.min ?? 1,
-                max: undefined,
-              }
-            : it
-        );
+          nextItems = prevItems.map((it) =>
+            it.id === id
+              ? {
+                  ...it,
+                  quantity: nextQuantity,
+                  displayPrice,
+                  sale: product.sale,
+                  price: product.price,
+                  min: it.min ?? product.min ?? 1,
+                  max: undefined,
+                }
+              : it
+          );
+        } else {
+          nextQuantity = Math.max(product?.min ?? 1, addQty);
 
-        setQuantities((q) => ({ ...q, [id]: newQuantity }));
-      } else {
-        const initialQty = Math.max(product.min ?? 1, addQty);
-
-        const toAdd = {
-          ...product,
-          id,
-          quantity: initialQty,
-          min: product.min ?? 1,
-          max: undefined,
-          displayPrice,
-        };
-
-        next = [...prev, toAdd];
-        setQuantities((q) => ({ ...q, [id]: initialQty }));
-      }
-
-      const totalByNext = next.reduce((sum, it) => sum + (it.quantity ?? 1), 0);
-      const productName = product.name ?? "Sản phẩm";
-
-      setSnackbarMsg(
-        `Đã thêm "${productName}" x${addQty}. Giỏ hàng hiện có ${totalByNext} sản phẩm.`
-      );
-      setSnackbarOpen(true);
-
-      return next;
-    });
-  };
-
-  const removeItem = (id) => {
-    setCartItems((prev) => prev.filter((it) => it.id !== id));
-    setQuantities((prev) => {
-      const { [id]: _, ...rest } = prev;
-      return rest;
-    });
-  };
-
-  // Bỏ dấu tiếng Việt + lowercase để so khớp dễ
-  const normalize = (s) =>
-    String(s)
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
-
-  // Tạo mảng tất cả sản phẩm từ cấu trúc { category: { name: item } }
-  const buildAllProducts = (productsObj) => {
-    const arr = [];
-    Object.entries(productsObj || {}).forEach(([category, items]) => {
-      Object.entries(items || {}).forEach(([name, item]) => {
-        // Ảnh lấy từ item.img (hỗ trợ URL hoặc data URI/base64)
-        const thumbnail = item?.img ?? null;
-
-        // Giá hiển thị: nếu có sale (hợp lệ) thì dùng sale, ngược lại price
-        let displayPrice = item?.price;
-        if (item?.sale != null && Number(item.sale) > 0) {
-          displayPrice = item.sale;
+          nextItems = [
+            ...prevItems,
+            {
+              ...product,
+              id,
+              quantity: nextQuantity,
+              min: product?.min ?? 1,
+              max: undefined,
+              displayPrice,
+            },
+          ];
         }
 
-        arr.push({
-          name,
-          category,
-          price: item?.price ?? null,
-          sale: item?.sale ?? null,
-          displayPrice,
-          thumbnail, // <-- dùng đúng key `img`
-          shortDesc: item?.["shortDescription"] ?? "", // key có khoảng trắng cần bracket
-          _normName: normalize(name),
-        });
+        setQuantities((prev) => ({ ...prev, [id]: nextQuantity }));
+
+        const totalByNext = nextItems.reduce(
+          (sum, it) => sum + (it.quantity ?? 1),
+          0
+        );
+        const productName = product?.name ?? "Sản phẩm";
+
+        showSnackbar(
+          `Đã thêm "${productName}" x${addQty}. Giỏ hàng hiện có ${totalByNext} sản phẩm.`
+        );
+
+        return nextItems;
       });
+    },
+    [showSnackbar]
+  );
+
+  const removeItem = useCallback((id) => {
+    setCartItems((prev) => prev.filter((it) => it.id !== id));
+    setQuantities((prev) => {
+      const { [id]: _removed, ...rest } = prev;
+      return rest;
     });
-    return arr;
-  };
+  }, []);
 
   const [searchAnchor, setSearchAnchor] = useState(null);
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showPopper, setShowPopper] = useState(false);
-  const toolbarRef = useRef(null);
 
   const [banners, setBanners] = useState(null);
-
-  useEffect(() => {
-    fetch("data/banners.json")
-      .then((res) => res.json())
-      .then((data) => setBanners(data))
-      .catch((err) => console.error("Lỗi khi tải JSON:", err));
-  }, []);
-
   const [products, setProducts] = useState(null);
 
+  // Scroll to top when switching tab
   useEffect(() => {
-    fetch("data/products.json")
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => console.error("Lỗi khi tải JSON:", err));
+    if (typeof window === "undefined") return;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [activeTab]);
+
+  const handleTabChange = useCallback((_, newValue) => {
+    setActiveTab(newValue);
   }, []);
 
-  const allProducts = React.useMemo(
+  const goHome = useCallback(() => {
+    setActiveTab(0);
+
+    // Khi đang ở tab 0 vẫn cần cuộn lên top nếu user đã scroll xuống
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, []);
+
+  useEffect(() => {
+    let isActive = true;
+
+    const loadBanners = async () => {
+      try {
+        const res = await fetch("data/banners.json");
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        if (isActive) setBanners(data);
+      } catch (err) {
+        console.error("Lỗi khi tải banners.json:", err);
+      }
+    };
+
+    loadBanners();
+    return () => {
+      isActive = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let isActive = true;
+
+    const loadProducts = async () => {
+      try {
+        const res = await fetch("data/products.json");
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        if (isActive) setProducts(data);
+      } catch (err) {
+        console.error("Lỗi khi tải products.json:", err);
+      }
+    };
+
+    loadProducts();
+    return () => {
+      isActive = false;
+    };
+  }, []);
+
+  const allProducts = useMemo(
     () => buildAllProducts(products ?? {}),
     [products]
   );
 
   useEffect(() => {
-    const q = normalize(query);
-    if (!q) {
+    const normalizedQuery = normalizeText(query);
+
+    if (!normalizedQuery) {
       setSuggestions([]);
       setShowPopper(false);
       return;
     }
 
     const matched = allProducts
-      .filter((p) => p._normName.includes(q))
-      .slice(0, 10);
+      .filter((p) => p._normName.includes(normalizedQuery))
+      .slice(0, MAX_SUGGESTIONS);
 
     setSuggestions(matched);
     setShowPopper(matched.length > 0);
   }, [query, allProducts]);
 
+  const handleSearchChange = useCallback((e) => {
+    setQuery(e.target.value);
+    setSearchAnchor(e.currentTarget);
+  }, []);
+
+  const handleSearchFocus = useCallback(
+    (e) => {
+      setSearchAnchor(e.currentTarget);
+      if (suggestions.length) setShowPopper(true);
+    },
+    [suggestions.length]
+  );
+
+  const handleSearchBlur = useCallback(() => {
+    // Giữ thời gian đóng để click gợi ý không bị mất
+    setTimeout(() => setShowPopper(false), POPPER_CLOSE_DELAY_MS);
+  }, []);
+
+  // --- PRODUCT DIALOG ---
+  const [productDialogOpen, setProductDialogOpen] = useState(false);
+  const [productDialogData, setProductDialogData] = useState({
+    name: "",
+    item: null,
+  });
+
   // --- CHECKOUT DIALOG ---
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [checkoutData, setCheckoutData] = useState(null);
 
-  const handleOpenCheckout = ({ items, quantities, subtotal }) => {
+  const openCheckout = useCallback(({ items, quantities, subtotal }) => {
     setCheckoutData({ items, quantities, subtotal });
     setCheckoutOpen(true);
-  };
-
-  const handleCheckoutSuccess = (order) => {
-    console.log("Đơn hàng mới:", order);
-
-    // reset giỏ hàng
-    setCartItems([]);
-    setQuantities({});
-
-    setCheckoutOpen(false);
-
-    setSnackbarMsg("Thanh toán thành công!");
-    setSnackbarOpen(true);
-  };
-
-  const goHome = React.useCallback(() => {
-    setTab(0);
-    // Cuộn mượt lên top
-    if (typeof window !== "undefined") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
   }, []);
+
+  const handleCheckoutSuccess = useCallback(
+    (order) => {
+      console.log("Đơn hàng mới:", order);
+
+      // Reset giỏ hàng sau khi thanh toán thành công
+      setCartItems([]);
+      setQuantities({});
+      setCheckoutOpen(false);
+
+      showSnackbar("Thanh toán thành công!");
+    },
+    [showSnackbar]
+  );
+
+  const navItems = useMemo(
+    () => [
+      { label: "Trang chủ", value: 0, Icon: HomeIcon },
+      { label: "Sản phẩm", value: 1, Icon: InventoryIcon },
+      { label: "Blog", value: 2, Icon: BookIcon },
+      { label: "Liên hệ", value: 3, Icon: CallIcon },
+    ],
+    []
+  );
+
+  const isLoading = !products || !banners;
 
   return (
     <ThemeProvider theme={theme}>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 16,
-        }}
-      >
+      <div style={APP_CONTAINER_STYLE}>
         <CssBaseline />
+
         <Box
           sx={{
             height: "100%",
@@ -299,97 +409,51 @@ export default function App() {
             marginTop: 15,
           }}
         >
-          {!products || !banners ? (
+          {isLoading ? (
             <div>Đang tải dữ liệu...</div>
           ) : (
             <>
-              {tab === 0 && (
-                <div
-                  style={{
-                    overflowY: "hidden",
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexDirection: "column",
-                    gap: 10,
-                  }}
-                >
+              {activeTab === 0 && (
+                <div style={TAB_SECTION_STYLE}>
                   <HomePage
                     products={products}
                     onAddToCart={addToCart}
-                    tab={setTab}
+                    tab={setActiveTab}
                     setCategoryTab={setCategoryTab}
                   />
                 </div>
               )}
-              {tab === 1 && (
-                <div
-                  style={{
-                    overflowY: "hidden",
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexDirection: "column",
-                    gap: 10,
-                  }}
-                >
+
+              {activeTab === 1 && (
+                <div style={TAB_SECTION_STYLE}>
                   <ProductPage
                     products={products}
                     banners={banners}
                     onAddToCart={addToCart}
-                    CategoryTab={CategoryTab}
+                    CategoryTab={categoryTab}
                     setCategoryTab={setCategoryTab}
                   />
                 </div>
               )}
-              {tab === 2 && (
-                <div
-                  style={{
-                    overflowY: "hidden",
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexDirection: "column",
-                    gap: 10,
-                  }}
-                >
+
+              {activeTab === 2 && (
+                <div style={TAB_SECTION_STYLE}>
                   <Blog />
                 </div>
               )}
-              {tab === 3 && (
-                <div
-                  style={{
-                    overflowY: "hidden",
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexDirection: "column",
-                    gap: 10,
-                  }}
-                >
+
+              {activeTab === 3 && (
+                <div style={TAB_SECTION_STYLE}>
                   <ContactPage />
                 </div>
               )}
-              <Footer tab={setTab} />
+
+              <Footer tab={setActiveTab} />
             </>
           )}
         </Box>
-        <div
-          style={{
-            backdropFilter: "blur(5px)",
-            width: "100%",
-            height: 100,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            position: "fixed",
-            top: 0,
-          }}
-        >
+
+        <div style={HEADER_WRAPPER_STYLE}>
           <AppBar
             position="static"
             sx={{
@@ -400,7 +464,7 @@ export default function App() {
               backgroundColor: "primary.main",
             }}
           >
-            {!openSearch ? (
+            {!isSearchOpen ? (
               <Toolbar sx={{ p: 1, gap: 2 }}>
                 {isMobile ? (
                   <>
@@ -411,9 +475,10 @@ export default function App() {
                     >
                       <MenuIcon />
                     </IconButton>
+
                     <Drawer
                       anchor="left"
-                      open={drawerOpen}
+                      open={isDrawerOpen}
                       onClose={toggleDrawer(false)}
                       sx={{
                         "& .MuiDrawer-paper": {
@@ -429,55 +494,22 @@ export default function App() {
                       }}
                     >
                       <List sx={{ width: 250 }}>
-                        <ListItem
-                          onClick={() => {
-                            handleTabChange(null, 0);
-                            setDrawerOpen(false);
-                          }}
-                          sx={{ cursor: "pointer", gap: 2 }}
-                        >
-                          <ListItemText
-                            primary="Trang chủ"
-                            sx={{ flexGrow: 1 }}
-                          />
-                          <HomeIcon />
-                        </ListItem>
-                        <ListItem
-                          onClick={() => {
-                            handleTabChange(null, 1);
-                            setDrawerOpen(false);
-                          }}
-                          sx={{ cursor: "pointer", gap: 2 }}
-                        >
-                          <ListItemText
-                            primary="Sản phẩm"
-                            sx={{ flexGrow: 1 }}
-                          />
-                          <InventoryIcon />
-                        </ListItem>
-                        <ListItem
-                          onClick={() => {
-                            handleTabChange(null, 2);
-                            setDrawerOpen(false);
-                          }}
-                          sx={{ cursor: "pointer", gap: 2 }}
-                        >
-                          <ListItemText primary="Blog" sx={{ flexGrow: 1 }} />
-                          <BookIcon />
-                        </ListItem>
-                        <ListItem
-                          onClick={() => {
-                            handleTabChange(null, 3);
-                            setDrawerOpen(false);
-                          }}
-                          sx={{ cursor: "pointer", gap: 2 }}
-                        >
-                          <ListItemText
-                            primary="Liên hệ"
-                            sx={{ flexGrow: 1 }}
-                          />
-                          <CallIcon />
-                        </ListItem>
+                        {navItems.map(({ label, value, Icon }) => (
+                          <ListItem
+                            key={value}
+                            onClick={() => {
+                              handleTabChange(null, value);
+                              setIsDrawerOpen(false);
+                            }}
+                            sx={{ cursor: "pointer", gap: 2 }}
+                          >
+                            <ListItemText
+                              primary={label}
+                              sx={{ flexGrow: 1 }}
+                            />
+                            <Icon />
+                          </ListItem>
+                        ))}
                       </List>
                     </Drawer>
                   </>
@@ -517,17 +549,16 @@ export default function App() {
 
                 {!isMobile ? (
                   <Tabs
-                    value={tab}
+                    value={activeTab}
                     onChange={handleTabChange}
                     textColor="white"
                     indicatorColor="secondary"
                     variant="scrollable"
                     scrollButtons="auto"
                   >
-                    <Tab label="Trang chủ" />
-                    <Tab label="Sản phẩm" />
-                    <Tab label="Blog" />
-                    <Tab label="Liên hệ" />
+                    {navItems.map(({ label, value }) => (
+                      <Tab key={value} label={label} />
+                    ))}
                   </Tabs>
                 ) : null}
 
@@ -543,7 +574,7 @@ export default function App() {
                       ? undefined
                       : "rgba(255, 255, 255, 0.3)",
                   }}
-                  onClick={handleOpen}
+                  onClick={openCart}
                 >
                   {isMobile ? (
                     <Badge badgeContent={cartTotalQty} color="success" showZero>
@@ -552,12 +583,15 @@ export default function App() {
                   ) : (
                     <ShoppingCartIcon />
                   )}
+
                   {!isMobile && (
-                    <>
-                      <Typography>
-                        Giỏ hàng ({cartTotalQty <= 99 ? cartTotalQty : "99+"})
-                      </Typography>
-                    </>
+                    <Typography>
+                      Giỏ hàng (
+                      {cartTotalQty <= MAX_CART_QTY_DISPLAY
+                        ? cartTotalQty
+                        : `${MAX_CART_QTY_DISPLAY}+`}
+                      )
+                    </Typography>
                   )}
                 </IconButton>
 
@@ -585,47 +619,31 @@ export default function App() {
                       }}
                       placeholder="Tìm kiếm sản phẩm..."
                       value={query}
-                      onChange={(e) => {
-                        setQuery(e.target.value);
-                        setSearchAnchor(e.currentTarget);
-                      }}
-                      onFocus={(e) => {
-                        setSearchAnchor(e.currentTarget);
-                        if (suggestions.length) setShowPopper(true);
-                      }}
-                      onBlur={() => {
-                        setTimeout(() => setShowPopper(false), 150); // giữ thời gian đóng để click gợi ý không bị mất
-                      }}
+                      onChange={handleSearchChange}
+                      onFocus={handleSearchFocus}
+                      onBlur={handleSearchBlur}
                     />
                   </div>
                 ) : (
                   <IconButton
                     color="inherit"
                     aria-label="search"
-                    onClick={() => setOpenSearch(true)}
+                    onClick={() => setIsSearchOpen(true)}
                   >
                     <SearchIcon />
                   </IconButton>
                 )}
               </Toolbar>
             ) : (
-              <Toolbar sx={{ pl: 2, gap: 2 }} ref={toolbarRef}>
+              <Toolbar sx={{ pl: 2, gap: 2 }}>
                 <SearchIcon sx={{ color: "white" }} />
                 <InputBase
                   autoFocus
                   placeholder="Tìm kiếm sản phẩm..."
                   value={query}
-                  onChange={(e) => {
-                    setQuery(e.target.value);
-                    setSearchAnchor(e.currentTarget);
-                  }}
-                  onFocus={(e) => {
-                    setSearchAnchor(e.currentTarget);
-                    if (suggestions.length) setShowPopper(true);
-                  }}
-                  onBlur={() => {
-                    setTimeout(() => setShowPopper(false), 150); // giữ thời gian đóng để click gợi ý không bị mất
-                  }}
+                  onChange={handleSearchChange}
+                  onFocus={handleSearchFocus}
+                  onBlur={handleSearchBlur}
                   sx={{
                     flex: 1,
                     backgroundColor: "white",
@@ -633,25 +651,32 @@ export default function App() {
                     pl: 1,
                   }}
                 />
-                <IconButton onClick={() => setOpenSearch(false)}>
+                <IconButton
+                  onClick={() => {
+                    setIsSearchOpen(false);
+                    setShowPopper(false);
+                  }}
+                  aria-label="Đóng tìm kiếm"
+                >
                   <CloseIcon sx={{ color: "white" }} />
                 </IconButton>
               </Toolbar>
             )}
           </AppBar>
         </div>
+
         <CartDialog
           items={cartItems}
           quantities={quantities}
           setQuantities={setQuantities}
           setCartItems={setCartItems}
           onRemove={removeItem}
-          open={open}
-          handleClose={handleClose}
+          open={isCartOpen}
+          handleClose={closeCart}
           onCheckout={(payload) => {
             // payload sẽ gồm: { items, quantities, subtotal }
-            handleOpenCheckout(payload);
-            setOpen(false); // đóng giỏ hàng
+            openCheckout(payload);
+            closeCart(); // đóng giỏ hàng
           }}
         />
       </div>
@@ -662,11 +687,7 @@ export default function App() {
         onClose={closeSnackbar}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       >
-        <Alert
-          onClose={closeSnackbar}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
+        <Alert onClose={closeSnackbar} severity="success" sx={{ width: "100%" }}>
           {snackbarMsg}
         </Alert>
       </Snackbar>
@@ -678,6 +699,7 @@ export default function App() {
         onPick={(sug) => {
           const item = products?.[sug.category]?.[sug.name];
           if (!item) return;
+
           setProductDialogData({ name: sug.name, item });
           setProductDialogOpen(true);
         }}
@@ -691,11 +713,8 @@ export default function App() {
           open={productDialogOpen}
           handleClose={() => setProductDialogOpen(false)}
           onAddToCart={(product, qty) => {
-            const productWithName = {
-              ...product,
-              name: productDialogData.name,
-            };
-            addToCart(productWithName, qty);
+            // Bổ sung name từ dialog để snackbar hiển thị đúng tên
+            addToCart({ ...product, name: productDialogData.name }, qty);
             setProductDialogOpen(false);
           }}
         />
