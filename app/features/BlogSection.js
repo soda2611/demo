@@ -42,6 +42,8 @@ export default function Blog() {
             mb: 2,
             textTransform: "none",
             fontSize: "1rem",
+            borderRadius: 5,
+            paddingX: 2
           }}
         >
           Quay lại danh sách
