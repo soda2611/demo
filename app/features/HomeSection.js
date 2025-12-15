@@ -143,7 +143,7 @@ export default function HomePage({
                 <Button
                   variant="outlined"
                   size="large"
-                  onClick={() => tab(1)}
+                  onClick={() => goCategory(0)}
                   sx={{
                     borderRadius: 999,
                     borderColor: "rgba(255,255,255,0.7)",
