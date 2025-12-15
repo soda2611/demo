@@ -628,7 +628,6 @@ export default function App() {
                         borderRadius: 10,
                         outline: "none",
                         width: "100%",
-                        fontFamily: "Coiny",
                         border: "none",
                       }}
                       placeholder="Tìm sản phẩm..."

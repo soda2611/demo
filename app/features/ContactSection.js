@@ -30,7 +30,7 @@ const INPUT_STYLE = {
   borderRadius: 10,
   outlineColor: "#1faa54ff",
   border: "none",
-  fontFamily: "Coiny",
+  fontFamily: "Calibri",
   padding: 10,
 };
 
@@ -39,7 +39,7 @@ const TEXTAREA_STYLE = {
   borderRadius: 10,
   outlineColor: "#1faa54ff",
   border: "none",
-  fontFamily: "Coiny",
+  fontFamily: "Calibri",
   padding: 10,
 };
 
