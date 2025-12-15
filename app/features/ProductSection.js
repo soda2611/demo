@@ -1,5 +1,5 @@
-// product.js
-import React, { useMemo, useState, useEffect, useRef } from "react";
+//app/features/ProductSection.js
+import React, { useCallback, useMemo, useState, useRef, useEffect } from "react";
 import {
   Box,
   Typography,
@@ -10,8 +10,6 @@ import {
   Slider,
   Select,
   MenuItem,
-  Tabs,
-  Tab,
   IconButton,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -20,20 +18,37 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import ProductCard from "../components/ProductCard";
 import { useIsMobile } from "../hooks/isMobile";
 
-// Helper: chuyển object {category: {name: item}} -> mảng dễ lọc
-const flattenProducts = (productsObj) => {
+const SWIPE_THRESHOLD_PX = 50;
+const SLIDER_STEP = 1000;
+
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function flattenProducts(productsObj = {}) {
   const out = [];
-  Object.entries(productsObj || {}).forEach(([category, items]) => {
+  Object.entries(productsObj).forEach(([category, items]) => {
     Object.entries(items || {}).forEach(([name, item]) => {
       out.push({ category, name, item });
     });
   });
   return out;
-};
+}
 
-// Helper: định dạng tiền VND ngắn gọn
-const formatVND = (v) =>
-  (v ?? 0).toLocaleString("vi-VN", { maximumFractionDigits: 0 });
+function formatVND(v) {
+  return (v ?? 0).toLocaleString("vi-VN", { maximumFractionDigits: 0 });
+}
+
+function getShownPrice(item) {
+  return item?.sale ?? item?.price ?? 0;
+}
+
+function getDiscountRatio(item) {
+  const price = item?.price ?? 0;
+  const sale = item?.sale ?? price;
+  if (price <= 0) return 0;
+  return 1 - sale / price;
+}
 
 export default function ProductPage({
   products = {},
@@ -44,57 +59,60 @@ export default function ProductPage({
 }) {
   const isMobile = useIsMobile();
 
-  useEffect(() => {}, [CategoryTab]);
+  // ---- Filter states ----
+  const [keyword, setKeyword] = useState("");
+  const [onlySale, setOnlySale] = useState(false);
+  const [priceRange, setPriceRange] = useState([0, 200000]);
+  const [sortBy, setSortBy] = useState("default");
 
-  // ---- Trạng thái UI bộ lọc ----
-  const [keyword, setKeyword] = useState(""); // Tìm theo tên/ mô tả
-  const [onlySale, setOnlySale] = useState(false); // Chỉ hiển thị mặt hàng đang giảm (sale < price)
-  const [priceRange, setPriceRange] = useState([0, 200000]); // Khoảng giá VND
-  const [sortBy, setSortBy] = useState("default"); // Sắp xếp
-
-  // Danh sách danh mục từ products
   const categories = useMemo(() => Object.keys(products || {}), [products]);
-  const totalTabs = (categories?.length ?? 0) + 1;
+  const totalTabs = categories.length + 1;
+  const minTab = 0;
+  const maxTab = categories.length;
 
-  // Dữ liệu phẳng để lọc
   const flat = useMemo(() => flattenProducts(products), [products]);
 
-  // Tự động xác định min-max giá để slider hợp lý
   const [minPrice, maxPrice] = useMemo(() => {
     if (!flat.length) return [0, 0];
-    const prices = flat.map((p) => p.item?.sale ?? p.item?.price ?? 0);
+    const prices = flat.map((p) => getShownPrice(p.item));
     return [Math.min(...prices), Math.max(...prices)];
   }, [flat]);
 
-  // Khi dữ liệu/giá trị min-max thay đổi, hiệu chỉnh priceRange nếu cần
   useEffect(() => {
     if (priceRange[0] < minPrice || priceRange[1] > maxPrice) {
       setPriceRange([minPrice, maxPrice]);
     }
-  }, [minPrice, maxPrice]); // eslint-disable-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [minPrice, maxPrice]);
 
-  // ---- Lọc theo bộ tiêu chí ----
+  const goTab = useCallback(
+    (next) => setCategoryTab?.((t) => clamp(next ?? t, minTab, maxTab)),
+    [setCategoryTab, minTab, maxTab]
+  );
+
+  const goPrev = useCallback(() => {
+    setCategoryTab?.((t) => clamp(t - 1, minTab, maxTab));
+  }, [setCategoryTab, minTab, maxTab]);
+
+  const goNext = useCallback(() => {
+    setCategoryTab?.((t) => clamp(t + 1, minTab, maxTab));
+  }, [setCategoryTab, minTab, maxTab]);
+
   const filtered = useMemo(() => {
-    // 1) Theo danh mục (tab = 0: tất cả; >0: theo category)
-    const currentCategory =
-      CategoryTab === 0 ? null : categories[CategoryTab - 1] ?? null;
+    const currentCategory = CategoryTab === 0 ? null : categories[CategoryTab - 1] ?? null;
 
-    let list = flat.filter((p) =>
-      !currentCategory ? true : p.category === currentCategory
-    );
+    let list = currentCategory
+      ? flat.filter((p) => p.category === currentCategory)
+      : [...flat];
 
-    // 2) Từ khóa (name + shortDescription + description)
     const kw = keyword.trim().toLowerCase();
     if (kw) {
       list = list.filter(({ name, item }) => {
-        const hay = `${name} ${item?.shortDescription ?? ""} ${
-          item?.description ?? ""
-        }`.toLowerCase();
+        const hay = `${name} ${item?.shortDescription ?? ""} ${item?.description ?? ""}`.toLowerCase();
         return hay.includes(kw);
       });
     }
 
-    // 3) Chỉ hàng giảm giá
     if (onlySale) {
       list = list.filter(({ item }) => {
         const price = item?.price ?? 0;
@@ -103,27 +121,17 @@ export default function ProductPage({
       });
     }
 
-    // 4) Khoảng giá (dựa vào giá hiển thị: nếu có sale thì dùng sale)
     list = list.filter(({ item }) => {
-      const shown = item?.sale ?? item?.price ?? 0;
+      const shown = getShownPrice(item);
       return shown >= priceRange[0] && shown <= priceRange[1];
     });
 
-    // 5) Sắp xếp
     switch (sortBy) {
       case "priceAsc":
-        list.sort(
-          (a, b) =>
-            (a.item?.sale ?? a.item?.price ?? 0) -
-            (b.item?.sale ?? b.item?.price ?? 0)
-        );
+        list.sort((a, b) => getShownPrice(a.item) - getShownPrice(b.item));
         break;
       case "priceDesc":
-        list.sort(
-          (a, b) =>
-            (b.item?.sale ?? b.item?.price ?? 0) -
-            (a.item?.sale ?? a.item?.price ?? 0)
-        );
+        list.sort((a, b) => getShownPrice(b.item) - getShownPrice(a.item));
         break;
       case "nameAsc":
         list.sort((a, b) => a.name.localeCompare(b.name, "vi"));
@@ -132,29 +140,16 @@ export default function ProductPage({
         list.sort((a, b) => b.name.localeCompare(a.name, "vi"));
         break;
       case "discountDesc":
-        // sắp xếp theo % giảm (cao -> thấp)
-        list.sort((a, b) => {
-          const pa = a.item?.price ?? 0;
-          const sa = a.item?.sale ?? pa;
-          const pb = b.item?.price ?? 0;
-          const sb = b.item?.sale ?? pb;
-          const da = pa > 0 ? 1 - sa / pa : 0;
-          const db = pb > 0 ? 1 - sb / pb : 0;
-          return db - da;
-        });
+        list.sort((a, b) => getDiscountRatio(b.item) - getDiscountRatio(a.item));
         break;
       default:
-        break; // giữ nguyên
+        break;
     }
 
     return list;
   }, [flat, CategoryTab, categories, keyword, onlySale, priceRange, sortBy]);
 
-  // --- SWIPE CONFIG & REFS ---
-  const SWIPE_THRESHOLD = 50; // ngưỡng px để tính là vuốt
-  const MIN_TAB = 0;
-  const MAX_TAB = categories.length; // tab = 0..categories.length (0 = Tất cả)
-
+  // ---- Swipe / Drag refs ----
   const touchStartX = useRef(null);
   const touchStartY = useRef(null);
   const isTouching = useRef(false);
@@ -162,81 +157,68 @@ export default function ProductPage({
   const mouseStartX = useRef(null);
   const isDragging = useRef(false);
 
-  // Mobile: touch handlers
-  const handleTouchStart = (e) => {
+  const handleTouchStart = useCallback((e) => {
     const t = e.touches[0];
     touchStartX.current = t.clientX;
     touchStartY.current = t.clientY;
     isTouching.current = true;
-  };
+  }, []);
 
-  const handleTouchMove = (e) => {
+  const handleTouchMove = useCallback((e) => {
     if (!isTouching.current) return;
+
     const t = e.touches[0];
     const dx = t.clientX - (touchStartX.current ?? t.clientX);
     const dy = t.clientY - (touchStartY.current ?? t.clientY);
-    // Nếu chủ yếu vuốt ngang, hạn chế cuộn dọc mặc định cho mượt
-    if (Math.abs(dx) > Math.abs(dy)) {
-      e.preventDefault();
-    }
-  };
 
-  const handleTouchEnd = (e) => {
-    if (!isTouching.current) return;
-    const ct = e.changedTouches?.[0];
-    const dx = (ct?.clientX ?? 0) - (touchStartX.current ?? 0);
-    const dy = (ct?.clientY ?? 0) - (touchStartY.current ?? 0);
+    // Nếu chủ yếu vuốt ngang thì chặn cuộn dọc để mượt hơn
+    if (Math.abs(dx) > Math.abs(dy)) e.preventDefault();
+  }, []);
 
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SWIPE_THRESHOLD) {
-      if (dx < 0 && CategoryTab < MAX_TAB) {
-        // Vuốt sang trái -> Next
-        setCategoryTab((t) => Math.min(MAX_TAB, t + 1));
-      } else if (dx > 0 && CategoryTab > MIN_TAB) {
-        // Vuốt sang phải -> Prev
-        setCategoryTab((t) => Math.max(MIN_TAB, t - 1));
+  const handleTouchEnd = useCallback(
+    (e) => {
+      if (!isTouching.current) return;
+
+      const ct = e.changedTouches?.[0];
+      const dx = (ct?.clientX ?? 0) - (touchStartX.current ?? 0);
+      const dy = (ct?.clientY ?? 0) - (touchStartY.current ?? 0);
+
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SWIPE_THRESHOLD_PX) {
+        if (dx < 0) goNext();
+        if (dx > 0) goPrev();
       }
-    }
-    isTouching.current = false;
-    touchStartX.current = null;
-    touchStartY.current = null;
-  };
 
-  // Desktop: mouse drag handlers
-  const handleMouseDown = (e) => {
+      isTouching.current = false;
+      touchStartX.current = null;
+      touchStartY.current = null;
+    },
+    [goNext, goPrev]
+  );
+
+  const handleMouseDown = useCallback((e) => {
     isDragging.current = true;
     mouseStartX.current = e.clientX;
-  };
+  }, []);
 
-  const handleMouseMove = (e) => {
-    if (!isDragging.current) return;
-    // Có thể thêm hiệu ứng kéo nếu muốn (parallax, translateX...), để trống cho nhẹ
-  };
+  const handleMouseUp = useCallback(
+    (e) => {
+      if (!isDragging.current) return;
 
-  const handleMouseUp = (e) => {
-    if (!isDragging.current) return;
-    const dx = e.clientX - (mouseStartX.current ?? e.clientX);
-    if (Math.abs(dx) > SWIPE_THRESHOLD) {
-      if (dx < 0 && CategoryTab < MAX_TAB) {
-        setCategoryTab((t) => Math.min(MAX_TAB, t + 1));
-      } else if (dx > 0 && CategoryTab > MIN_TAB) {
-        setCategoryTab((t) => Math.max(MIN_TAB, t - 1));
+      const dx = e.clientX - (mouseStartX.current ?? e.clientX);
+      if (Math.abs(dx) > SWIPE_THRESHOLD_PX) {
+        if (dx < 0) goNext();
+        if (dx > 0) goPrev();
       }
-    }
-    isDragging.current = false;
-    mouseStartX.current = null;
-  };
 
-  // ---- Render ----
+      isDragging.current = false;
+      mouseStartX.current = null;
+    },
+    [goNext, goPrev]
+  );
+
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        width: "80%",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <Box sx={{ display: "flex", flexDirection: "column", width: "80%", alignItems: "center" }}>
+      {/* Banner + swipe */}
       <Box
         key={CategoryTab > 0 ? categories[CategoryTab - 1] : "Sản phẩm"}
         sx={{
@@ -258,15 +240,12 @@ export default function ProductPage({
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
         onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
       >
         <img
           src={
-            CategoryTab > 0
-              ? banners[`${categories[CategoryTab - 1]}`]
-              : "images/branding/banner.jpg"
+            CategoryTab > 0 ? banners?.[categories[CategoryTab - 1]] : "images/branding/banner.jpg"
           }
           alt="Banner"
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
@@ -281,7 +260,6 @@ export default function ProductPage({
             position: "absolute",
             color: "white",
             textAlign: "center",
-            padding: 0,
             borderRadius: 5,
             height: !isMobile ? 200 : 125,
             width: "100%",
@@ -291,14 +269,15 @@ export default function ProductPage({
           <IconButton
             disabled={CategoryTab === 0}
             sx={{ color: "white", height: "100%", borderRadius: 0 }}
-            onClick={() => setCategoryTab((t) => Math.max(0, t - 1))}
+            onClick={goPrev}
             aria-label="Danh mục trước"
           >
             <KeyboardArrowLeftIcon />
           </IconButton>
+
           <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
             <Typography
-              onClick={() => setCategoryTab(CategoryTab - 1)}
+              onClick={() => goTab(CategoryTab - 1)}
               variant="h6"
               component="div"
               sx={{
@@ -308,15 +287,12 @@ export default function ProductPage({
                 textAlign: "right",
                 width: "26%",
                 cursor: "pointer",
-                "@media (max-width:500px)": {
-                  fontSize: 14,
-                  textAlign: "center",
-                },
+                "@media (max-width:500px)": { fontSize: 14, textAlign: "center" },
               }}
             >
-              {CategoryTab > 0 &&
-                (CategoryTab > 1 ? categories[CategoryTab - 2] : "Tất cả")}
+              {CategoryTab > 0 && (CategoryTab > 1 ? categories[CategoryTab - 2] : "Tất cả")}
             </Typography>
+
             <Typography
               variant="h4"
               component="div"
@@ -330,8 +306,9 @@ export default function ProductPage({
             >
               {CategoryTab > 0 ? categories[CategoryTab - 1] : "Tất cả"}
             </Typography>
+
             <Typography
-              onClick={() => setCategoryTab(CategoryTab + 1)}
+              onClick={() => goTab(CategoryTab + 1)}
               variant="h6"
               component="div"
               sx={{
@@ -341,43 +318,38 @@ export default function ProductPage({
                 textAlign: "left",
                 width: "26%",
                 cursor: "pointer",
-                "@media (max-width:500px)": {
-                  fontSize: 14,
-                  textAlign: "center",
-                },
+                "@media (max-width:500px)": { fontSize: 14, textAlign: "center" },
               }}
             >
-              {CategoryTab < MAX_TAB && categories[CategoryTab]}
+              {CategoryTab < maxTab && categories[CategoryTab]}
             </Typography>
           </Box>
+
           <IconButton
             disabled={CategoryTab === totalTabs - 1}
             sx={{ color: "white", height: "100%", borderRadius: 0 }}
-            onClick={() =>
-              setCategoryTab((t) => Math.min(totalTabs - 1, t + 1))
-            }
+            onClick={goNext}
             aria-label="Danh mục tiếp theo"
           >
             <KeyboardArrowRightIcon />
           </IconButton>
 
-          {/* Indicator dạng chấm */}
+          {/* Dots */}
           <Box
             sx={{
               position: "absolute",
               bottom: !isMobile ? 8 : 6,
+              left: "50%",
               transform: "translateX(-50%)",
               display: "flex",
+              alignItems: 'center',
               gap: !isMobile ? 1 : 0.75,
               px: 1,
               py: 0.5,
               borderRadius: 999,
               bgcolor: "rgba(0,0,0,0.3)",
-              alignItems: "center",
-              justifyContent: "center",
               "@media (max-width:240px)": { display: "none" },
-              "@media (max-width:500px)": { transform: "scale(0.7)" },
-              "@media (min-width:500px)": { left: "50%" },
+              "@media (max-width:500px)": { transform: "translateX(-50%) scale(0.7)" },
             }}
           >
             {Array.from({ length: totalTabs }).map((_, i) => {
@@ -386,22 +358,17 @@ export default function ProductPage({
                 <Box
                   key={`dot-${i}`}
                   role="button"
-                  aria-label={
-                    i === 0
-                      ? "Chuyển tới tab Tất cả"
-                      : `Chuyển tới tab ${categories[i - 1]}`
-                  }
                   tabIndex={0}
-                  onClick={() => setCategoryTab(i)}
+                  aria-label={i === 0 ? "Chuyển tới tab Tất cả" : `Chuyển tới tab ${categories[i - 1]}`}
+                  onClick={() => goTab(i)}
                   onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") setCategoryTab(i);
+                    if (e.key === "Enter" || e.key === " ") goTab(i);
                   }}
                   sx={{
                     width: isActive ? 12 : 8,
                     height: isActive ? 12 : 8,
                     borderRadius: "50%",
                     bgcolor: isActive ? "white" : "rgba(255,255,255,0.5)",
-                    outline: "none",
                     transition: "all 0.2s ease",
                     cursor: "pointer",
                     "&:hover": {
@@ -419,24 +386,21 @@ export default function ProductPage({
         </Box>
       </Box>
 
-      {/* Khu vực bộ lọc */}
+      {/* Filters */}
       <Box
         sx={{
           display: "flex",
-          flexDirection: isMobile && "column",
+          flexDirection: isMobile ? "column" : "row",
           alignItems: "center",
           justifyContent: "right",
           gap: 2,
           mb: 5,
         }}
       >
-        {/* Tìm kiếm */}
         <TextField
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
-          placeholder={
-            isMobile ? "Tìm sản phẩm" : "Tìm sản phẩm (tên, mô tả)..."
-          }
+          placeholder="Tìm sản phẩm (tên, mô tả)..."
           size="small"
           InputProps={{
             startAdornment: (
@@ -445,41 +409,23 @@ export default function ProductPage({
               </InputAdornment>
             ),
           }}
+          sx={{ width: 250 }}
         />
 
-        {/* Chỉ hàng giảm giá */}
         <FormControlLabel
-          control={
-            <Checkbox
-              checked={onlySale}
-              onChange={(e) => setOnlySale(e.target.checked)}
-            />
-          }
+          control={<Checkbox checked={onlySale} onChange={(e) => setOnlySale(e.target.checked)} />}
           label="Hàng đang giảm giá"
         />
 
         {!isMobile && (
           <Box
             component="hr"
-            sx={{
-              border: "none",
-              width: "2px",
-              height: 24,
-              bgcolor: "black",
-              mr: 2,
-              display: "inline-block",
-            }}
+            sx={{ border: "none", width: "2px", height: 24, bgcolor: "black", mr: 2 }}
           />
         )}
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-          {/* Sắp xếp */}
-          <Select
-            size="small"
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-            displayEmpty
-          >
+          <Select size="small" value={sortBy} onChange={(e) => setSortBy(e.target.value)} displayEmpty>
             <MenuItem value="default">Mặc định</MenuItem>
             <MenuItem value="priceAsc">Giá ↑</MenuItem>
             <MenuItem value="priceDesc">Giá ↓</MenuItem>
@@ -488,17 +434,15 @@ export default function ProductPage({
             <MenuItem value="discountDesc">% giảm ↓</MenuItem>
           </Select>
 
-          {/* Khoảng giá */}
           <Box sx={{ px: 1 }}>
             <Typography variant="caption" sx={{ display: "block", mb: 0.5 }}>
-              Khoảng giá: {formatVND(priceRange[0])}₫ –{" "}
-              {formatVND(priceRange[1])}₫
+              Khoảng giá: {formatVND(priceRange[0])}₫ – {formatVND(priceRange[1])}₫
             </Typography>
             <Slider
               value={priceRange}
               min={minPrice}
               max={maxPrice}
-              step={1000}
+              step={SLIDER_STEP}
               onChange={(_, v) => setPriceRange(v)}
               valueLabelDisplay="auto"
             />
@@ -506,7 +450,7 @@ export default function ProductPage({
         </Box>
       </Box>
 
-      {/* Lưới sản phẩm */}
+      {/* Grid products */}
       <Box
         sx={{
           width: "100%",
@@ -523,18 +467,14 @@ export default function ProductPage({
             key={`${category}__${name}`}
             name={name}
             item={item}
-            // FIX: gắn name vào object product trước khi gọi lên trên
             onAddToCart={(product, qty) => {
-              // product ở đây thường là `item` từ ProductDialog
-              // Ta chuẩn hóa lại để luôn có `name`
-              const normalized = { name, ...product };
-              onAddToCart?.(normalized, qty);
+              // FIX nghiệp vụ snackbar/giỏ: luôn đảm bảo có `name` khi gọi lên trên
+              onAddToCart?.({ name, ...product }, qty);
             }}
           />
         ))}
       </Box>
 
-      {/* Trạng thái rỗng */}
       {filtered.length === 0 && (
         <Box sx={{ py: 6, textAlign: "center", opacity: 0.7 }}>
           <Typography>Không tìm thấy sản phẩm phù hợp bộ lọc.</Typography>
