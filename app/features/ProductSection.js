@@ -381,7 +381,7 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
       </Box>
 
       {/* Khu vực bộ lọc */}
-        <Box sx={{ display: 'flex', flexDirection: isMobile && "column", alignItems: 'center', justifyContent: 'right', gap: 2 }}>
+        <Box sx={{ display: 'flex', flexDirection: isMobile && "column", alignItems: 'center', justifyContent: 'right', gap: 2, mb: 5 }}>
           {/* Tìm kiếm */}
           <TextField
             value={keyword}
