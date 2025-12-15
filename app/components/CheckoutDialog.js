@@ -1,5 +1,5 @@
 // app/components/CheckoutDialog.js
-import React, { useState, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -13,21 +13,54 @@ import {
   FormControlLabel,
   Radio,
   FormControl,
-  FormLabel,
   Divider,
   CircularProgress,
   Alert,
 } from "@mui/material";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle"; // Nhớ cài @mui/icons-material
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AddressForm from "./AddressForm";
 
-// Cấu hình thông tin ngân hàng của bạn (Demo)
 const BANK_INFO = {
-  bankId: "MB", // Ví dụ: MB, VCB, ACB, TPB...
-  accountNo: "4579444444", // Thay số tài khoản của bạn vào đây
-  accountName: "DANG HOANG BAO HUY", // Tên chủ tài khoản
-  template: "compact", // Kiểu hiển thị QR
+  bankId: "MB",
+  accountNo: "79797979",
+  accountName: "GREENFARM STORE",
+  template: "compact",
 };
+
+const COUPON_RULES = {
+  GREEN10: 10,
+  GREEN20: 20,
+  GREEN50: 50,
+  GREEN90: 90,
+  GREEN100: 100,
+};
+
+const PAYMENT_CHECK_DELAY_MS = 5000;
+
+const INITIAL_FORM = {
+  fullName: "",
+  phone: "",
+  email: "",
+  street: "",
+  province: "",
+  district: "",
+  ward: "",
+  note: "",
+  coupon: "",
+  paymentMethod: "cod",
+};
+
+function buildFullAddress(form) {
+  return `${form.street}, ${form.ward}, ${form.district}, ${form.province}`;
+}
+
+function buildVietQrUrl({ total, phone }) {
+  const amount = Math.floor(total);
+  const addInfo = `GREENFARM ${phone || ""}`.trim();
+  return `https://img.vietqr.io/image/${BANK_INFO.bankId}-${BANK_INFO.accountNo}-${BANK_INFO.template}.png?amount=${amount}&addInfo=${encodeURIComponent(
+    addInfo
+  )}`;
+}
 
 export default function CheckoutDialog({
   open,
@@ -36,96 +69,82 @@ export default function CheckoutDialog({
   subtotal = 0,
   onSuccess,
 }) {
-  const [form, setForm] = useState({
-    fullName: "",
-    phone: "",
-    email: "",
-    street: "",
-    province: "",
-    district: "",
-    ward: "",
-    note: "",
-    coupon: "",
-    paymentMethod: "cod",
-  });
+  const [form, setForm] = useState(INITIAL_FORM);
 
   const [error, setError] = useState("");
   const [discountPercent, setDiscountPercent] = useState(0);
   const [appliedVoucher, setAppliedVoucher] = useState(null);
 
-  // State mới cho việc xử lý thanh toán QR
-  const [isCheckingPayment, setIsCheckingPayment] = useState(false); // Đang loading
-  const [isPaid, setIsPaid] = useState(false); // Đã thanh toán thành công chưa
+  const [isCheckingPayment, setIsCheckingPayment] = useState(false);
+  const [isPaid, setIsPaid] = useState(false);
 
-  const discountAmount = subtotal * (discountPercent / 100);
-  const total = subtotal - discountAmount;
+  const discountAmount = useMemo(
+    () => subtotal * (discountPercent / 100),
+    [subtotal, discountPercent]
+  );
 
-  // Tạo Link QR động dựa trên số tiền (API VietQR)
-  // Cấu trúc: https://img.vietqr.io/image/<BANK_ID>-<TK>-<TEMPLATE>.png?amount=<TIEN>&addInfo=<NOIDUNG>
-  const qrCodeUrl = `https://img.vietqr.io/image/${BANK_INFO.bankId}-${
-    BANK_INFO.accountNo
-  }-${BANK_INFO.template}.png?amount=${Math.floor(total)}&addInfo=GREENFARM ${
-    form.phone
-  }`;
+  const total = useMemo(() => subtotal - discountAmount, [subtotal, discountAmount]);
 
-  // FORM CHANGE
-  const handleChange = (field) => (e) => {
-    const value =
-      e.target.type === "checkbox" ? e.target.checked : e.target.value;
-    setForm((prev) => ({ ...prev, [field]: value }));
-  };
+  const qrCodeUrl = useMemo(
+    () => buildVietQrUrl({ total, phone: form.phone }),
+    [total, form.phone]
+  );
 
-  // APPLY COUPON
-  const handleApplyCoupon = () => {
-    const code = form.coupon.trim().toUpperCase();
-    if (code === "GREEN10") {
-      setDiscountPercent(10);
-      setAppliedVoucher("GREEN10");
-      setError("");
-    } else if (code === "GREEN20") {
-      setDiscountPercent(20);
-      setAppliedVoucher("GREEN20");
-      setError("");
-    } else if (!code) {
+  const handleChange = useCallback(
+    (field) => (e) => {
+      const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+      setForm((prev) => ({ ...prev, [field]: value }));
+    },
+    []
+  );
+
+  const handleApplyCoupon = useCallback(() => {
+    const code = String(form.coupon || "").trim().toUpperCase();
+
+    if (!code) {
       setDiscountPercent(0);
       setAppliedVoucher(null);
       setError("");
-    } else {
+      return;
+    }
+
+    const percent = COUPON_RULES[code];
+    if (!percent) {
       setDiscountPercent(0);
       setAppliedVoucher(null);
       setError("Mã giảm giá không hợp lệ.");
+      return;
     }
-  };
 
-  // Giả lập kiểm tra thanh toán (Simulation)
-  const handleCheckPayment = () => {
+    setDiscountPercent(percent);
+    setAppliedVoucher(code);
+    setError("");
+  }, [form.coupon]);
+
+  const handleCheckPayment = useCallback(() => {
     setIsCheckingPayment(true);
     setError("");
 
-    // Giả vờ đợi 3 giây để kiểm tra giao dịch
     setTimeout(() => {
       setIsCheckingPayment(false);
-      setIsPaid(true); // Gán trạng thái đã thanh toán
-    }, 3000);
-  };
+      setIsPaid(true);
+    }, PAYMENT_CHECK_DELAY_MS);
+  }, []);
 
-  // SUBMIT
-  const handleSubmit = () => {
-    const hasAddress =
-      form.street && form.province && form.district && form.ward;
+  const handleSubmit = useCallback(() => {
+    const hasAddress = form.street && form.province && form.district && form.ward;
 
     if (!form.fullName || !form.phone || !hasAddress) {
       setError("Vui lòng nhập đầy đủ Họ tên, Số điện thoại và Địa chỉ.");
       return;
     }
 
-    // Logic chặn nếu chọn chuyển khoản mà chưa "thành công"
     if (form.paymentMethod === "transfer" && !isPaid) {
       setError("Vui lòng hoàn tất chuyển khoản trước khi đặt hàng.");
       return;
     }
 
-    const fullAddress = `${form.street}, ${form.ward}, ${form.district}, ${form.province}`;
+    const fullAddress = buildFullAddress(form);
 
     onSuccess?.({
       customer: {
@@ -141,39 +160,29 @@ export default function CheckoutDialog({
         discountPercent,
         subtotal,
         total,
-        status: isPaid ? "paid" : "pending", // Lưu trạng thái thanh toán
+        status: isPaid ? "paid" : "pending",
       },
       items,
     });
-  };
+  }, [appliedVoucher, discountPercent, form, isPaid, items, onSuccess, subtotal, total]);
 
-  // RESET form khi đóng dialog
+  // Reset state khi đóng dialog
   useEffect(() => {
-    if (!open) {
-      setDiscountPercent(0);
-      setAppliedVoucher(null);
-      setIsPaid(false); // Reset trạng thái thanh toán
-      setIsCheckingPayment(false);
-      setForm({
-        fullName: "",
-        phone: "",
-        email: "",
-        street: "",
-        province: "",
-        district: "",
-        ward: "",
-        note: "",
-        coupon: "",
-        paymentMethod: "cod",
-      });
-    }
+    if (open) return;
+
+    setDiscountPercent(0);
+    setAppliedVoucher(null);
+    setIsPaid(false);
+    setIsCheckingPayment(false);
+    setError("");
+    setForm(INITIAL_FORM);
   }, [open]);
 
-  // Reset trạng thái thanh toán nếu người dùng đổi phương thức hoặc đổi tiền
+  // Reset trạng thái thanh toán khi đổi phương thức hoặc tổng tiền thay đổi
   useEffect(() => {
-    if (isPaid) setIsPaid(false);
-  }, [total, form.paymentMethod]);
-
+    if (!open) return;          // chỉ reset khi dialog đang mở
+    setIsPaid(false);
+  }, [total, form.paymentMethod, open]);
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
       <DialogTitle>
@@ -190,7 +199,7 @@ export default function CheckoutDialog({
             gap: 4,
           }}
         >
-          {/* CỘT TRÁI: Thông tin khách hàng */}
+          {/* CỘT TRÁI */}
           <Box>
             <Typography variant="subtitle1" fontWeight={600} mb={2} color="primary">
               1. Thông tin giao hàng
@@ -220,19 +229,17 @@ export default function CheckoutDialog({
               value={form.email}
               onChange={handleChange("email")}
             />
-            
+
             <Box sx={{ mb: 2 }}>
-                <AddressForm
+              <AddressForm
                 value={{
-                    street: form.street,
-                    province: form.province,
-                    district: form.district,
-                    ward: form.ward,
+                  street: form.street,
+                  province: form.province,
+                  district: form.district,
+                  ward: form.ward,
                 }}
-                onChange={(addr) =>
-                    setForm((prev) => ({ ...prev, ...addr }))
-                }
-                />
+                onChange={(addr) => setForm((prev) => ({ ...prev, ...addr }))}
+              />
             </Box>
 
             <TextField
@@ -246,17 +253,14 @@ export default function CheckoutDialog({
             />
           </Box>
 
-          {/* CỘT PHẢI: Thanh toán */}
+          {/* CỘT PHẢI */}
           <Box>
             <Typography variant="subtitle1" fontWeight={600} mb={2} color="primary">
               2. Phương thức thanh toán
             </Typography>
 
             <FormControl component="fieldset" sx={{ mb: 2, width: "100%" }}>
-              <RadioGroup
-                value={form.paymentMethod}
-                onChange={handleChange("paymentMethod")}
-              >
+              <RadioGroup value={form.paymentMethod} onChange={handleChange("paymentMethod")}>
                 <FormControlLabel
                   value="cod"
                   control={<Radio />}
@@ -270,7 +274,6 @@ export default function CheckoutDialog({
               </RadioGroup>
             </FormControl>
 
-            {/* LOGIC QR CODE */}
             {form.paymentMethod === "transfer" && (
               <Box
                 sx={{
@@ -287,8 +290,7 @@ export default function CheckoutDialog({
                     <Typography variant="body2" mb={1} fontWeight="bold">
                       Quét mã để thanh toán {total.toLocaleString("vi-VN")}đ
                     </Typography>
-                    
-                    {/* HÌNH ẢNH QR ĐỘNG TỪ VIETQR */}
+
                     <Box
                       component="img"
                       src={qrCodeUrl}
@@ -300,14 +302,14 @@ export default function CheckoutDialog({
                         borderRadius: 2,
                         mb: 2,
                         bgcolor: "white",
-                        p: 1
+                        p: 1,
                       }}
                     />
 
                     <Typography variant="caption" display="block" mb={2}>
-                        Nội dung: <b>GREENFARM {form.phone}</b>
-                        <br/>
-                        (Hệ thống tự động kiểm tra sau khi bạn bấm nút dưới)
+                      Nội dung: <b>GREENFARM {form.phone}</b>
+                      <br />
+                      (Hệ thống tự động kiểm tra sau khi bạn bấm nút dưới)
                     </Typography>
 
                     <Button
@@ -316,7 +318,9 @@ export default function CheckoutDialog({
                       fullWidth
                       onClick={handleCheckPayment}
                       disabled={isCheckingPayment}
-                      startIcon={isCheckingPayment && <CircularProgress size={20} color="inherit" />}
+                      startIcon={
+                        isCheckingPayment ? <CircularProgress size={20} color="inherit" /> : null
+                      }
                     >
                       {isCheckingPayment ? "Đang kiểm tra giao dịch..." : "Tôi đã chuyển khoản"}
                     </Button>
@@ -327,9 +331,7 @@ export default function CheckoutDialog({
                     <Typography variant="h6" color="green" fontWeight="bold">
                       Thanh toán thành công!
                     </Typography>
-                    <Typography variant="body2">
-                      Đơn hàng đã được xác nhận thanh toán.
-                    </Typography>
+                    <Typography variant="body2">Đơn hàng đã được xác nhận thanh toán.</Typography>
                   </Box>
                 )}
               </Box>
@@ -337,7 +339,6 @@ export default function CheckoutDialog({
 
             <Divider sx={{ my: 2 }} />
 
-            {/* MÃ GIẢM GIÁ */}
             <Typography variant="caption" fontWeight={600} mb={1} display="block">
               Mã giảm giá
             </Typography>
@@ -346,34 +347,36 @@ export default function CheckoutDialog({
                 placeholder="Nhập mã (GREEN10)"
                 value={form.coupon}
                 onChange={handleChange("coupon")}
-                sx={{flexGrow: 1  }}
+                sx={{ flexGrow: 1 }}
               />
               <Button variant="outlined" onClick={handleApplyCoupon} size="small">
                 Áp dụng
               </Button>
             </Box>
 
-            {/* TỔNG KẾT */}
             <Box sx={{ bgcolor: "#fafafa", p: 2, borderRadius: 2 }}>
-                <Box sx={{ display: "flex", justifyContent: "space-between", mb: 0.5 }}>
+              <Box sx={{ display: "flex", justifyContent: "space-between", mb: 0.5 }}>
                 <Typography variant="body2">Tạm tính</Typography>
                 <Typography variant="body2">{subtotal.toLocaleString("vi-VN")} đ</Typography>
-                </Box>
-                <Box sx={{ display: "flex", justifyContent: "space-between", mb: 0.5 }}>
+              </Box>
+
+              <Box sx={{ display: "flex", justifyContent: "space-between", mb: 0.5 }}>
                 <Typography variant="body2">Giảm giá</Typography>
                 <Typography variant="body2" color="error">
-                    {discountPercent > 0 ? `-${discountPercent}%` : "0đ"}
+                  {discountPercent > 0 ? `-${discountPercent}%` : "0đ"}
                 </Typography>
-                </Box>
-                <Divider sx={{ my: 1 }} />
-                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              </Box>
+
+              <Divider sx={{ my: 1 }} />
+
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Typography variant="subtitle1" fontWeight={700}>
-                    Tổng cộng
+                  Tổng cộng
                 </Typography>
                 <Typography variant="subtitle1" fontWeight={700} color="primary">
-                    {total.toLocaleString("vi-VN")} đ
+                  {total.toLocaleString("vi-VN")} đ
                 </Typography>
-                </Box>
+              </Box>
             </Box>
 
             {error && (
@@ -389,12 +392,12 @@ export default function CheckoutDialog({
         <Button onClick={onClose} color="inherit">
           Đóng
         </Button>
-        <Button 
-            variant="contained" 
-            color="success" 
-            size="large"
-            onClick={handleSubmit}
-            disabled={form.paymentMethod === 'transfer' && !isPaid} // Disable nếu chưa thanh toán
+        <Button
+          variant="contained"
+          color="success"
+          size="large"
+          onClick={handleSubmit}
+          disabled={form.paymentMethod === "transfer" && !isPaid}
         >
           Hoàn tất đơn hàng
         </Button>

@@ -1,90 +1,75 @@
-
-// ./NumberSpinner.jsx
-import React from "react";
+// app/components/NumberSpinner.js
+import React, { useCallback, useMemo } from "react";
 import { Box, IconButton, TextField } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
+
+const BUTTON_SX = { bgcolor: "#d1d1d1ff", borderRadius: 1 };
 
 export default function NumberSpinner({
   value,
   onChange,
   min = 0,
-  // CHO PHÉP VÔ HẠN: dùng Infinity là không giới hạn
   max = Infinity,
   size = "small",
 }) {
-  const toNumber = (v) => {
-    const n = Number(v);
-    return Number.isNaN(n) ? min : n;
-  };
+  const hasMax = Number.isFinite(max);
 
-  // Nếu max = Infinity hoặc undefined => bỏ giới hạn trên
-  const clamp = (n) => {
-    const boundedMin = Math.max(min, n);
-    const hasMax = Number.isFinite(max); // chỉ clamp max nếu là số hữu hạn
-    return hasMax ? Math.min(max, boundedMin) : boundedMin;
-  };
+  const toNumber = useCallback(
+    (v) => {
+      const n = Number(v);
+      return Number.isNaN(n) ? min : n;
+    },
+    [min]
+  );
 
-  const handleMinus = () => {
-    const n = clamp(toNumber(value) - 1);
-    onChange?.(n);
-  };
+  const clamp = useCallback(
+    (n) => {
+      const boundedMin = Math.max(min, n);
+      return hasMax ? Math.min(max, boundedMin) : boundedMin;
+    },
+    [hasMax, max, min]
+  );
 
-  const handlePlus = () => {
-    // KHÔNG giới hạn max khi vô hạn
-    const current = toNumber(value);
-    const next = current + 1;
-    onChange?.(clamp(next));
-  };
+  const handleMinus = useCallback(() => {
+    onChange?.(clamp(toNumber(value) - 1));
+  }, [clamp, onChange, toNumber, value]);
 
-  const handleInput = (e) => {
-    const n = clamp(toNumber(e.target.value));
-    onChange?.(n);
-  };
+  const handlePlus = useCallback(() => {
+    onChange?.(clamp(toNumber(value) + 1));
+  }, [clamp, onChange, toNumber, value]);
 
-  // Không set inputProps.max khi max là vô hạn để tránh browser chặn
-  const inputProps = Number.isFinite(max)
-    ? { min, max }
-    : { min };
+  const handleInput = useCallback(
+    (e) => {
+      onChange?.(clamp(toNumber(e.target.value)));
+    },
+    [clamp, onChange, toNumber]
+  );
+
+  const inputProps = useMemo(() => (hasMax ? { min, max } : { min }), [hasMax, max, min]);
 
   return (
     <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-      <IconButton
-        size={size}
-        onClick={handleMinus}
-        aria-label="decrement"
-        sx={{ bgcolor: '#d1d1d1ff', borderRadius: 1 }}
-      >
+      <IconButton size={size} onClick={handleMinus} aria-label="decrement" sx={BUTTON_SX}>
         <RemoveIcon />
       </IconButton>
+
       <TextField
         type="number"
         size={size}
-        value={value} // controlled
+        value={value}
         onChange={handleInput}
         inputProps={inputProps}
         sx={{
           width: 60,
           "& input": { textAlign: "center" },
-          "& input[type=number]::-webkit-inner-spin-button": {
-            WebkitAppearance: "none",
-            margin: 0,
-          },
-          "& input[type=number]::-webkit-outer-spin-button": {
-            WebkitAppearance: "none",
-            margin: 0,
-          },
-          "& input[type=number]": {
-            MozAppearance: "textfield",
-          },
+          "& input[type=number]::-webkit-inner-spin-button": { WebkitAppearance: "none", margin: 0 },
+          "& input[type=number]::-webkit-outer-spin-button": { WebkitAppearance: "none", margin: 0 },
+          "& input[type=number]": { MozAppearance: "textfield" },
         }}
       />
-      <IconButton
-        size={size}
-        onClick={handlePlus}
-        aria-label="increment"
-        sx={{ bgcolor: '#d1d1d1ff', borderRadius: 1 }}
-      >
+
+      <IconButton size={size} onClick={handlePlus} aria-label="increment" sx={BUTTON_SX}>
         <AddIcon />
       </IconButton>
     </Box>
