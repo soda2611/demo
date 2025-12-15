@@ -35,11 +35,18 @@ const flattenProducts = (productsObj) => {
 const formatVND = (v) =>
   (v ?? 0).toLocaleString("vi-VN", { maximumFractionDigits: 0 });
 
-export default function ProductPage({ products = {}, banners, onAddToCart }) {
+export default function ProductPage({
+  products = {},
+  banners,
+  onAddToCart,
+  CategoryTab,
+  setCategoryTab,
+}) {
   const isMobile = useIsMobile();
 
+  useEffect(() => {}, [CategoryTab]);
+
   // ---- Trạng thái UI bộ lọc ----
-  const [tab, setTab] = useState(0); // Tab "Tất cả" + từng danh mục
   const [keyword, setKeyword] = useState(""); // Tìm theo tên/ mô tả
   const [onlySale, setOnlySale] = useState(false); // Chỉ hiển thị mặt hàng đang giảm (sale < price)
   const [priceRange, setPriceRange] = useState([0, 200000]); // Khoảng giá VND
@@ -69,7 +76,8 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
   // ---- Lọc theo bộ tiêu chí ----
   const filtered = useMemo(() => {
     // 1) Theo danh mục (tab = 0: tất cả; >0: theo category)
-    const currentCategory = tab === 0 ? null : categories[tab - 1] ?? null;
+    const currentCategory =
+      CategoryTab === 0 ? null : categories[CategoryTab - 1] ?? null;
 
     let list = flat.filter((p) =>
       !currentCategory ? true : p.category === currentCategory
@@ -140,7 +148,7 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
     }
 
     return list;
-  }, [flat, tab, categories, keyword, onlySale, priceRange, sortBy]);
+  }, [flat, CategoryTab, categories, keyword, onlySale, priceRange, sortBy]);
 
   // --- SWIPE CONFIG & REFS ---
   const SWIPE_THRESHOLD = 50; // ngưỡng px để tính là vuốt
@@ -180,12 +188,12 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
     const dy = (ct?.clientY ?? 0) - (touchStartY.current ?? 0);
 
     if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SWIPE_THRESHOLD) {
-      if (dx < 0 && tab < MAX_TAB) {
+      if (dx < 0 && CategoryTab < MAX_TAB) {
         // Vuốt sang trái -> Next
-        setTab((t) => Math.min(MAX_TAB, t + 1));
-      } else if (dx > 0 && tab > MIN_TAB) {
+        setCategoryTab((t) => Math.min(MAX_TAB, t + 1));
+      } else if (dx > 0 && CategoryTab > MIN_TAB) {
         // Vuốt sang phải -> Prev
-        setTab((t) => Math.max(MIN_TAB, t - 1));
+        setCategoryTab((t) => Math.max(MIN_TAB, t - 1));
       }
     }
     isTouching.current = false;
@@ -208,10 +216,10 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
     if (!isDragging.current) return;
     const dx = e.clientX - (mouseStartX.current ?? e.clientX);
     if (Math.abs(dx) > SWIPE_THRESHOLD) {
-      if (dx < 0 && tab < MAX_TAB) {
-        setTab((t) => Math.min(MAX_TAB, t + 1));
-      } else if (dx > 0 && tab > MIN_TAB) {
-        setTab((t) => Math.max(MIN_TAB, t - 1));
+      if (dx < 0 && CategoryTab < MAX_TAB) {
+        setCategoryTab((t) => Math.min(MAX_TAB, t + 1));
+      } else if (dx > 0 && CategoryTab > MIN_TAB) {
+        setCategoryTab((t) => Math.max(MIN_TAB, t - 1));
       }
     }
     isDragging.current = false;
@@ -230,7 +238,7 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
       }}
     >
       <Box
-        key={tab > 0 ? categories[tab - 1] : "Sản phẩm"}
+        key={CategoryTab > 0 ? categories[CategoryTab - 1] : "Sản phẩm"}
         sx={{
           backgroundColor: "primary.main",
           height: !isMobile ? 200 : 125,
@@ -256,8 +264,8 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
       >
         <img
           src={
-            tab > 0
-              ? banners[`${categories[tab - 1]}`]
+            CategoryTab > 0
+              ? banners[`${categories[CategoryTab - 1]}`]
               : "images/branding/banner.jpg"
           }
           alt="Banner"
@@ -281,42 +289,73 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
           }}
         >
           <IconButton
-            disabled={tab === 0}
+            disabled={CategoryTab === 0}
             sx={{ color: "white", height: "100%", borderRadius: 0 }}
-            onClick={() => setTab((t) => Math.max(0, t - 1))}
+            onClick={() => setCategoryTab((t) => Math.max(0, t - 1))}
             aria-label="Danh mục trước"
           >
             <KeyboardArrowLeftIcon />
           </IconButton>
-          <Box sx={{display: 'flex', alignItems: 'center', flexGrow: 1}}>
+          <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
             <Typography
-              onClick={() => setTab(tab - 1)}
+              onClick={() => setCategoryTab(CategoryTab - 1)}
               variant="h6"
               component="div"
-              sx={{ fontWeight: "bold", mb: 1, color: "#ffffff6c", textAlign: "right", width: "26%", cursor: 'pointer', "@media (max-width:500px)": {fontSize: 14, textAlign: 'center'} }}
+              sx={{
+                fontWeight: "bold",
+                mb: 1,
+                color: "#ffffff6c",
+                textAlign: "right",
+                width: "26%",
+                cursor: "pointer",
+                "@media (max-width:500px)": {
+                  fontSize: 14,
+                  textAlign: "center",
+                },
+              }}
             >
-              {(tab > 0) && (tab > 1 ? categories[tab - 2] : "Tất cả")}
+              {CategoryTab > 0 &&
+                (CategoryTab > 1 ? categories[CategoryTab - 2] : "Tất cả")}
             </Typography>
             <Typography
               variant="h4"
               component="div"
-              sx={{ fontWeight: "bold", mb: 1, color: "white", width: "48%", "@media (max-width:500px)": {fontSize: 24} }}
+              sx={{
+                fontWeight: "bold",
+                mb: 1,
+                color: "white",
+                width: "48%",
+                "@media (max-width:500px)": { fontSize: 24 },
+              }}
             >
-              {tab > 0 ? categories[tab - 1] : "Tất cả"}
+              {CategoryTab > 0 ? categories[CategoryTab - 1] : "Tất cả"}
             </Typography>
             <Typography
-              onClick={() => setTab(tab + 1)}
+              onClick={() => setCategoryTab(CategoryTab + 1)}
               variant="h6"
               component="div"
-              sx={{ fontWeight: "bold", mb: 1, color: "#ffffff6c", textAlign: "left", width: "26%", cursor: 'pointer', "@media (max-width:500px)": {fontSize: 14, textAlign: 'center'} }}
+              sx={{
+                fontWeight: "bold",
+                mb: 1,
+                color: "#ffffff6c",
+                textAlign: "left",
+                width: "26%",
+                cursor: "pointer",
+                "@media (max-width:500px)": {
+                  fontSize: 14,
+                  textAlign: "center",
+                },
+              }}
             >
-              {tab < MAX_TAB && categories[tab]}
+              {CategoryTab < MAX_TAB && categories[CategoryTab]}
             </Typography>
           </Box>
           <IconButton
-            disabled={tab === totalTabs - 1}
+            disabled={CategoryTab === totalTabs - 1}
             sx={{ color: "white", height: "100%", borderRadius: 0 }}
-            onClick={() => setTab((t) => Math.min(totalTabs - 1, t + 1))}
+            onClick={() =>
+              setCategoryTab((t) => Math.min(totalTabs - 1, t + 1))
+            }
             aria-label="Danh mục tiếp theo"
           >
             <KeyboardArrowRightIcon />
@@ -338,11 +377,11 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
               justifyContent: "center",
               "@media (max-width:240px)": { display: "none" },
               "@media (max-width:500px)": { transform: "scale(0.7)" },
-              "@media (min-width:500px)": { left: "50%" }
+              "@media (min-width:500px)": { left: "50%" },
             }}
           >
             {Array.from({ length: totalTabs }).map((_, i) => {
-              const isActive = i === tab;
+              const isActive = i === CategoryTab;
               return (
                 <Box
                   key={`dot-${i}`}
@@ -353,9 +392,9 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
                       : `Chuyển tới tab ${categories[i - 1]}`
                   }
                   tabIndex={0}
-                  onClick={() => setTab(i)}
+                  onClick={() => setCategoryTab(i)}
                   onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") setTab(i);
+                    if (e.key === "Enter" || e.key === " ") setCategoryTab(i);
                   }}
                   sx={{
                     width: isActive ? 12 : 8,
@@ -381,32 +420,43 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
       </Box>
 
       {/* Khu vực bộ lọc */}
-        <Box sx={{ display: 'flex', flexDirection: isMobile && "column", alignItems: 'center', justifyContent: 'right', gap: 2, mb: 5 }}>
-          {/* Tìm kiếm */}
-          <TextField
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
-            placeholder={isMobile ? "Tìm sản phẩm" : "Tìm sản phẩm (tên, mô tả)..."}
-            size="small"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: isMobile && "column",
+          alignItems: "center",
+          justifyContent: "right",
+          gap: 2,
+          mb: 5,
+        }}
+      >
+        {/* Tìm kiếm */}
+        <TextField
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+          placeholder={
+            isMobile ? "Tìm sản phẩm" : "Tìm sản phẩm (tên, mô tả)..."
+          }
+          size="small"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
 
-          {/* Chỉ hàng giảm giá */}
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={onlySale}
-                onChange={(e) => setOnlySale(e.target.checked)}
-              />
-            }
-            label="Hàng đang giảm giá"
-          />
+        {/* Chỉ hàng giảm giá */}
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={onlySale}
+              onChange={(e) => setOnlySale(e.target.checked)}
+            />
+          }
+          label="Hàng đang giảm giá"
+        />
 
         {!isMobile && (
           <Box
@@ -422,7 +472,7 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
           />
         )}
 
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
           {/* Sắp xếp */}
           <Select
             size="small"
@@ -441,8 +491,8 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
           {/* Khoảng giá */}
           <Box sx={{ px: 1 }}>
             <Typography variant="caption" sx={{ display: "block", mb: 0.5 }}>
-              Khoảng giá: {formatVND(priceRange[0])}₫ – {formatVND(priceRange[1])}
-              ₫
+              Khoảng giá: {formatVND(priceRange[0])}₫ –{" "}
+              {formatVND(priceRange[1])}₫
             </Typography>
             <Slider
               value={priceRange}

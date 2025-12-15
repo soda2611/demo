@@ -43,6 +43,7 @@ import { useCustomTheme } from "./hooks/theme";
 export default function App() {
   const theme = useCustomTheme();
   const [tab, setTab] = useState(0);
+  const [CategoryTab, setCategoryTab] = useState(0); // Tab "Tất cả" + từng danh mục
 
   const handleTabChange = (event, newValue) => {
     setTab(newValue);
@@ -318,6 +319,7 @@ export default function App() {
                     products={products}
                     onAddToCart={addToCart}
                     tab={setTab}
+                    setCategoryTab={setCategoryTab}
                   />
                 </div>
               )}
@@ -337,6 +339,8 @@ export default function App() {
                     products={products}
                     banners={banners}
                     onAddToCart={addToCart}
+                    CategoryTab={CategoryTab}
+                    setCategoryTab={setCategoryTab}
                   />
                 </div>
               )}
@@ -481,7 +485,14 @@ export default function App() {
 
                 <Box
                   onClick={goHome}
-                  sx={{ display: 'flex', alignItems: 'center', p: 0, borderRadius: 2, gap: 2, cursor: "pointer" }}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    p: 0,
+                    borderRadius: 2,
+                    gap: 2,
+                    cursor: "pointer",
+                  }}
                   aria-label="Về trang chủ"
                 >
                   <img

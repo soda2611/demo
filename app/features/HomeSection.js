@@ -11,7 +11,12 @@ import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { useIsMobile } from "../hooks/isMobile";
 
-export default function HomePage({ products, onAddToCart, tab }) {
+export default function HomePage({
+  products,
+  onAddToCart,
+  tab,
+  setCategoryTab,
+}) {
   const categoryNames = React.useMemo(
     () => (products ? Object.keys(products) : []),
     [products]
@@ -19,8 +24,14 @@ export default function HomePage({ products, onAddToCart, tab }) {
 
   const isMobile = useIsMobile();
 
-  const go = (index) => {
-    if (typeof tab === "function") tab(index);
+  const goCategory = (index) => {
+    // 1. chuyển sang tab Sản phẩm
+    setCategoryTab?.(index);
+
+    // 2. đợi ProductSection mount xong rồi set category
+    setTimeout(() => {
+      tab?.(1);
+    }, 0);
   };
 
   return (
@@ -132,7 +143,7 @@ export default function HomePage({ products, onAddToCart, tab }) {
                 <Button
                   variant="outlined"
                   size="large"
-                  onClick={() => go(1)}
+                  onClick={() => tab(1)}
                   sx={{
                     borderRadius: 999,
                     borderColor: "rgba(255,255,255,0.7)",
@@ -160,10 +171,11 @@ export default function HomePage({ products, onAddToCart, tab }) {
           justifyContent="center"
           sx={{ maxWidth: "1000px" }}
         >
-          {categoryNames.map((cat) => (
+          {categoryNames.map((cat, i) => (
             <Chip
               key={cat}
               label={cat}
+              onClick={() => goCategory(i + 1)}
               icon={<AgricultureIcon fontSize="small" />}
               sx={{
                 borderRadius: 999,
