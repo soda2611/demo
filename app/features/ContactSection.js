@@ -148,7 +148,7 @@ export default function ContactPage() {
               </Typography>
             </div>
             <Typography variant="body1">
-              Hotline: 0123456789
+              Hotline: 0123 456 789
               <br />
               Email: example@mail.host
               <br />
