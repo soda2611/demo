@@ -401,7 +401,15 @@ export default function App() {
             }}
           >
             {!openSearch ? (
-              <Toolbar sx={{ p: 1, gap: 2 }}>
+              <Toolbar
+                sx={{
+                  p: 1,
+                  gap: 2,
+                  "@media (max-width:500px)": {
+                    gap: 0,
+                  },
+                }}
+              >
                 {isMobile ? (
                   <>
                     <IconButton
@@ -490,15 +498,24 @@ export default function App() {
                     alignItems: "center",
                     p: 0,
                     borderRadius: 2,
-                    gap: 2,
+                    gap: 1,
                     cursor: "pointer",
                   }}
                   aria-label="Về trang chủ"
                 >
-                  <img
+                  <Box
+                    component="img"
                     src="images/branding/logo.png"
                     alt="Logo"
-                    style={{ height: 40 }}
+                    sx={{
+                      height: 40,
+                      "@media (max-width:500px)": {
+                        height: "20",
+                      },
+                      "@media (max-width:350px)": {
+                        display: "none",
+                      },
+                    }}
                   />
                   <Typography
                     variant="h5"
@@ -506,9 +523,6 @@ export default function App() {
                     component="div"
                     sx={{
                       color: "white",
-                      "@media (max-width:500px)": {
-                        display: "none",
-                      },
                     }}
                   >
                     GreenFarm
