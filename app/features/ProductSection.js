@@ -381,23 +381,13 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
       </Box>
 
       {/* Khu vực bộ lọc */}
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: isMobile && "column",
-          gap: 2,
-          mb: 5,
-          alignItems: "center",
-        }}
-      >
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'right', gap: 2 }}>
+        <Box sx={{ display: 'flex', flexDirection: isMobile && "column", alignItems: 'center', justifyContent: 'right', gap: 2 }}>
           {/* Tìm kiếm */}
           <TextField
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
             placeholder={isMobile ? "Tìm sản phẩm" : "Tìm sản phẩm (tên, mô tả)..."}
             size="small"
-            sx={{ "@media (max-width: 500px)": {width: "75%"}, "@media (min-width: 500px)": {flexGrow: 1} }}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -417,7 +407,6 @@ export default function ProductPage({ products = {}, banners, onAddToCart }) {
             }
             label="Hàng đang giảm giá"
           />
-        </Box>
 
         {!isMobile && (
           <Box
