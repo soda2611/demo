@@ -1,34 +1,56 @@
-import React, { useState } from "react";
-import {
-  Box,
-  DialogContent,
-  Dialog,
-  Typography,
-  IconButton,
-} from "@mui/material";
-import NumberSpinner from "./NumberSpinner";
+// app/components/ProductDialog.js
+import React, { useCallback, useMemo, useState } from "react";
+import { Box, DialogContent, Dialog, Typography, IconButton } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import NumberSpinner from "./NumberSpinner";
 import { useIsMobile } from "../hooks/isMobile";
 
-export default function ProductDialog({
-  name,
-  item,
-  open,
-  handleClose,
-  onAddToCart,
-}) {
+const IMAGE_SX = {
+  width: 300,
+  height: 400,
+  objectFit: "cover",
+  borderRadius: 2,
+  border: "1px solid black",
+};
+
+const ADD_BUTTON_SX = {
+  fontSize: 14,
+  borderRadius: 2.5,
+  backgroundColor: "primary.main",
+  color: "white",
+  "&:hover": { backgroundColor: "primary.light" },
+};
+
+function toSafeQty(value) {
+  const qty = Number(value);
+  if (!Number.isFinite(qty)) return 1;
+  return Math.max(1, Math.floor(qty));
+}
+
+export default function ProductDialog({ name, item, open, handleClose, onAddToCart }) {
   const isMobile = useIsMobile();
-
-  // ✅ Controlled số lượng
   const [qty, setQty] = useState(1);
-  const handleQtyChange = (v) => setQty(Number(v) || 1);
 
-  const handleAddClick = () => {
+  const hasDiscount = useMemo(() => item?.sale !== item?.price, [item]);
+  const discountText = useMemo(() => {
+    if (!hasDiscount) return null;
+    const sale = Number(item?.sale);
+    const price = Number(item?.price);
+    if (!Number.isFinite(sale) || !Number.isFinite(price) || price <= 0) return null;
+    return `-${(100 - (sale / price) * 100).toFixed(1)}%`;
+  }, [item, hasDiscount]);
+
+  const handleQtyChange = useCallback((v) => setQty(toSafeQty(v)), []);
+
+  const handleAddClick = useCallback(() => {
+    if (!item) return; // edge case: dữ liệu chưa sẵn sàng
     onAddToCart?.(item, qty);
-  };
+  }, [onAddToCart, item, qty]);
+
+  if (!item) return null;
 
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth={"lg"}>
+    <Dialog open={open} onClose={handleClose} maxWidth="lg">
       <DialogContent
         sx={{
           display: "flex",
@@ -39,17 +61,8 @@ export default function ProductDialog({
           overflowX: "hidden",
         }}
       >
-        <Box
-          component={"img"}
-          src={item["img"]}
-          sx={{
-            width: 300,
-            height: 400,
-            objectFit: "cover",
-            borderRadius: 2,
-            border: "1px solid black",
-          }}
-        />
+        <Box component="img" src={item.img} sx={IMAGE_SX} />
+
         <Box
           sx={{
             display: "flex",
@@ -58,16 +71,15 @@ export default function ProductDialog({
             height: 400,
             borderRadius: 2,
             gap: 2,
-            overflowY: !isMobile ? 'auto' : undefined
+            overflowY: !isMobile ? "auto" : undefined,
           }}
         >
-          <Typography variant="h3" sx={{ fontWeight: 'bold' }}>{name}</Typography>
+          <Typography variant="h3" sx={{ fontWeight: "bold" }}>
+            {name}
+          </Typography>
 
-          <Typography
-            variant={isMobile ? "body2" : "h6"}
-            color="text.secondary"
-          >
-            {item["shortDescription"]}
+          <Typography variant={isMobile ? "body2" : "h6"} color="text.secondary">
+            {item.shortDescription}
           </Typography>
 
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -76,36 +88,33 @@ export default function ProductDialog({
               component="div"
               sx={{ fontWeight: "bold", color: "primary.main" }}
             >
-              {item["sale"]?.toLocaleString("vi-VN")}₫
+              {item.sale?.toLocaleString("vi-VN")}₫
             </Typography>
 
-            {item["sale"]!=item["price"] && (
+            {hasDiscount && (
               <>
                 <Typography
                   variant={isMobile ? "body2" : "body1"}
                   component="div"
-                  sx={{
-                    fontWeight: "bold",
-                    color: "gray",
-                    textDecoration: "line-through",
-                  }}
+                  sx={{ fontWeight: "bold", color: "gray", textDecoration: "line-through" }}
                 >
-                  {item["price"]?.toLocaleString("vi-VN")}₫
+                  {item.price?.toLocaleString("vi-VN")}₫
                 </Typography>
-                <Typography variant="caption" color="error" sx={{ background: 'pink', borderRadius: 1, padding: 0.5 }}>
-                  -{(100-(item["sale"]/item["price"])*100).toFixed(1)}%
-                </Typography>
+
+                {discountText && (
+                  <Typography
+                    variant="caption"
+                    color="error"
+                    sx={{ background: "pink", borderRadius: 1, padding: 0.5 }}
+                  >
+                    {discountText}
+                  </Typography>
+                )}
               </>
             )}
           </Box>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: 200,
-              gap: 10,
-            }}
-          >
+
+          <Box sx={{ display: "flex", flexDirection: "column", width: 200, gap: 1.5 }}>
             <NumberSpinner
               label="Số lượng"
               min={1}
@@ -113,25 +122,19 @@ export default function ProductDialog({
               value={qty}
               onChange={handleQtyChange}
             />
-            <IconButton
-              color="inherit"
-              aria-label="cart"
-              sx={{
-                fontSize: 14,
-                borderRadius: 2.5,
-                backgroundColor: "primary.main",
-                color: "white",
-                "&:hover": { backgroundColor: "primary.light" },
-              }}
-              onClick={handleAddClick}
-            >
+
+            <IconButton color="inherit" aria-label="cart" sx={ADD_BUTTON_SX} onClick={handleAddClick}>
               <ShoppingCartIcon />
               <Typography>Thêm vào giỏ hàng</Typography>
             </IconButton>
-          </div>
-          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Thông tin sản phẩm</Typography>
-          <Typography variant="body1">{item["description"]}</Typography>
-          {isMobile && <br/>}
+          </Box>
+
+          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+            Thông tin sản phẩm
+          </Typography>
+          <Typography variant="body1">{item.description}</Typography>
+
+          {isMobile && <br />}
         </Box>
       </DialogContent>
     </Dialog>
