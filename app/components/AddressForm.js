@@ -1,38 +1,63 @@
-// AddressForm.js
-import React, { useEffect, useState } from "react";
+// app/components/AddressForm.js
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { TextField, Box, Typography, MenuItem, Divider } from "@mui/material";
+
+const LOCATIONS_JSON_PATH = "data/locations.json";
+
+async function fetchJson(path, signal) {
+  const res = await fetch(path, { signal });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
 
 export default function AddressForm({ value = {}, onChange }) {
   const [locations, setLocations] = useState([]);
-
-  // Lấy từ value truyền xuống (nếu có), fallback thành ""
-  const province = value.province || "";
-  const district = value.district || "";
-  const ward = value.ward || "";
-  const street = value.street || "";
-
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
 
+  const { province = "", district = "", ward = "", street = "" } = value;
+
+  const updateField = useCallback(
+    (patch) => {
+      onChange?.({ ...value, ...patch });
+    },
+    [onChange, value]
+  );
+
   useEffect(() => {
-    fetch("data/locations.json")
-      .then((res) => res.json())
-      .then((data) => setLocations(data));
+    const controller = new AbortController();
+
+    (async () => {
+      try {
+        const data = await fetchJson(LOCATIONS_JSON_PATH, controller.signal);
+        setLocations(Array.isArray(data) ? data : []);
+      } catch (err) {
+        // Không throw ra UI để tránh crash, chỉ log để debug
+        if (err?.name !== "AbortError") {
+          console.error("Lỗi khi tải locations.json:", err);
+        }
+      }
+    })();
+
+    return () => controller.abort();
   }, []);
 
-  // Khi chọn Tỉnh
+  const selectedProvince = useMemo(
+    () => locations.find((p) => p.Name === province) || null,
+    [locations, province]
+  );
+
   useEffect(() => {
-    if (!province) {
+    if (!province || !selectedProvince) {
       setDistricts([]);
       setWards([]);
       return;
     }
 
-    const selected = locations.find((p) => p.Name === province);
-    setDistricts(selected?.Districts || []);
-  }, [province, locations]);
+    setDistricts(selectedProvince?.Districts || []);
+    setWards([]); // reset danh sách phường khi đổi tỉnh
+  }, [province, selectedProvince]);
 
-  // Khi chọn Quận
   useEffect(() => {
     if (!district) {
       setWards([]);
@@ -43,18 +68,12 @@ export default function AddressForm({ value = {}, onChange }) {
     setWards(selectedDistrict?.Wards || []);
   }, [district, districts]);
 
-  const updateField = (patch) => {
-    // Gộp vào value hiện tại và báo ra ngoài
-    onChange?.({ ...value, ...patch });
-  };
-
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
       <Typography fontSize={16} fontWeight={600}>
         Địa chỉ giao hàng
       </Typography>
 
-      {/* Địa chỉ, tên đường */}
       <TextField
         label="Số nhà, tên đường"
         fullWidth
@@ -64,7 +83,6 @@ export default function AddressForm({ value = {}, onChange }) {
 
       <Divider sx={{ my: 1 }} />
 
-      {/* Tỉnh / TP */}
       <TextField
         select
         label="Tỉnh / TP"
@@ -85,7 +103,6 @@ export default function AddressForm({ value = {}, onChange }) {
         ))}
       </TextField>
 
-      {/* Quận / Huyện */}
       <TextField
         select
         label="Quận / Huyện"
@@ -106,7 +123,6 @@ export default function AddressForm({ value = {}, onChange }) {
         ))}
       </TextField>
 
-      {/* Phường / Xã */}
       <TextField
         select
         label="Phường / Xã"
